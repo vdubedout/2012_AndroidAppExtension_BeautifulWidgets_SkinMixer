@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Not translate Following -->
+    <string name="skintext">skinname=%1$s\nauthor=%2$s\n\ngeneratedfrom=%3$s\nbackgroundid=%4$s\nbackgroundnumbersid=%5$s\nnumbersid=%6$s\nnumbersskintype=%7$s\n</string>
+    <string name="clocktype_normal">Normal Clock</string>
+    <string name="clocktype_super">Super Clock</string>
+	
+    <!-- Logs texts -->
+    <string name="logs_create_nomedia">Create .nomedia to %1$s</string>
+    <string name="logs_error_create_nomedia">Can\'t create .nomedia to %1$s</string>
+    <string name="logs_error_create_directory">Failed to create skin directory</string>
+    <string name="logs_create_void_background">Copy Blank background</string>
+    <string name="logs_create_background">Copy background from : %1$s</string>
+    <string name="logs_create_void_backgroundnumbers">Copy Blank background numbers</string>
+    <string name="logs_create_backgroundnumbers">Copy background numbers from : %1$s</string>
+    <string name="logs_create_void_numbers">Copy Blank numbers</string>
+    <string name="logs_create_numbers">Copy numbers %1$s from : %2$s</string>
+    <string name="logs_error_duringcreation">Error during creation</string>
+    <string name="logs_error_duringcopy">Error during copy : %1$s</string>
+    
+    
+     <!-- Translate Following -->
+    <string name="app_name">Skin Mixer - Alpha</string>
+    <string name="main_welcome">Welcome in Skin Mixer</string>
+    <string name="main_buttonCreate">Create</string>
+    <string name="main_buttonDownload">Get skins to mix</string>
+    <string name="main_buttonSaved">Saved</string>
+    <string name="main_buttonColorMixer">Set text widget\'s color</string>
+    <string name="main_buttonPublish">Share Mix Skins</string>
+    <string name="main_buttonGrab">Get others mix</string>
+    
+    <string name="skinmixer_change">Change</string>
+    <string name="skinmixer_backgroundLabel">Background</string>
+    <string name="skinmixer_backgroundNumbersLabel">Numbers\' Background</string>
+    <string name="skinmixer_numbersLabel">Numbers</string>
+    <string name="skinmixer_skinname">Your Skin Name</string>
+    <string name="skinmixer_preview_city">Mountain View</string>
+    <string name="skinmixer_preview_weather">So hot</string>
+    <string name="skinmixer_preview_current">80°</string><string name="skinmixer_preview_low">10°</string><string name="skinmixer_preview_max">110°</string>
+    <string name="skinmixer_preview_label">Preview</string>
+    <string name="skinmixer_noskin_label">Click to compose your skin</string>
+    <string name="skinmixer_btn_createSkin">Mix these ones</string>
+    
+    <string name="skinpartchange_label">Available %1$s on the sdcard.</string>
+    <string name="SDCard_not_mount">The SDCard is not mounted, mount it first to access the different skins.</string>
+    
+    <string name="warning_beginprocess">Creation begins</string>
+    <string name="warning_processfailed">Failed to create skin</string>
+    <string name="warning_processsucceed">Skin created</string>
+    <string name="warning_skinpartnull">One of the skin part is not filled, please add one. The void part will be added in a next update</string>
+    
+    <string name="skincreator_progress">Progress</string>
+    <string name="skincreator_creatingskin">Creating Skin</string>
+    <string name="skincreator_disclaimer">Skins proposed in this application have been created by persons who work for free, during their spare time so that you can benefit from a wider range of skin creation\nPlease, support them to donating!</string>
+    <string name="skincreator_lbl_background">%1$s for the background</string>
+    <string name="skincreator_lbl_backgroundNumber">%1$s for the clock</string>
+    <string name="skincreator_lbl_numbers">%1$s for the numbers</string>
+    <string name="skincreator_lbl_close">If you close before the skin is created, you will be warned by a popup that the creation have been well processed.</string>
+    <string name="skincreator_btn_donate">Donate</string>
+    <string name="skincreator_btn_close">Close</string>
+    <string name="skincreator_lbl_createdfrom">Skin composed thanks to :</string>
+    <string name="skincreator_lbl_error">Error : </string>
+    <string name="skincreator_lbl_skin_uncomplete">Skin %1$s not complete : %2$s missing </string>
+    
+    <string name="savedskins_noitems">No skins created</string>
+    <string name="savedskins_button_delete">Delete</string>
+    <string name="savedskins_button_modify">Modify</string>
+    
+</resources>
