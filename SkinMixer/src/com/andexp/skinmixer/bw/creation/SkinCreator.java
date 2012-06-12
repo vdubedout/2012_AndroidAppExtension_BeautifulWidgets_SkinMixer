@@ -42,24 +42,24 @@ public class SkinCreator {
 
 	public void noMediaFile(){
 		File noMedia = new File(myData.getFullDirectoryPath()+".nomedia");
-		MLog.v(R.string.logs_create_nomedia, noMedia.getAbsolutePath());
+		MLog.v("Create .nomedia to :"+ noMedia.getAbsolutePath());
 		BufferedWriter buffer;
 		try {
 			buffer = new BufferedWriter(new FileWriter(noMedia, true));
 			buffer.newLine();
 			buffer.close();
 		} catch (IOException e) {
-			MLog.d(R.string.logs_error_create_nomedia,e.getMessage());
+			MLog.d("Can't create .nomedia to "+e.getMessage());
 		}
 	}
 
 	public void copyBackground() throws IOException {
 		String outputFilePath = myData.getFullDirectoryPath()+ myComposedSkin.getSkinPart(ESkinPart.BACKGROUND).getFileName();
 		if(myComposedSkin.getSkinPart(ESkinPart.BACKGROUND) == null){
-			MLog.v(R.string.logs_create_void_background, myComposedSkin.getSkinPart(ESkinPart.BACKGROUND).getImagePath());
+			MLog.v("Copy Blank background "+myComposedSkin.getSkinPart(ESkinPart.BACKGROUND).getImagePath());
 			Assets.copyVoidBackgroundTo(outputFilePath, myAppContext);
 		} else {
-			MLog.v(R.string.logs_create_background, myComposedSkin.getSkinPart(ESkinPart.BACKGROUND).getImagePath());
+			MLog.v("Copy background from : "+myComposedSkin.getSkinPart(ESkinPart.BACKGROUND).getImagePath());
 			SDCard.copyFile(myComposedSkin.getSkinPart(ESkinPart.BACKGROUND).getImagePath(), outputFilePath);
 		}
 	}
@@ -67,10 +67,10 @@ public class SkinCreator {
 	public void copyBackgroundNumbers() throws IOException  {
 		String outputFilePath = myData.getFullDirectoryPath()+ myComposedSkin.getSkinPart(ESkinPart.BACKGROUND_NUMBERS).getFileName();
 		if(myComposedSkin.getSkinPart(ESkinPart.BACKGROUND_NUMBERS) == null){
-			MLog.v(R.string.logs_create_void_backgroundnumbers, myComposedSkin.getSkinPart(ESkinPart.BACKGROUND_NUMBERS).getImagePath());
+			MLog.v("Copy Blank background numbers "+ myComposedSkin.getSkinPart(ESkinPart.BACKGROUND_NUMBERS).getImagePath());
 			Assets.copyVoidBackgroundTo(outputFilePath, myAppContext);
 		} else {
-			MLog.v(R.string.logs_create_backgroundnumbers, myComposedSkin.getSkinPart(ESkinPart.BACKGROUND_NUMBERS).getImagePath());
+			MLog.v("Copy background from : "+myComposedSkin.getSkinPart(ESkinPart.BACKGROUND_NUMBERS).getImagePath());
 			SDCard.copyFile(myComposedSkin.getSkinPart(ESkinPart.BACKGROUND_NUMBERS).getImagePath(), outputFilePath);
 		}
 	}
@@ -78,7 +78,7 @@ public class SkinCreator {
 	public void copyNumbers() throws IOException {
 		String outputFilePath = myData.getFullDirectoryPath();
 		for(int i=0; i<10;i++){
-			MLog.v(R.string.logs_create_numbers, String.valueOf(i), myComposedSkin.getSkinPart(ESkinPart.NUMBER_0+i).getImagePath());
+			MLog.v("Copy numbers "+String.valueOf(i)+" from : "+myComposedSkin.getSkinPart(ESkinPart.NUMBER_0+i).getImagePath());
 			SDCard.copyFile(myComposedSkin.getSkinPart(ESkinPart.NUMBER_0+i).getImagePath(),outputFilePath+myComposedSkin.getSkinPart(ESkinPart.NUMBER_0+i).getFileName());
 		}
 	}
