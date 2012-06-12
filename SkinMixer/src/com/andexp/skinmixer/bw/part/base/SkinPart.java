@@ -8,7 +8,7 @@ import com.andexp.skinmixer.bw.part.base.text.SkinData;
 import com.andexp.skinmixer.utils.SDCard;
 
 public class SkinPart extends BaseSkinPart implements SkinPartImpl {
-	public final static int SKINPARTS_NUMBER = 17;
+	
 	private final String DEFAULT_REPERTORY_NAME = "%repertoryname%";
 	public final String[] FILE_NAME = new String[]{
 		"background.png",

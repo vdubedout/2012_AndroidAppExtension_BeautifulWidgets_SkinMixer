@@ -106,14 +106,6 @@ public class MLog {
 		}
 	}
 	
-	public static void i(int stringId){
-		i(getTextFromResId(stringId));
-	}
-	
-	public static void i(int stringId, Object... args){
-		i(getTextFromResId(stringId, args));
-	}
-	
 	public static void i(String msg){
 		if(!enableLog || logLevel > INFO)
 			return;
@@ -135,14 +127,6 @@ public class MLog {
 		println(tag +" "+ msg + "\n"+ Log.getStackTraceString(tr));
 	}
 	
-	public static void v(int stringId){
-		v(getTextFromResId(stringId));
-	}
-	
-	public static void v(int stringId, Object... args){
-		v(getTextFromResId(stringId, args));
-	}
-
 	public static void v(String msg){
 		if(!enableLog || logLevel > VERBOSE)
 			return;
@@ -162,14 +146,6 @@ public class MLog {
 			return;
 		Log.v(tag, msg, tr);
 		println(tag +" "+ msg + "\n"+ Log.getStackTraceString(tr));
-	}
-	
-	public static void d(int stringId){
-		d(getTextFromResId(stringId));
-	}
-	
-	public static void d(int stringId, Object... args){
-		d(getTextFromResId(stringId, args));
 	}
 	
 	public static void d(String msg){
@@ -193,14 +169,6 @@ public class MLog {
 		println(tag +" "+ msg + "\n"+ Log.getStackTraceString(tr));
 	}
 	
-	public static void w(int stringId){
-		w(getTextFromResId(stringId));
-	}
-	
-	public static void w(int stringId, Object... args){
-		w(getTextFromResId(stringId, args));
-	}
-	
 	public static void w(String msg){
 		if(!enableLog || logLevel > WARN)
 			return;
@@ -220,14 +188,6 @@ public class MLog {
 			return;
 		Log.w(tag, msg, tr);
 		println(tag +" "+ msg + "\n"+ Log.getStackTraceString(tr));
-	}
-	
-	public static void e(int stringId){
-		e(getTextFromResId(stringId));
-	}
-	
-	public static void e(int stringId, Object... args){
-		e(getTextFromResId(stringId, args));
 	}
 	
 	public static void e(String msg){
@@ -251,18 +211,6 @@ public class MLog {
 		println(tag +" "+ msg + "\n"+ Log.getStackTraceString(tr));
 	}
 	
-	private static String getTextFromResId(int id){
-		String text = ctx.getResources().getString(id);
-		if(text == null) return " ";
-		else return text;
-	}
-	
-	private static String getTextFromResId(int id, Object... args){
-		String text = ctx.getResources().getString(id, args);
-		if(text == null) return " ";
-		else return text;
-	}
-
 	/**
 	 * Write the string into System Output Stream
 	 * @param str

@@ -95,7 +95,8 @@ public class SkinComposerActivity extends RoboActivity{
 			public void onClick(View v) {
 				loadSkinNameToSkin();
 				checkSuperClockSkin();
-				
+				if(skin.isSkinHasMinimumToGenerate())
+					skin.fillMissingSkinParts();
 				if(skin.isSkinComplete()){
 					Intent i = new Intent(SkinComposerActivity.this,SkinCreatorActivity.class);
 					long date = System.currentTimeMillis();

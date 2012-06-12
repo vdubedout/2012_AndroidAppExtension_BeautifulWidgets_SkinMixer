@@ -19,7 +19,8 @@ public interface SkinImpl {
 	
 //	public void loadFromCompressedExtra(String extra);
 	
-	public boolean isPartiallyComplete();
+	public boolean isSkinHasMinimumToGenerate();
+	public void fillMissingSkinParts();
 	public boolean isSkinComplete();
 	
 }

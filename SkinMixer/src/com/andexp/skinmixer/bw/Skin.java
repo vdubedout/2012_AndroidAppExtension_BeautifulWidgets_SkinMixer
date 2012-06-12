@@ -3,12 +3,14 @@ package com.andexp.skinmixer.bw;
 import android.os.Bundle;
 
 import com.andexp.skinmixer.bw.part.base.ESkinPart;
-import com.andexp.skinmixer.bw.part.base.SkinPartImpl;
 import com.andexp.skinmixer.bw.part.base.SkinPart;
+import com.andexp.skinmixer.bw.part.base.SkinPartImpl;
 import com.andexp.skinmixer.bw.part.base.text.SkinData;
+import com.andexp.skinmixer.utils.MLog;
 
 public class Skin implements SkinImpl {
-	private SkinPartImpl[] skinParts = new SkinPartImpl[SkinPart.SKINPARTS_NUMBER];
+	private final static int SKINPARTS_NUMBER = 17;
+	private SkinPartImpl[] skinParts = new SkinPartImpl[SKINPARTS_NUMBER];
 	private SkinData mSkinData;
 
 	public Skin(){
@@ -18,7 +20,7 @@ public class Skin implements SkinImpl {
 
 	@Override
 	public void setFromRepertory(String repertory, int clockType) {
-		for (int skinPartType = 0; skinPartType < SkinPart.SKINPARTS_NUMBER; skinPartType++) {
+		for (int skinPartType = 0; skinPartType < SKINPARTS_NUMBER; skinPartType++) {
 			setSkinPartByRepertory(repertory, skinPartType, clockType);
 		}
 	}
@@ -27,7 +29,6 @@ public class Skin implements SkinImpl {
 	public SkinData getSkinData() {
 		return mSkinData;
 	}
-	
 
 	@Override
 	public void setSkinPartByRepertory(String repertorySkinPart, int skinPartType, int clockType) {
@@ -90,7 +91,28 @@ public class Skin implements SkinImpl {
 
 	@Override
 	public boolean isSkinComplete() {
-		// TODO Auto-generated method stub
-		return false;
+		for (int i=0 ; i<skinParts.length ; i++){
+			if(skinParts[i]==null) {
+				MLog.e("Missing part : "+i);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isSkinHasMinimumToGenerate() {
+		if(skinParts[ESkinPart.BACKGROUND] != null 
+				&& skinParts[ESkinPart.BACKGROUND_NUMBERS]  != null
+				&& skinParts[ESkinPart.NUMBER_0]  != null)
+			return true;
+		else return false;
+	}
+
+	@Override
+	public void fillMissingSkinParts() {
+		if(skinParts[ESkinPart.AM] == null) skinParts[ESkinPart.AM] = skinParts[ESkinPart.NUMBER_0];
+		if(skinParts[ESkinPart.PM] == null) skinParts[ESkinPart.PM] = skinParts[ESkinPart.NUMBER_0];
+		if(skinParts[ESkinPart.DOTS] == null) skinParts[ESkinPart.DOTS] = skinParts[ESkinPart.BACKGROUND_NUMBERS];
 	}
 }
