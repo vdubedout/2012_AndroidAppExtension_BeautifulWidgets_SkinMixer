@@ -84,7 +84,6 @@ public class Skin implements SkinImpl {
 //		setSkinPart(SkinExtraLoader.loadSkinPart(extra));
 //	}
 
-	@Override
 	public Bundle toBundle() {
 		return SkinBundler.GetBundleFromSkin(this);
 	}
@@ -114,5 +113,9 @@ public class Skin implements SkinImpl {
 		if(skinParts[ESkinPart.AM] == null) skinParts[ESkinPart.AM] = skinParts[ESkinPart.NUMBER_0];
 		if(skinParts[ESkinPart.PM] == null) skinParts[ESkinPart.PM] = skinParts[ESkinPart.NUMBER_0];
 		if(skinParts[ESkinPart.DOTS] == null) skinParts[ESkinPart.DOTS] = skinParts[ESkinPart.BACKGROUND_NUMBERS];
+	}
+	
+	public void build(SkinBuilderListener listener){
+		
 	}
 }

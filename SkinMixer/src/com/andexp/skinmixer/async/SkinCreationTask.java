@@ -47,69 +47,72 @@ public class SkinCreationTask extends AsyncTask<Void, Integer, Boolean> {
 		Boolean worked = true;
 
 		try{
-			myNewSkin = new Skin();
-			publishProgress((int)1);
+			
+			
+			
+//			myNewSkin = new Skin();
+//			publishProgress((int)1);
+//
+//			myNewSkin.getSkinData().setAuthor(myAuthor);
+//			publishProgress((int)2);
+//
+//			myNewSkin.getSkinData().skinName = generateDirectoryNameFromSkinName(mySkinName); //TODO 
+//			publishProgress((int)3);
+//
+//			myNewSkin.createSkinData(mySkinPartsHandler);
+//			publishProgress((int)4);
+//
+//			myNewSkin.loadSkinParts(mySkinPartsHandler);
+//			publishProgress((int)5);
+//
+//			if(!myNewSkin.isSkinComplete()) throw new Exception();
+//			myNewSkin.linkDotsTo(ESkinPart.BACKGROUND_NUMBERS);
+//			publishProgress((int)6);
+//
+//			myNewSkin.linkAMPMTo(ESkinPart.NUMBERS);
+//			publishProgress((int)7);
+//
+//			myNewSkin.initializeCreator();
+//			publishProgress((int)8);
+//
+//			myNewSkin.create.directory();
+//			publishProgress((int)9);
+//
+//			myNewSkin.create.preview();
+//			publishProgress((int)10);
+//
+//			myNewSkin.create.noMediaFile();
+//			publishProgress((int)11);
+//
+//			myNewSkin.create.copyBackground();
+//			publishProgress((int)12);
+//
+//			myNewSkin.create.copyBackgroundNumbers();
+//			publishProgress((int)13);
+//
+//			myNewSkin.create.copyNumbers();
+//			publishProgress((int)14);
+//
+//			myNewSkin.create.copyDots();
+//			publishProgress((int)15);
+//
+//			myNewSkin.create.copyAmPm();
+//			publishProgress((int)16);
+//
+//			SkinDataWriter write = new SkinDataWriter(myNewSkin.data, myActivity.getApplicationContext());
+//			write.createTextFile();
+//			publishProgress((int)17);
 
-			myNewSkin.getSkinData().setAuthor(myAuthor);
-			publishProgress((int)2);
-
-			myNewSkin.getSkinData().skinName = generateDirectoryNameFromSkinName(mySkinName); //TODO 
-			publishProgress((int)3);
-
-			myNewSkin.createSkinData(mySkinPartsHandler);
-			publishProgress((int)4);
-
-			myNewSkin.loadSkinParts(mySkinPartsHandler);
-			publishProgress((int)5);
-
-			if(!myNewSkin.isSkinComplete()) throw new Exception();
-			myNewSkin.linkDotsTo(ESkinPart.BACKGROUND_NUMBERS);
-			publishProgress((int)6);
-
-			myNewSkin.linkAMPMTo(ESkinPart.NUMBERS);
-			publishProgress((int)7);
-
-			myNewSkin.initializeCreator();
-			publishProgress((int)8);
-
-			myNewSkin.create.directory();
-			publishProgress((int)9);
-
-			myNewSkin.create.preview();
-			publishProgress((int)10);
-
-			myNewSkin.create.noMediaFile();
-			publishProgress((int)11);
-
-			myNewSkin.create.copyBackground();
-			publishProgress((int)12);
-
-			myNewSkin.create.copyBackgroundNumbers();
-			publishProgress((int)13);
-
-			myNewSkin.create.copyNumbers();
-			publishProgress((int)14);
-
-			myNewSkin.create.copyDots();
-			publishProgress((int)15);
-
-			myNewSkin.create.copyAmPm();
-			publishProgress((int)16);
-
-			SkinDataWriter write = new SkinDataWriter(myNewSkin.data, myActivity.getApplicationContext());
-			write.createTextFile();
-			publishProgress((int)17);
-
-		} catch (IOException e) {
-			MLog.e(R.string.logs_error_duringcopy, e.getMessage());
-			prepareFailMessage(e.getMessage());
-			worked = false;
-			myNewSkin.delete.deleteAll();
+//		} catch (IOException e) {
+//			MLog.e("Error during copy : "+ e.getMessage());
+//			prepareFailMessage(e.getMessage());
+//			worked = false;
+//			myNewSkin.delete.deleteAll();
 		} catch (Exception e) {
-			MLog.e(R.string.logs_error_duringcreation);
-			failMessage = myActivity.getResources().getString(R.string.logs_error_duringcreation);
+			MLog.e("Error during creation");
+			failMessage = "Error during creation";
 			worked = false;
-			myNewSkin.delete.deleteAll();
+//			myNewSkin.delete.deleteAll();
 
 		}
 
