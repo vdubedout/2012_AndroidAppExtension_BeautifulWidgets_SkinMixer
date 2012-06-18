@@ -1,26 +1,17 @@
 package com.andexp.skinmixer.async;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Locale;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.andexp.skinmixer.MyApplication;
 import com.andexp.skinmixer.R;
-import com.andexp.skinmixer.bw.Skin;
 import com.andexp.skinmixer.bw.SkinImpl;
-import com.andexp.skinmixer.bw.creation.SkinDelete;
 import com.andexp.skinmixer.bw.part.base.BaseSkinPart;
 import com.andexp.skinmixer.bw.part.base.ESkinPart;
+import com.andexp.skinmixer.bw.part.base.SkinPartImpl;
 import com.andexp.skinmixer.bw.part.base.text.SkinData;
-import com.andexp.skinmixer.bw.part.base.text.SkinDataWriter;
-import com.andexp.skinmixer.utils.Extra;
 import com.andexp.skinmixer.utils.MLog;
 
 
@@ -188,22 +179,24 @@ public class SkinBuilderBWAsync extends AsyncTask<Void, Integer, Boolean> {
 
 	public void createSkinData(){
 		SkinData data = myNewSkin.getSkinData();
-		data.generatedFrom = createGeneratedFrom(skinparts);
-		data.idBackground = getIdBackground(skinparts);
-		data.idBackgroundNumber = getIdBackgroundNumber(skinparts);
-		data.idNumber = getIdNumber(skinparts);
-		data.numberSkinType = getNumberSkinType(skinparts);
+		data.generatedFrom = createGeneratedFrom();
+		data.idBackground = myNewSkin.getSkinPart(ESkinPart.BACKGROUND).getSkinPartData().directoryName;
+		data.idBackgroundNumber = myNewSkin.getSkinPart(ESkinPart.BACKGROUND_NUMBERS).getSkinPartData().directoryName;
+		data.idNumber = myNewSkin.getSkinPart(ESkinPart.NUMBER_0).getSkinPartData().directoryName;
+		data.numberSkinType = myNewSkin.getSkinPart(ESkinPart.NUMBER_0).getSkinPartData().clockType;
 	}
 
 	private String createGeneratedFrom(){
 		StringBuilder builder = new StringBuilder();
-		if(skinparts.background != null && skinparts.background.data.author!= null)
-			builder.append(skinparts.background.data.author);
-		if(skinparts.backgroundNumbers != null && skinparts.backgroundNumbers.data.author!= null)
-			builder.append(File.separator).append(skinparts.backgroundNumbers.data.author);
-		if(skinparts.numbers != null && skinparts.numbers.data.author!= null)
-			builder.append(File.separator).append(skinparts.numbers.data.author);
-
+		builder.append(getAuthor(myNewSkin.getSkinPart(ESkinPart.BACKGROUND)));
+		builder.append(getAuthor(myNewSkin.getSkinPart(ESkinPart.BACKGROUND_NUMBERS)));
+		builder.append(getAuthor(myNewSkin.getSkinPart(ESkinPart.NUMBER_0)));
 		return builder.toString();
+	}
+	
+	private String getAuthor(SkinPartImpl sp){
+		if(sp != null && sp.getSkinPartData().author!= null)
+			return sp.getSkinPartData().author+File.separator;
+		else return "";
 	}
 }
