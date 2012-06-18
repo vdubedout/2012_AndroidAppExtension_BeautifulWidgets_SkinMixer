@@ -1,12 +1,12 @@
 package com.andexp.skinmixer.utils;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.andexp.skinmixer.bw.part.base.BaseSkinPart;
-import com.andexp.skinmixer.bw.part.base.EClockType;
-
 import android.os.Environment;
+
+import com.andexp.skinmixer.bw.part.base.EClockType;
 
 public class SDCard {
 	public static boolean isMounted(){
@@ -46,29 +46,18 @@ public class SDCard {
 		sourceFile.close();
 	}
 	
-//	data.skinName = skinName;
-//	
-//	data.directoryName = BaseSkinPart.PREFIX_GEN_SKINNAME + GetCharSafeString(skinName);
-//	int i = 1;
-//	while (isDirectoryNameAllreadyUsed(data.directoryName))
-//	{ 
-//		data.directoryName += i;
-//		i++;
-//	}
-//	
-//	delete = new SkinDelete(data.directoryName);
-	
-//	private String GetCharSafeString(String skinName) {
-//	String output;
-//	output = skinName.toLowerCase(Locale.ENGLISH);
-//	output = output.replaceAll("[^a-z0-9]", "");
-//	
-//	return output;
-//}
-//
-//private boolean isDirectoryNameAllreadyUsed(String directoryName){
-//	//TODO directoryName checker
-//	return false;
-//}
+	public static boolean deleteDir(File dir) {
+		MLog.d("Delete Directory : "+dir.toString());
+	    if (dir.isDirectory()) {
+	        String[] children = dir.list();
+	        for (int i=0; i<children.length; i++) {
+	            boolean success = deleteDir(new File(dir, children[i]));
+	            if (!success) {
+	                return false;
+	            }
+	        }
+	    }
 
+	    return dir.delete();
+	}
 }

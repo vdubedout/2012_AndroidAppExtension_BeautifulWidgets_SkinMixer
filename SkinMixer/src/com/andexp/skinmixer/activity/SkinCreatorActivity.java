@@ -17,14 +17,14 @@ import com.andexp.skinmixer.R;
 import com.andexp.skinmixer.main;
 import com.andexp.skinmixer.async.ReadSkinPartTextTask;
 import com.andexp.skinmixer.async.ReadSkinPartTextTask.ReadSkinAsyncListener;
+import com.andexp.skinmixer.bw.SkinBuilderListener;
 import com.andexp.skinmixer.bw.SkinFactory;
 import com.andexp.skinmixer.bw.SkinImpl;
-import com.andexp.skinmixer.bw.part.base.ESkinPart;
 import com.andexp.skinmixer.bw.part.base.text.SkinData;
 import com.andexp.skinmixer.utils.Extra;
 import com.andexp.skinmixer.utils.MLog;
 
-public class SkinCreatorActivity extends RoboActivity implements ReadSkinAsyncListener {
+public class SkinCreatorActivity extends RoboActivity implements ReadSkinAsyncListener, SkinBuilderListener{
 	@InjectView(R.id.skincreator_progressbar)					ProgressBar progressBar;
 	@InjectView(R.id.skincreator_btn_close)						Button btn_close;
 	@InjectView(R.id.skincreator_lbl_backgrounddesigner)		TextView tv_authorBackground;
@@ -33,9 +33,9 @@ public class SkinCreatorActivity extends RoboActivity implements ReadSkinAsyncLi
 	@InjectView(R.id.skincreator_btn_donatebackground)			Button btn_background;
 	@InjectView(R.id.skincreator_btn_donatebackgroundnumbers) 	Button btn_backgroundNumber;
 	@InjectView(R.id.skincreator_btn_donatenumbers)				Button btn_numbers;
-	
+
 	@InjectExtra(Extra.SKINDATE) 	long mSkinCreationDate;
-	
+
 	private SkinImpl mySkin;
 	private Context mContext;
 
@@ -44,7 +44,7 @@ public class SkinCreatorActivity extends RoboActivity implements ReadSkinAsyncLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_skincreator);
 		mContext = this;
-		
+
 		try{
 			mySkin = SkinFactory.getHoldedSkin(mSkinCreationDate);
 		} catch (Exception e){
@@ -52,7 +52,7 @@ public class SkinCreatorActivity extends RoboActivity implements ReadSkinAsyncLi
 		}
 
 		initializeCloseButtonOnClickListener();
-		
+
 		new ReadSkinPartTextTask(mySkin, this).execute();
 	}
 
@@ -74,29 +74,29 @@ public class SkinCreatorActivity extends RoboActivity implements ReadSkinAsyncLi
 			SkinData backgroundNumbersData, SkinData numbersData) {
 		displayAuthor(tv_authorBackground, 
 				R.string.skincreator_lbl_background,
-				mySkin.getSkinPart(ESkinPart.BACKGROUND).getSkinPartData().author);
+				backgroundData.author);
 		InitButtonDonate(btn_background, backgroundData.donate);
-		
+
 		displayAuthor(tv_authorBackgroundNumber, 
 				R.string.skincreator_lbl_backgroundNumber, 
-				mySkin.getSkinPart(ESkinPart.BACKGROUND_NUMBERS).getSkinPartData().author);
+				backgroundNumbersData.author);
 		InitButtonDonate(btn_backgroundNumber, backgroundNumbersData.donate);
-		
+
 		displayAuthor(tv_authorNumber, 
 				R.string.skincreator_lbl_numbers, 
-				mySkin.getSkinPart(ESkinPart.NUMBER_0).getSkinPartData().author);
-		
+				numbersData.author);
+
 		InitButtonDonate(btn_numbers, numbersData.donate);
-		
-		//TODO launch creation
+
+		mySkin.build(this);
 	}
-	
+
 	private void displayAuthor(TextView tv_authors, int base_text, String data){
 		String tempText  = String.format(this.getResources().getString(base_text), data);
 		tv_authors.setText(tempText);
 		tv_authors.setVisibility(View.VISIBLE);
 	}
-	
+
 	private void InitButtonDonate(View view, final String url){
 		if(url != null && url.length()>8){
 			view.setVisibility(View.VISIBLE);
@@ -108,5 +108,31 @@ public class SkinCreatorActivity extends RoboActivity implements ReadSkinAsyncLi
 				}
 			});
 		}
+	}
+
+
+	@Override
+	public void SetProgressBarMax(int progressMax) {
+		progressBar.setMax(progressMax);
+	}
+
+
+	@Override
+	public void OnNewStep(int value) {
+		progressBar.setProgress(value);
+	}
+
+
+	@Override
+	public void OnFail(String errorMessage) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+	@Override
+	public void OnComplete() {
+		// TODO Auto-generated method stub
+
 	}
 }

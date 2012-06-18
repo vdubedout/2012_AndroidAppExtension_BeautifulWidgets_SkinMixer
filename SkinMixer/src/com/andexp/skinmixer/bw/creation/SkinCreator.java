@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import android.content.Context;
 
+import com.andexp.skinmixer.MyApplication;
 import com.andexp.skinmixer.R;
 import com.andexp.skinmixer.bw.Skin;
 import com.andexp.skinmixer.bw.part.base.BaseSkinPart;
@@ -21,10 +22,10 @@ public class SkinCreator {
 	private Skin myComposedSkin;
 	private Context myAppContext;
 	
-	public SkinCreator(Skin mySkin, Context applicationContext){
+	public SkinCreator(Skin mySkin){
 		this.myData = mySkin.getSkinData();
 		this.myComposedSkin = mySkin;
-		this.myAppContext = applicationContext;
+		this.myAppContext = MyApplication.getCustomApplicationContext();
 	}
 	
 	public void directory() throws Exception{

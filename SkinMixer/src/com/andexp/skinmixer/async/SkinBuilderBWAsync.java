@@ -1,18 +1,23 @@
 package com.andexp.skinmixer.async;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
 import android.os.AsyncTask;
 
 import com.andexp.skinmixer.MyApplication;
 import com.andexp.skinmixer.R;
+import com.andexp.skinmixer.bw.Skin;
 import com.andexp.skinmixer.bw.SkinImpl;
+import com.andexp.skinmixer.bw.creation.SkinCreator;
 import com.andexp.skinmixer.bw.part.base.BaseSkinPart;
 import com.andexp.skinmixer.bw.part.base.ESkinPart;
 import com.andexp.skinmixer.bw.part.base.SkinPartImpl;
 import com.andexp.skinmixer.bw.part.base.text.SkinData;
+import com.andexp.skinmixer.bw.part.base.text.SkinDataWriter;
 import com.andexp.skinmixer.utils.MLog;
+import com.andexp.skinmixer.utils.SDCard;
 
 
 public class SkinBuilderBWAsync extends AsyncTask<Void, Integer, Boolean> {
@@ -23,7 +28,7 @@ public class SkinBuilderBWAsync extends AsyncTask<Void, Integer, Boolean> {
 	}
 	AsyncListener mAsyncListener;
 
-	final static int PROGRESS_MAX = 17;
+	final static int PROGRESS_MAX = 12;
 	SkinImpl myNewSkin;
 	String failMessage;
 
@@ -39,85 +44,53 @@ public class SkinBuilderBWAsync extends AsyncTask<Void, Integer, Boolean> {
 
 		try{
 
-			// (generer le nom du skin)
-			generateDirectoryNameFromSkinName();
+			generateDirectoryName();
+			publishProgress((int)1);
+			
+			createSkinData();
+			publishProgress((int)2);
+			
+			SkinCreator create = new SkinCreator((Skin) myNewSkin);
+			publishProgress((int)3);
 
-			// creer les data du skin 
+			create.directory();
+			publishProgress((int)4);
 
-			// creer le repertoire
+			create.preview();
+			publishProgress((int)5);
 
-			// creer la preview
+			create.noMediaFile();
+			publishProgress((int)6);
 
-			// creer le nomedia
+			create.copyBackground();
+			publishProgress((int)7);
 
-			// copier toutes les parties
+			create.copyBackgroundNumbers();
+			publishProgress((int)8);
 
-			// ecrire le text file
+			create.copyNumbers();
+			publishProgress((int)9);
 
-			//			myNewSkin = new Skin();
-			//			publishProgress((int)1);
-			//
-			//			myNewSkin.getSkinData().setAuthor(myAuthor);
-			//			publishProgress((int)2);
-			//
-			//			myNewSkin.getSkinData().skinName = generateDirectoryNameFromSkinName(mySkinName); //TODO 
-			//			publishProgress((int)3);
-			//
-			//			myNewSkin.createSkinData(mySkinPartsHandler);
-			//			publishProgress((int)4);
-			//
-			//			myNewSkin.loadSkinParts(mySkinPartsHandler);
-			//			publishProgress((int)5);
-			//
-			//			if(!myNewSkin.isSkinComplete()) throw new Exception();
-			//			myNewSkin.linkDotsTo(ESkinPart.BACKGROUND_NUMBERS);
-			//			publishProgress((int)6);
-			//
-			//			myNewSkin.linkAMPMTo(ESkinPart.NUMBERS);
-			//			publishProgress((int)7);
-			//
-			//			myNewSkin.initializeCreator();
-			//			publishProgress((int)8);
-			//
-			//			myNewSkin.create.directory();
-			//			publishProgress((int)9);
-			//
-			//			myNewSkin.create.preview();
-			//			publishProgress((int)10);
-			//
-			//			myNewSkin.create.noMediaFile();
-			//			publishProgress((int)11);
-			//
-			//			myNewSkin.create.copyBackground();
-			//			publishProgress((int)12);
-			//
-			//			myNewSkin.create.copyBackgroundNumbers();
-			//			publishProgress((int)13);
-			//
-			//			myNewSkin.create.copyNumbers();
-			//			publishProgress((int)14);
-			//
-			//			myNewSkin.create.copyDots();
-			//			publishProgress((int)15);
-			//
-			//			myNewSkin.create.copyAmPm();
-			//			publishProgress((int)16);
-			//
-			//			SkinDataWriter write = new SkinDataWriter(myNewSkin.data, myActivity.getApplicationContext());
-			//			write.createTextFile();
-			//			publishProgress((int)17);
+			create.copyDots();
+			publishProgress((int)10);
 
-			//		} catch (IOException e) {
-			//			MLog.e("Error during copy : "+ e.getMessage());
-			//			prepareFailMessage(e.getMessage());
-			//			worked = false;
-			//			myNewSkin.delete.deleteAll();
+			create.copyAmPm();
+			publishProgress((int)11);
+
+			SkinDataWriter write = new SkinDataWriter(myNewSkin.getSkinData());
+			write.createTextFile();
+			publishProgress((int)12);
+
+		} catch (IOException e) {
+			MLog.e("Error during copy : "+ e.getMessage());
+			prepareFailMessage(e.getMessage());
+			worked = false;
+			SDCard.deleteDir(new File(SDCard.getSuperClockSkinPath() + myNewSkin.getSkinData().directoryName +	File.separator));
 		} catch (Exception e) {
 			MLog.e("Error during creation");
 			failMessage = "Error during creation";
 			worked = false;
-			//			myNewSkin.delete.deleteAll();
-
+			SDCard.deleteDir(new File(SDCard.getSuperClockSkinPath() + myNewSkin.getSkinData().directoryName +	File.separator));
 		}
 
 		return worked;
@@ -152,7 +125,7 @@ public class SkinBuilderBWAsync extends AsyncTask<Void, Integer, Boolean> {
 		mAsyncListener.OnFail(failMessage);
 	}
 
-	public void generateDirectoryNameFromSkinName(){
+	public void generateDirectoryName(){
 		String skinName = myNewSkin.getSkinData().skinName;
 
 		myNewSkin.getSkinData().directoryName = BaseSkinPart.PREFIX_GEN_SKINNAME + GetCharSafeString(skinName);
@@ -193,7 +166,7 @@ public class SkinBuilderBWAsync extends AsyncTask<Void, Integer, Boolean> {
 		builder.append(getAuthor(myNewSkin.getSkinPart(ESkinPart.NUMBER_0)));
 		return builder.toString();
 	}
-	
+
 	private String getAuthor(SkinPartImpl sp){
 		if(sp != null && sp.getSkinPartData().author!= null)
 			return sp.getSkinPartData().author+File.separator;
