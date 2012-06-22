@@ -11,7 +11,7 @@ import android.content.Context;
 import com.google.inject.Module;
 
 @ReportsCrashes(formKey = "dFQ2ZXhrYlYtOXBzMGdQd2lHTGJ2V2c6MQ")
-public class MyApplication extends RoboApplication {
+public class Application extends RoboApplication {
 	static Context mContext;
 	
 	@Override
@@ -21,7 +21,7 @@ public class MyApplication extends RoboApplication {
         super.onCreate();
     }
 	
-	public static Context getCustomApplicationContext(){ //TODO temporaire
+	public static Context getCustomApplicationContext(){ 
 		return mContext;
 	}
 	
