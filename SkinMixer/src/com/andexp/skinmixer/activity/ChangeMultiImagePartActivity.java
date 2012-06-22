@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.andexp.skinmixer.R;
 import com.andexp.skinmixer.adapter.MultipleImageSkinAdapter;
-import com.andexp.skinmixer.bw.part.base.ESkinPart;
 import com.andexp.skinmixer.bw.part.base.SkinPartImpl;
 import com.andexp.skinmixer.utils.Extra;
 import com.andexp.skinmixer.utils.MLog;
@@ -21,7 +20,7 @@ import com.andexp.skinmixer.utils.SDCardSkinLoader;
 public class ChangeMultiImagePartActivity extends ListActivity{
 	ListView listview_SkinParts;
 
-	private ArrayList<SkinPartImpl> mSkinList;
+	private ArrayList<SkinPartImpl[]> mSkinList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,21 +33,21 @@ public class ChangeMultiImagePartActivity extends ListActivity{
 		} else {
 			initializeVariable();
 			//TODO bindAdapter, afficher une roue qui charge, async pour charger les données, puis notify dataset changed
-			loadSkinList();
+//			loadSkinList();
 			bindAdapterToListView();
 		}
 	}
 
 	private void initializeVariable(){
-		mSkinList = new ArrayList<SkinPartImpl>();
+		mSkinList = SDCardSkinLoader.getNumbersSkinPart();
 	}
 
 
 
-	private void loadSkinList(){
-		mSkinList = SDCardSkinLoader.getSuperClockSkinIdsList(ESkinPart.NUMBER_0);
-		mSkinList.addAll(SDCardSkinLoader.getNormalClockSkinIdsList(ESkinPart.NUMBER_0)); 
-	}  		
+//	private void loadSkinList(){
+//		mSkinList = get
+//		mSkinList.addAll(SDCardSkinLoader.getNormalClockSkinIdsList(ESkinPart.NUMBER_0)); 
+//	}  		
 
 
 	private void bindAdapterToListView(){
@@ -61,8 +60,8 @@ public class ChangeMultiImagePartActivity extends ListActivity{
 		super.onListItemClick(l, v, position, id);
 		
 		Intent intent = new Intent(Intent.ACTION_CHOOSER);
-		String directoryName = mSkinList.get(position).getSkinPartData().directoryName;
-		int clockType = mSkinList.get(position).getSkinPartData().clockType;
+		String directoryName = mSkinList.get(position)[0].getSkinPartData().directoryName;
+		int clockType = mSkinList.get(position)[0].getSkinPartData().clockType;
 		
 		MLog.d("Directory Name:"+directoryName+" | clockType:"+clockType);
 		intent.putExtra(Extra.SKIN_DIRECTORYNAME, directoryName);

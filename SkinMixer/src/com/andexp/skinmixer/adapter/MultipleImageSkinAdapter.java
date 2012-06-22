@@ -3,7 +3,6 @@ package com.andexp.skinmixer.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
@@ -19,11 +18,11 @@ import com.andexp.skinmixer.bw.part.base.SkinPartImpl;
 public class MultipleImageSkinAdapter extends BaseAdapter{
 
 	private Context mContext;
-	private ArrayList<SkinPartImpl> mSkinPartList;
+	private ArrayList<SkinPartImpl[]> mSkinPartList;
 	private LayoutInflater mInflater;
 	Handler mHandler;
 
-	public MultipleImageSkinAdapter(Context ctx, ArrayList<SkinPartImpl> mSkinList){
+	public MultipleImageSkinAdapter(Context ctx, ArrayList<SkinPartImpl[]> mSkinList){
 		this.mContext = ctx;
 		this.mSkinPartList = mSkinList;
 		this.mInflater = LayoutInflater.from(mContext);
@@ -76,10 +75,10 @@ public class MultipleImageSkinAdapter extends BaseAdapter{
 	}
 
 	private class PreviewBinder extends Thread{
-		SkinPartImpl tSkin;
+		SkinPartImpl[] tSkin;
 		ViewHolder tHolder;
 
-		public PreviewBinder(SkinPartImpl skin, ViewHolder holder){
+		public PreviewBinder(SkinPartImpl[] skin, ViewHolder holder){
 			this.tSkin = skin;
 			this.tHolder = holder;
 		}
@@ -102,15 +101,11 @@ public class MultipleImageSkinAdapter extends BaseAdapter{
 
 		private void bindNumbers(){
 			//MLog.v("skin:"+tSkinInfo.directoryName+" path:"+Numbers.getDrawable(tSkinInfo.directoryName, 0, tSkinInfo.clockType)); //CLEAN
-			tHolder.iv_number[0].setImageDrawable(getDrawableForNumber(0));
-			tHolder.iv_number[1].setImageDrawable(getDrawableForNumber(1));
-			tHolder.iv_number[2].setImageDrawable(getDrawableForNumber(2));
-			tHolder.iv_number[3].setImageDrawable(getDrawableForNumber(3));
-			tHolder.tv_skinName.setText(tSkin.getSkinPartData().directoryName);
-		}
-
-		private Drawable getDrawableForNumber(int number){
-			return tSkin.getDrawable();
+			tHolder.iv_number[0].setImageDrawable(tSkin[0].getDrawable());
+			tHolder.iv_number[1].setImageDrawable(tSkin[1].getDrawable());
+			tHolder.iv_number[2].setImageDrawable(tSkin[5].getDrawable());
+			tHolder.iv_number[3].setImageDrawable(tSkin[8].getDrawable());
+			tHolder.tv_skinName.setText(tSkin[0].getSkinPartData().directoryName);
 		}
 	}
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.andexp.skinmixer.bw.part.base.BaseSkinPart;
 import com.andexp.skinmixer.bw.part.base.EClockType;
+import com.andexp.skinmixer.bw.part.base.ESkinPart;
 import com.andexp.skinmixer.bw.part.base.SkinPart;
 import com.andexp.skinmixer.bw.part.base.SkinPartImpl;
 
@@ -35,6 +36,36 @@ public class SDCardSkinLoader {
 
 		return mySkinsInfos;
 	}
+	
+	
+	public static ArrayList<SkinPartImpl[]> getNumbersSkinPart(){
+		ArrayList<SkinPartImpl[]> mySkinsInfos = getSkinPartsFromClockType(EClockType.NORMALCLOCK);
+		mySkinsInfos.addAll(getSkinPartsFromClockType(EClockType.SUPERCLOCK));
+		
+		return mySkinsInfos;
+	}
+	
+	public static ArrayList<SkinPartImpl[]> getSkinPartsFromClockType(int clockType){
+		ArrayList<String> mySkinIds;
+		
+		if(clockType == EClockType.NORMALCLOCK){
+			mySkinIds = loadSkinRepertoryIdsAvailable(SDCard.getClockSkinPath(EClockType.NORMALCLOCK));
+		} else {
+			mySkinIds = loadSkinRepertoryIdsAvailable(SDCard.getClockSkinPath(EClockType.SUPERCLOCK));
+		}
+		
+		ArrayList<SkinPartImpl[]> mySkinsInfos = new ArrayList<SkinPartImpl[]>();
+		SkinPartImpl[] parts;
+		for (String id : mySkinIds) {
+			parts = new SkinPartImpl[10];
+			for (int i = 0; i < 10; i++) {
+				parts[i] = new SkinPart(id, ESkinPart.NUMBER_0+i, clockType);
+			}
+			mySkinsInfos.add(parts);
+		}
+		
+		return mySkinsInfos;
+	}
 
 	public static ArrayList<String> loadSkinRepertoryIdsAvailable(String path){
 		boolean isIgnored;
@@ -47,7 +78,7 @@ public class SDCardSkinLoader {
 				if(isSkinRepertoryIdHasChild(path+id)){
 					isIgnored = false;
 					for (String textToIgnore : idToNotLoad) {
-						if(id.startsWith(textToIgnore)) isIgnored = true;
+						if(id.toLowerCase().startsWith(textToIgnore.toLowerCase())) isIgnored = true;
 					}
 					if(!isIgnored) futureIds.add(id);
 				}

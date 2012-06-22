@@ -32,9 +32,10 @@ public class SkinPart extends BaseSkinPart implements SkinPartImpl {
 	
 	private String mFileName;
 	private int mSkinPartType;
-
+	private Drawable mDrawable;
+	
 	public SkinPart(String directoryName, int skinPartType, int clockType) {
-		super(directoryName, EClockType.SUPERCLOCK);
+		super(directoryName, clockType);
 		this.mFileName = getSkinPartName(directoryName, skinPartType);
 		this.mSkinPartType = skinPartType;
 	} 
@@ -62,8 +63,8 @@ public class SkinPart extends BaseSkinPart implements SkinPartImpl {
 	}
 
 	public Drawable getDrawable(){
-		Drawable myDrawable = Drawable.createFromPath(getImagePath());
-		return myDrawable;
+		if(mDrawable == null) mDrawable = Drawable.createFromPath(getImagePath());
+		return mDrawable;
 	}
 
 	
