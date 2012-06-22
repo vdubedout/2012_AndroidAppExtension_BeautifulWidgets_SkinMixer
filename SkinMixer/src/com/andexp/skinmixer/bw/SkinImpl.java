@@ -2,6 +2,7 @@ package com.andexp.skinmixer.bw;
 
 import android.os.Bundle;
 
+import com.andexp.skinmixer.async.SkinBuilderBWAsync.AsyncBuildListener;
 import com.andexp.skinmixer.bw.part.base.SkinPartImpl;
 import com.andexp.skinmixer.bw.part.base.text.SkinData;
 
@@ -17,7 +18,7 @@ public interface SkinImpl {
 	public boolean isSkinHasMinimumToGenerate();
 	public void fillMissingSkinParts();
 	public boolean isSkinComplete();
-	public void build(SkinBuilderListener listener);
+	public void build(AsyncBuildListener listener);
 	
 	public Bundle toBundle();
 	

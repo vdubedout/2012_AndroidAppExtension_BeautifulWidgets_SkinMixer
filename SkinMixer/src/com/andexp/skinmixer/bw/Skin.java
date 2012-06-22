@@ -2,6 +2,8 @@ package com.andexp.skinmixer.bw;
 
 import android.os.Bundle;
 
+import com.andexp.skinmixer.async.SkinBuilderBWAsync;
+import com.andexp.skinmixer.async.SkinBuilderBWAsync.AsyncBuildListener;
 import com.andexp.skinmixer.bw.part.base.ESkinPart;
 import com.andexp.skinmixer.bw.part.base.SkinPart;
 import com.andexp.skinmixer.bw.part.base.SkinPartImpl;
@@ -9,7 +11,7 @@ import com.andexp.skinmixer.bw.part.base.text.SkinData;
 import com.andexp.skinmixer.utils.MLog;
 
 public class Skin implements SkinImpl {
-	private final static int SKINPARTS_NUMBER = 17;
+	private final static int SKINPARTS_NUMBER = ESkinPart.LAST_SKIN_IMAGE +1;
 	private SkinPartImpl[] skinParts = new SkinPartImpl[SKINPARTS_NUMBER];
 	private SkinData mSkinData;
 
@@ -32,7 +34,11 @@ public class Skin implements SkinImpl {
 
 	@Override
 	public void setSkinPartByRepertory(String repertorySkinPart, int skinPartType, int clockType) {
-		skinParts[skinPartType] = new SkinPart(repertorySkinPart, skinPartType, clockType);
+		if(skinPartType == ESkinPart.NUMBER_0){
+			for (int i = ESkinPart.NUMBER_0; i <= ESkinPart.NUMBER_9; i++) {
+				skinParts[i] = new SkinPart(repertorySkinPart, i, clockType);
+			}
+		} else skinParts[skinPartType] = new SkinPart(repertorySkinPart, skinPartType, clockType);
 	}
 
 	@Override
@@ -115,7 +121,7 @@ public class Skin implements SkinImpl {
 		if(skinParts[ESkinPart.DOTS] == null) skinParts[ESkinPart.DOTS] = skinParts[ESkinPart.BACKGROUND_NUMBERS];
 	}
 	
-	public void build(SkinBuilderListener listener){
-		
+	public void build(AsyncBuildListener listener){
+		new SkinBuilderBWAsync(this, listener).execute((Void)null);
 	}
 }

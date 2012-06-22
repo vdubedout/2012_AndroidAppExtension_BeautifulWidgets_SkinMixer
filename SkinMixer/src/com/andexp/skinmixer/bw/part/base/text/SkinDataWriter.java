@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import android.content.Context;
 
-import com.andexp.skinmixer.MyApplication;
+import com.andexp.skinmixer.Application;
 import com.andexp.skinmixer.R;
 import com.andexp.skinmixer.utils.MLog;
 
@@ -17,7 +17,7 @@ public class SkinDataWriter {
 	
 	public SkinDataWriter(SkinData data) {
 		this.data = data;
-		this.context = MyApplication.getCustomApplicationContext();
+		this.context = Application.getCustomApplicationContext();
 	}
 	
 	public void createTextFile(){

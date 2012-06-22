@@ -12,27 +12,28 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.andexp.skinmixer.R;
 import com.andexp.skinmixer.main;
 import com.andexp.skinmixer.async.ReadSkinPartTextTask;
 import com.andexp.skinmixer.async.ReadSkinPartTextTask.ReadSkinAsyncListener;
-import com.andexp.skinmixer.bw.SkinBuilderListener;
+import com.andexp.skinmixer.async.SkinBuilderBWAsync.AsyncBuildListener;
 import com.andexp.skinmixer.bw.SkinFactory;
 import com.andexp.skinmixer.bw.SkinImpl;
 import com.andexp.skinmixer.bw.part.base.text.SkinData;
 import com.andexp.skinmixer.utils.Extra;
 import com.andexp.skinmixer.utils.MLog;
 
-public class SkinCreatorActivity extends RoboActivity implements ReadSkinAsyncListener, SkinBuilderListener{
+public class SkinCreatorActivity extends RoboActivity implements ReadSkinAsyncListener, AsyncBuildListener{
 	@InjectView(R.id.skincreator_progressbar)					ProgressBar progressBar;
 	@InjectView(R.id.skincreator_btn_close)						Button btn_close;
 	@InjectView(R.id.skincreator_lbl_backgrounddesigner)		TextView tv_authorBackground;
 	@InjectView(R.id.skincreator_lbl_backgroundnumbersdesigner)	TextView tv_authorBackgroundNumber;
 	@InjectView(R.id.skincreator_lbl_numbersdesigner)			TextView tv_authorNumber;
-	@InjectView(R.id.skincreator_btn_donatebackground)			Button btn_background;
-	@InjectView(R.id.skincreator_btn_donatebackgroundnumbers) 	Button btn_backgroundNumber;
-	@InjectView(R.id.skincreator_btn_donatenumbers)				Button btn_numbers;
+	@InjectView(R.id.skincreator_btn_donatebackground)			TextView btn_background;
+	@InjectView(R.id.skincreator_btn_donatebackgroundnumbers) 	TextView btn_backgroundNumber;
+	@InjectView(R.id.skincreator_btn_donatenumbers)				TextView btn_numbers;
 
 	@InjectExtra(Extra.SKINDATE) 	long mSkinCreationDate;
 
@@ -118,21 +119,18 @@ public class SkinCreatorActivity extends RoboActivity implements ReadSkinAsyncLi
 
 
 	@Override
-	public void OnNewStep(int value) {
+	public void OnComplete() {
+		Toast.makeText(this, "COMPLETE ", Toast.LENGTH_LONG).show();
+
+	}
+
+	@Override
+	public void OnUpdate(int value) {
 		progressBar.setProgress(value);
 	}
-
-
+	
 	@Override
-	public void OnFail(String errorMessage) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	@Override
-	public void OnComplete() {
-		// TODO Auto-generated method stub
-
+	public void OnFail(String reason){
+		Toast.makeText(this, "FAIL : "+reason, Toast.LENGTH_LONG).show();
 	}
 }

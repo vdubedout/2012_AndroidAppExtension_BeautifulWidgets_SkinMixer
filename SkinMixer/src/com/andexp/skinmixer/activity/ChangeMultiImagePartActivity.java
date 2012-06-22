@@ -14,6 +14,7 @@ import com.andexp.skinmixer.adapter.MultipleImageSkinAdapter;
 import com.andexp.skinmixer.bw.part.base.ESkinPart;
 import com.andexp.skinmixer.bw.part.base.SkinPartImpl;
 import com.andexp.skinmixer.utils.Extra;
+import com.andexp.skinmixer.utils.MLog;
 import com.andexp.skinmixer.utils.SDCard;
 import com.andexp.skinmixer.utils.SDCardSkinLoader;
 
@@ -58,9 +59,14 @@ public class ChangeMultiImagePartActivity extends ListActivity{
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id){
 		super.onListItemClick(l, v, position, id);
+		
 		Intent intent = new Intent(Intent.ACTION_CHOOSER);
-		intent.putExtra(Extra.SKIN_DIRECTORYNAME, mSkinList.get(position).getSkinPartData().directoryName);
-		intent.putExtra(Extra.SKIN_CLOCKTYPE, mSkinList.get(position).getSkinPartData().clockType);
+		String directoryName = mSkinList.get(position).getSkinPartData().directoryName;
+		int clockType = mSkinList.get(position).getSkinPartData().clockType;
+		
+		MLog.d("Directory Name:"+directoryName+" | clockType:"+clockType);
+		intent.putExtra(Extra.SKIN_DIRECTORYNAME, directoryName);
+		intent.putExtra(Extra.SKIN_CLOCKTYPE, clockType);
 
 		setResult(RESULT_OK, intent);
 		finish();

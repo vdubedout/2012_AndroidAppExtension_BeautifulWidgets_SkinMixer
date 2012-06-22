@@ -6,7 +6,7 @@ import java.util.Locale;
 
 import android.os.AsyncTask;
 
-import com.andexp.skinmixer.MyApplication;
+import com.andexp.skinmixer.Application;
 import com.andexp.skinmixer.R;
 import com.andexp.skinmixer.bw.Skin;
 import com.andexp.skinmixer.bw.SkinImpl;
@@ -21,18 +21,19 @@ import com.andexp.skinmixer.utils.SDCard;
 
 
 public class SkinBuilderBWAsync extends AsyncTask<Void, Integer, Boolean> {
-	public interface AsyncListener{
+	public interface AsyncBuildListener{
 		public void SetProgressBarMax(int progressMax);
 		public void OnUpdate(int value);
+		public void OnComplete();
 		public void OnFail(String reason);
 	}
-	AsyncListener mAsyncListener;
+	AsyncBuildListener mAsyncListener;
 
 	final static int PROGRESS_MAX = 12;
 	SkinImpl myNewSkin;
 	String failMessage;
 
-	public SkinBuilderBWAsync(SkinImpl mySkin, AsyncListener asyncListener){
+	public SkinBuilderBWAsync(SkinImpl mySkin, AsyncBuildListener asyncListener){
 		myNewSkin = mySkin;
 		mAsyncListener = asyncListener;
 		mAsyncListener.SetProgressBarMax(PROGRESS_MAX);
@@ -104,7 +105,7 @@ public class SkinBuilderBWAsync extends AsyncTask<Void, Integer, Boolean> {
 		String skinDirectory = message[length-2];
 		String fileMissing = message[length-1].split(" ")[0];
 		//TODO send a enum with error to fail
-		failMessage = MyApplication.getCustomApplicationContext().getString(R.string.skincreator_lbl_skin_uncomplete, skinDirectory, fileMissing);
+		failMessage = Application.getCustomApplicationContext().getString(R.string.skincreator_lbl_skin_uncomplete, skinDirectory, fileMissing);
 	}
 
 	@Override
@@ -116,14 +117,10 @@ public class SkinBuilderBWAsync extends AsyncTask<Void, Integer, Boolean> {
 	@Override
 	protected void onPostExecute(Boolean result) {
 		super.onPostExecute(result);
-		if(result == false){
-			displayError();
-		}
+		if(result == false)	mAsyncListener.OnFail(failMessage);
+		else mAsyncListener.OnComplete();
 	}
 
-	private void displayError(){
-		mAsyncListener.OnFail(failMessage);
-	}
 
 	public void generateDirectoryName(){
 		String skinName = myNewSkin.getSkinData().skinName;

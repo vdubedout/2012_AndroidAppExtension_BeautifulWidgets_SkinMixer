@@ -1,53 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.andexp.skinmixer"
-    android:versionCode="13"
-    android:versionName="alpha 0.4.00" >
+    android:versionCode="14"
+    android:versionName="alpha 0.4.01" >
 
     <uses-sdk android:minSdkVersion="7" />
 
     <application
+        android:name=".Application"
         android:icon="@drawable/logo_v2"
-        android:label="@string/app_name"
-        android:name=".MyApplication" >
-       
+        android:label="@string/app_name" >
         <activity
+            android:name=".main"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activity.SkinComposerActivity"
             android:label="@string/app_name"
-            android:name=".main" >
-            <intent-filter >
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-       
         <activity
-            android:label="@string/app_name"
-            android:name=".activity.SkinComposerActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        
-        <activity
-            android:label="@string/app_name"
             android:name=".activity.ChangeOneImagePartActivity"
-            android:configChanges="orientation|keyboardHidden" />
-       
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name" />
         <activity
-            android:label="@string/app_name"
             android:name=".activity.ChangeMultiImagePartActivity"
-            android:configChanges="orientation|keyboardHidden" />
-        
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name" />
         <activity
-            android:label="@string/app_name"
             android:name=".activity.SkinCreatorActivity"
-            android:configChanges="orientation|keyboardHidden" />
-        
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name" />
         <activity
-            android:label="@string/app_name"
             android:name=".activity.SavedSkinsActivity"
-            android:configChanges="orientation|keyboardHidden" />
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name" />
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.android.vending.BILLING"/>
+    <uses-permission android:name="com.android.vending.BILLING" />
 
 </manifest>
