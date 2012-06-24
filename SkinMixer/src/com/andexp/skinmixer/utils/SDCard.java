@@ -28,5 +28,10 @@ public class SDCard {
 		mSuperClockDirectory.mkdirs();
 		return mSuperClockDirectory;
 	}
+
+
+	public String getSuperClockSkinPath() {
+		return new String();
+	}
 	
 }

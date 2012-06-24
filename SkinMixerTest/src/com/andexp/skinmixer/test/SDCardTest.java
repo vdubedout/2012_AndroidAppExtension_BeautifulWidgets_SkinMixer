@@ -23,6 +23,10 @@ public class SDCardTest extends AndroidTestCase {
 		assertSame(SDCard.getInstance(mContext), SDCard.getInstance(mContext));
 	}
 	
+	public void testGetSkinPathNotNull(){
+		assertNotNull(SDCard.getInstance(mContext).getSuperClockSkinPath());
+	}
+	
 	public void testGetSuperClockPathNotNull() {
 		assertNotNull(SDCard.getInstance(mContext).getSuperClockDirectory());
 	}
