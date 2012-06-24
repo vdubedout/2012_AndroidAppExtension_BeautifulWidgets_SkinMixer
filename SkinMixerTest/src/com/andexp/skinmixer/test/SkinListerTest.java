@@ -12,7 +12,11 @@ public class SkinListerTest extends AndroidTestCase{
 	}
 	
 	public void testSkinListerNotNull() {
-		assertNotNull(new SkinLister());
+		assertNotNull(SkinLister.getInstance());
+	}
+	
+	public void testSkinListerSingleton() {
+		assertSame(SkinLister.getInstance(), SkinLister.getInstance());
 	}
 	
 	@Override
