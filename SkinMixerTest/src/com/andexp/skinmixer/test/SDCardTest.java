@@ -26,6 +26,10 @@ public class SDCardTest extends AndroidTestCase {
 		assertNotNull(SDCard.getInstance().getSuperClockSkinPath());
 	}
 	
+	public void testGetSkinPathCorrect(){
+		assertTrue(SDCard.getInstance().getSuperClockSkinPath().toLowerCase().contains("data/beautifulwidgets/scskins"));
+	}
+	
 	public void testGetSuperClockPathNotNull() {
 		assertNotNull(SDCard.getInstance().getSuperClockDirectory());
 	}

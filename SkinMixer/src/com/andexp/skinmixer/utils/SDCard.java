@@ -28,7 +28,7 @@ public class SDCard {
 
 
 	public String getSuperClockSkinPath() {
-		return new String();
+		return Environment.getExternalStorageDirectory()+File.separator+BASE_PATH+SUPERCLOCK_PATH;
 	}
 	
 }
