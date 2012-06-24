@@ -31,4 +31,8 @@ public class SDCard {
 				+ BASE_PATH + SUPERCLOCK_PATH;
 	}
 
+	public String getClassicClockPath() {
+		return new String();
+	}
+
 }

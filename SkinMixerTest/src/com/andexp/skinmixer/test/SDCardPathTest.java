@@ -74,8 +74,9 @@ public class SDCardPathTest extends AndroidTestCase {
 		}
 	}
 	
-	
-
+	public void testIsClassicClockPathNotNull() {
+		assertNotNull(SDCard.getInstance().getClassicClockPath());
+	}
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
