@@ -24,8 +24,9 @@ public class SDCardPathTest extends AndroidTestCase {
 		assertSame(SDCard.getInstance(), SDCard.getInstance());
 	}
 
-	public void testGetSkinPathNotNull(){
+	public void testGetSkinPathsNotNull(){
 		assertNotNull(SDCard.getInstance().getSuperClockSkinPath());
+		assertNotNull(SDCard.getInstance().getClassicClockPath());
 	}
 
 	public void testGetSkinPathCorrect(){
@@ -74,9 +75,6 @@ public class SDCardPathTest extends AndroidTestCase {
 		}
 	}
 	
-	public void testIsClassicClockPathNotNull() {
-		assertNotNull(SDCard.getInstance().getClassicClockPath());
-	}
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
