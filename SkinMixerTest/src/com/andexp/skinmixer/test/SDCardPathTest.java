@@ -7,7 +7,7 @@ import android.test.IsolatedContext;
 
 import com.andexp.skinmixer.utils.SDCard;
 
-public class SDCardTest extends AndroidTestCase {
+public class SDCardPathTest extends AndroidTestCase {
 	IsolatedContext mContext;
 
 	@Override
@@ -73,6 +73,8 @@ public class SDCardTest extends AndroidTestCase {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	@Override
 	protected void tearDown() throws Exception {
