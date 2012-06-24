@@ -37,6 +37,8 @@ public class SDCardPathTest extends AndroidTestCase {
 	public void testGetSuperClockPathNotNull() {
 		try{
 			assertNotNull(SDCard.getInstance().getSuperClockDirectory());
+			assertNotNull(SDCard.getInstance().getClassicClockDirectory());
+			
 		} catch (IOException e){
 
 		}

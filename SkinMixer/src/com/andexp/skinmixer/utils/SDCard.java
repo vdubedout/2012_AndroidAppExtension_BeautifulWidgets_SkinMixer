@@ -37,4 +37,8 @@ public class SDCard {
 				+ BASE_PATH + CLASSICCLOCK_PATH;
 	}
 
+	public File getClassicClockDirectory() {
+		return new File("blabla");
+	}
+
 }
