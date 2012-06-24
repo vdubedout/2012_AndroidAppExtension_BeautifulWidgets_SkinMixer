@@ -8,6 +8,7 @@ import android.os.Environment;
 public class SDCard {
 	private static String BASE_PATH = "data/beautifulwidgets/";
 	private static String SUPERCLOCK_PATH = "scskins/";
+	private static String CLASSICCLOCK_PATH = "skins/";
 	private static SDCard mInstance;
 
 	public SDCard() {
@@ -32,7 +33,8 @@ public class SDCard {
 	}
 
 	public String getClassicClockPath() {
-		return new String();
+		return Environment.getExternalStorageDirectory() + File.separator
+				+ BASE_PATH + CLASSICCLOCK_PATH;
 	}
 
 }
