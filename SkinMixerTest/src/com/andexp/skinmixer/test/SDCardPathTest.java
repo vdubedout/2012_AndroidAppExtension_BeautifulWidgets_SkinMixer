@@ -85,6 +85,14 @@ public class SDCardPathTest extends AndroidTestCase {
 		}
 	}
 	
+	public void testIsClassicClockFileIsDirectory(){
+		try {
+			assertTrue(SDCard.getInstance().getClassicClockDirectory().isDirectory());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
