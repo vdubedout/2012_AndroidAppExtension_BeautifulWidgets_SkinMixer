@@ -53,6 +53,7 @@ public class ChangeMultiImagePartActivity extends ListActivity{
 	private void bindAdapterToListView(){
 		MultipleImageSkinAdapter myAdapter = new MultipleImageSkinAdapter(this, mSkinList);
 		setListAdapter(myAdapter);
+		//test
 	}
 
 	@Override
