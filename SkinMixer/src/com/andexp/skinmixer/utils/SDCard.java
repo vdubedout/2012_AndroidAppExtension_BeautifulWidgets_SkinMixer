@@ -21,21 +21,21 @@ public class SDCard {
 	}
 
 	public File getSuperClockDirectory() throws IOException {
-		return getFileFromPath(getSuperClockSkinPath());
+		return getFileFromPath(getSuperClockPath());
 	}
 
-	public String getSuperClockSkinPath() {
+	public String getSuperClockPath() {
 		return Environment.getExternalStorageDirectory() + File.separator
 				+ BASE_PATH + SUPERCLOCK_PATH;
 	}
 
+	public File getClassicClockDirectory() throws IOException {
+		return getFileFromPath(getClassicClockPath());
+	}
+	
 	public String getClassicClockPath() {
 		return Environment.getExternalStorageDirectory() + File.separator
 				+ BASE_PATH + CLASSICCLOCK_PATH;
-	}
-
-	public File getClassicClockDirectory() throws IOException {
-		return getFileFromPath(getClassicClockPath());
 	}
 	
 	private File getFileFromPath(String path) throws IOException {
