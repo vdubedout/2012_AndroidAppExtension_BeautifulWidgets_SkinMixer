@@ -1,10 +1,9 @@
 package com.andexp.skinmixer.test;
 
-import com.andexp.skinmixer.utils.SDCard;
-
 import android.test.AndroidTestCase;
 import android.test.IsolatedContext;
-import android.util.Log;
+
+import com.andexp.skinmixer.utils.SDCard;
 
 public class SDCardTest extends AndroidTestCase {
 	IsolatedContext mContext;
@@ -16,36 +15,36 @@ public class SDCardTest extends AndroidTestCase {
 	}
 
 	public void testSDCardClassExists(){
-		assertNotNull(SDCard.getInstance(mContext));
+		assertNotNull(SDCard.getInstance());
 	}
 	
 	public void testSDCardSingleton(){
-		assertSame(SDCard.getInstance(mContext), SDCard.getInstance(mContext));
+		assertSame(SDCard.getInstance(), SDCard.getInstance());
 	}
 	
 	public void testGetSkinPathNotNull(){
-		assertNotNull(SDCard.getInstance(mContext).getSuperClockSkinPath());
+		assertNotNull(SDCard.getInstance().getSuperClockSkinPath());
 	}
 	
 	public void testGetSuperClockPathNotNull() {
-		assertNotNull(SDCard.getInstance(mContext).getSuperClockDirectory());
+		assertNotNull(SDCard.getInstance().getSuperClockDirectory());
 	}
 	
 	public void testSuperClockPathCorrect(){
-		assertFalse(SDCard.getInstance(mContext).getSuperClockDirectory().toString().contains("//"));
+		assertFalse(SDCard.getInstance().getSuperClockDirectory().toString().contains("//"));
 	}
 	
 	public void testIsSuperClockPathInGoodPath(){
-		String path = SDCard.getInstance(mContext).getSuperClockDirectory().toString();
+		String path = SDCard.getInstance().getSuperClockDirectory().toString();
 		assertTrue(path.toLowerCase().contains("data/beautifulwidgets/scskins"));
 	}
 	
 	public void testIsSuperClockFileExists(){
-		assertTrue(SDCard.getInstance(mContext).getSuperClockDirectory().exists());
+		assertTrue(SDCard.getInstance().getSuperClockDirectory().exists());
 	}
 	
 	public void testIsSuperClockFileIsDirectory(){
-		assertTrue(SDCard.getInstance(mContext).getSuperClockDirectory().isDirectory());
+		assertTrue(SDCard.getInstance().getSuperClockDirectory().isDirectory());
 	}
 	
 	@Override
