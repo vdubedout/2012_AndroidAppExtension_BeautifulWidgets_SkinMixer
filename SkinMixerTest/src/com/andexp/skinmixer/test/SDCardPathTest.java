@@ -38,7 +38,6 @@ public class SDCardPathTest extends AndroidTestCase {
 		try{
 			assertNotNull(SDCard.getInstance().getSuperClockDirectory());
 			assertNotNull(SDCard.getInstance().getClassicClockDirectory());
-			
 		} catch (IOException e){
 
 		}
@@ -46,6 +45,7 @@ public class SDCardPathTest extends AndroidTestCase {
 
 	public void testSuperClockPathCorrect(){
 		try {
+			assertTrue(SDCard.getInstance().getSuperClockDirectory().toString().contains("data/beautifulwidgets/scskins"));
 			assertFalse(SDCard.getInstance().getSuperClockDirectory().toString().contains("//"));
 		} catch (IOException e) {
 			e.printStackTrace();
