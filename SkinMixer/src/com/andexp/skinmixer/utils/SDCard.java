@@ -20,8 +20,7 @@ public class SDCard {
 	}
 
 	public File getSuperClockDirectory() {
-		String pathString = Environment.getExternalStorageDirectory()+File.separator+BASE_PATH+SUPERCLOCK_PATH;
-		File mSuperClockDirectory = new File(pathString);
+		File mSuperClockDirectory = new File(getSuperClockSkinPath());
 		mSuperClockDirectory.mkdirs();
 		return mSuperClockDirectory;
 	}
