@@ -22,9 +22,7 @@ public class SDCard {
 
 	public File getSuperClockDirectory() throws IOException {
 		if(Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED) throw new IOException("SDCard not present or ready"); 
-		File mSuperClockDirectory = new File(getSuperClockSkinPath());
-		mSuperClockDirectory.mkdirs();
-		return mSuperClockDirectory;
+		return getFileFromPath(getSuperClockSkinPath());
 	}
 
 	public String getSuperClockSkinPath() {
@@ -40,5 +38,11 @@ public class SDCard {
 	public File getClassicClockDirectory() {
 		return new File("blabla");
 	}
-
+	
+	private File getFileFromPath(String path) {
+		File mFile = new File(path);
+		mFile.mkdirs();
+		return mFile;
+	}
+	
 }
