@@ -13,7 +13,7 @@ public class SkinLister extends SkinDir{
 		return mInstance;
 	}
 
-	public ArrayList<String> getSuperClockSkins() {
+	public ArrayList<String> getSuperClockSkinList() {
 		return new ArrayList<String>();
 	}
 }

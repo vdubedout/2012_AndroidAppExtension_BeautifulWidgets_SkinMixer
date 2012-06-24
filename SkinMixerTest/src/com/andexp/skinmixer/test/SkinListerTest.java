@@ -19,8 +19,8 @@ public class SkinListerTest extends AndroidTestCase{
 		assertSame(SkinLister.getInstance(), SkinLister.getInstance());
 	}
 	
-	public void testSuperClockDirectoryNotNull(){
-		assertNotNull(SkinLister.getInstance().getSuperClockSkins());
+	public void testSuperClockListNotNull(){
+		assertNotNull(SkinLister.getInstance().getSuperClockSkinList());
 	}
 	
 	@Override
