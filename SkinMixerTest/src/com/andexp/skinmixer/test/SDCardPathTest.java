@@ -61,19 +61,17 @@ public class SDCardPathTest extends AndroidTestCase {
 		}
 	}
 
-	public void testIsSuperClockPathInGoodPath(){
-		String path;
+	public void testIsSuperClockFileExists(){
 		try {
-			path = SDCard.getInstance().getSuperClockDirectory().toString();
-			assertTrue(path.toLowerCase().contains("data/beautifulwidgets/scskins"));
+			assertTrue(SDCard.getInstance().getSuperClockDirectory().exists());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-	public void testIsSuperClockFileExists(){
+	
+	public void testIsClassicClockFileExists() {
 		try {
-			assertTrue(SDCard.getInstance().getSuperClockDirectory().exists());
+			assertTrue(SDCard.getInstance().getClassicClockDirectory().exists());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
