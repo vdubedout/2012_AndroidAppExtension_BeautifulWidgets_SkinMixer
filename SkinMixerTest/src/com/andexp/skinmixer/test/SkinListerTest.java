@@ -9,12 +9,14 @@ import com.andexp.skinmixer.utils.SkinLister;
 
 public class SkinListerTest extends InstrumentationTestCase{
 	private final int DEFAULT_ASSETS_FILE_NUMBER=3;
+	private String[] mAssetsTestFiles;
 	Context localContext;
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		localContext = getInstrumentation().getContext();
+		mAssetsTestFiles = new String[]{"scskins.zip","skins.zip"};
 	}
 	
 	public void testSkinListerNotNull() {
@@ -45,12 +47,15 @@ public class SkinListerTest extends InstrumentationTestCase{
 	
 	public void testAssetsTestFilesPresent() {
 		try {
-			assertNotNull(localContext.getAssets().open("scskins.zip"));
-			assertNotNull(localContext.getAssets().open("skins.zip"));
+			for (String fileString: mAssetsTestFiles) {
+				assertNotNull(localContext.getAssets().open(fileString));
+			}
 		} catch (IOException e) {
 			fail("Error accessing Assets list : "+e.getMessage());
 		}
 	}
+	
+	
 	
 	@Override
 	protected void tearDown() throws Exception {
