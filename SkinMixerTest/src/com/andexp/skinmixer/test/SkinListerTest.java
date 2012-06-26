@@ -2,15 +2,19 @@ package com.andexp.skinmixer.test;
 
 import java.io.IOException;
 
+import android.content.Context;
+import android.test.InstrumentationTestCase;
+
 import com.andexp.skinmixer.utils.SkinLister;
 
-import android.test.AndroidTestCase;
-
-public class SkinListerTest extends AndroidTestCase{
-
+public class SkinListerTest extends InstrumentationTestCase{
+	private final int DEFAULT_ASSETS_FILE_NUMBER=3;
+	Context localContext;
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		localContext = getInstrumentation().getContext();
 	}
 	
 	public void testSkinListerNotNull() {
@@ -26,12 +30,19 @@ public class SkinListerTest extends AndroidTestCase{
 	}
 	
 	public void testAssetsTestFilesPresent() {
-		try {
-			assertNotNull(getContext().getAssets().list(""));
-		} catch (IOException e) {
-			fail("Not any files listed : "+e.getMessage());
-		}
+		String testList[] = getLocalAssetsList();
+		assertEquals(DEFAULT_ASSETS_FILE_NUMBER + 2, testList.length);
 	}
+
+	private String[] getLocalAssetsList() {
+		try {
+			return localContext.getAssets().list("");
+		} catch (IOException e) {
+			fail("Error accessing Assets list : "+e.getMessage());
+		}
+		return new String[]{""};
+	}
+	
 	
 	@Override
 	protected void tearDown() throws Exception {
