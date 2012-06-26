@@ -6,7 +6,7 @@ import java.io.IOException;
 import android.os.Environment;
 
 public class SkinDir {
-	public static String BASE_PATH = "data/beautifulwidgets/";
+	public static String BASE_PATH = "/data/beautifulwidgets/";
 	private static String SUPERCLOCK_PATH = "scskins/";
 	private static String CLASSICCLOCK_PATH = "skins/";
 	private static SkinDir mInstance;
@@ -25,8 +25,7 @@ public class SkinDir {
 	}
 
 	public String getSuperClockPath() {
-		return Environment.getExternalStorageDirectory() + File.separator
-				+ BASE_PATH + SUPERCLOCK_PATH;
+		return Environment.getExternalStorageDirectory() + BASE_PATH + SUPERCLOCK_PATH;
 	}
 
 	public File getClassicClockDirectory() throws IOException {
@@ -34,11 +33,10 @@ public class SkinDir {
 	}
 	
 	public String getClassicClockPath() {
-		return Environment.getExternalStorageDirectory() + File.separator
-				+ BASE_PATH + CLASSICCLOCK_PATH;
+		return Environment.getExternalStorageDirectory() + BASE_PATH + CLASSICCLOCK_PATH;
 	}
 	
-	private File getFileFromPath(String path) throws IOException {
+	public File getFileFromPath(String path) throws IOException {
 		if(Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED) throw new IOException("SDCard not present or ready");
 		File mFile = new File(path);
 		mFile.mkdirs();
