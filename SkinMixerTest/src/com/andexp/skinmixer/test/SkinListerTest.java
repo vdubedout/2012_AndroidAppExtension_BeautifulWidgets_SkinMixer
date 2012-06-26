@@ -46,6 +46,7 @@ public class SkinListerTest extends InstrumentationTestCase{
 	public void testAssetsTestFilesPresent() {
 		try {
 			assertNotNull(localContext.getAssets().open("scskins.zip"));
+			assertNotNull(localContext.getAssets().open("skins.zip"));
 		} catch (IOException e) {
 			fail("Error accessing Assets list : "+e.getMessage());
 		}
