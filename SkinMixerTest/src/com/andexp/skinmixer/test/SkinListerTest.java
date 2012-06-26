@@ -29,7 +29,7 @@ public class SkinListerTest extends InstrumentationTestCase{
 		assertNotNull(SkinLister.getInstance().getSuperClockSkinList());
 	}
 	
-	public void testAssetsTestFilesPresent() {
+	public void testAssetsTestFilesNumber() {
 		String testList[] = getLocalAssetsList();
 		assertEquals(DEFAULT_ASSETS_FILE_NUMBER + 2, testList.length);
 	}
@@ -43,6 +43,13 @@ public class SkinListerTest extends InstrumentationTestCase{
 		return new String[]{""};
 	}
 	
+	public void testAssetsTestFilesPresent() {
+		try {
+			assertNotNull(localContext.getAssets().open("scskins.zip"));
+		} catch (IOException e) {
+			fail("Error accessing Assets list : "+e.getMessage());
+		}
+	}
 	
 	@Override
 	protected void tearDown() throws Exception {
