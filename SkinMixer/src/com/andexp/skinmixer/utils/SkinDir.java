@@ -6,7 +6,7 @@ import java.io.IOException;
 import android.os.Environment;
 
 public class SkinDir {
-	private static String BASE_PATH = "data/beautifulwidgets/";
+	public static String BASE_PATH = "data/beautifulwidgets/";
 	private static String SUPERCLOCK_PATH = "scskins/";
 	private static String CLASSICCLOCK_PATH = "skins/";
 	private static SkinDir mInstance;
