@@ -5,18 +5,18 @@ import java.io.IOException;
 
 import android.os.Environment;
 
-public class SDCardSkinPathLoader {
+public class SDCardSkinPath {
 	public static String BASE_PATH = "/data/beautifulwidgets/";
 	private static String SUPERCLOCK_PATH = "scskins/";
 	private static String CLASSICCLOCK_PATH = "skins/";
-	private static SDCardSkinPathLoader mInstance;
+	private static SDCardSkinPath mInstance;
 
-	public SDCardSkinPathLoader() {
+	public SDCardSkinPath() {
 	}
 
-	public static SDCardSkinPathLoader getInstance() {
+	public static SDCardSkinPath getInstance() {
 		if (mInstance == null)
-			mInstance = new SDCardSkinPathLoader();
+			mInstance = new SDCardSkinPath();
 		return mInstance;
 	}
 

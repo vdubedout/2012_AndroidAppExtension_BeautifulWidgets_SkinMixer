@@ -8,7 +8,7 @@ import android.content.res.AssetManager;
 import android.os.Environment;
 import android.test.InstrumentationTestCase;
 
-import com.andexp.skinmixer.utils.SDCardSkinPathLoader;
+import com.andexp.skinmixer.utils.SDCardSkinPath;
 import com.andexp.skinmixer.utils.ZipExtractor;
 
 public class ZipExtractorTest extends InstrumentationTestCase {
@@ -20,7 +20,7 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		mContext = getInstrumentation().getContext();
-		testPath = Environment.getExternalStorageDirectory() + SDCardSkinPathLoader.BASE_PATH + "tests/";
+		testPath = Environment.getExternalStorageDirectory() + SDCardSkinPath.BASE_PATH + "tests/";
 		deleteDir(new File(testPath));
 		mZipExtractor = new ZipExtractor(testPath);
 	}
