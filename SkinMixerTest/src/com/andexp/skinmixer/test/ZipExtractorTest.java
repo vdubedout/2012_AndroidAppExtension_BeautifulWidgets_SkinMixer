@@ -11,7 +11,7 @@ import android.test.InstrumentationTestCase;
 import com.andexp.skinmixer.utils.SkinDir;
 import com.andexp.skinmixer.utils.ZipExtractor;
 
-public class testZipExtractor extends InstrumentationTestCase {
+public class ZipExtractorTest extends InstrumentationTestCase {
 	ZipExtractor mZipExtractor;
 	String testPath;
 	Context mContext;
