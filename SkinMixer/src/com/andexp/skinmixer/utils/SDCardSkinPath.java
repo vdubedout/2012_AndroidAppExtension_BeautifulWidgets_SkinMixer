@@ -7,8 +7,8 @@ import android.os.Environment;
 
 public class SDCardSkinPath {
 	public static String BASE_PATH = "/data/beautifulwidgets/";
-	private static String SUPERCLOCK_PATH = "scskins/";
-	private static String CLASSICCLOCK_PATH = "skins/";
+	public static String SUPERCLOCK_PATH = "scskins/";
+	public static String CLASSICCLOCK_PATH = "skins/";
 	private static SDCardSkinPath mInstance;
 
 	public SDCardSkinPath() {

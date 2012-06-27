@@ -2,9 +2,9 @@ package com.andexp.skinmixer.test;
 
 import android.test.AndroidTestCase;
 
-import com.andexp.skinmixer.SkinFile;
+import com.andexp.skinmixer.SkinDirectory;
 
-public class SkinTest extends AndroidTestCase{
+public class SkinDirectoryTest extends AndroidTestCase{
 
 	@Override
 	protected void setUp() throws Exception {
@@ -12,11 +12,11 @@ public class SkinTest extends AndroidTestCase{
 	}
 	
 	public void testSkinNotNull(){
-		assertNotNull(new SkinFile(""));
+		assertNotNull(new SkinDirectory(""));
 	}
 	
 	public void testSkinPathCorrectlySet() {
-		SkinFile mSkinFile = new SkinFile("toto");
+		SkinDirectory mSkinFile = new SkinDirectory("toto");
 		assertNotNull(mSkinFile.getPath());
 		assertSame("toto", mSkinFile.getPath());
 	}
