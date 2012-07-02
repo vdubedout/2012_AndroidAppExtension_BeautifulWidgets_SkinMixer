@@ -1,4 +1,4 @@
-package com.andexp.skinmixer.utils;
+package com.andexp.skinmixer.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -61,7 +61,6 @@ public class ZipExtractor {
 		} else {
 			boolean worked = new File(destinationname+entryName).mkdirs();
 			Log.d("Test Zip", "Create dir : "+destinationname+entryName+" Creation Worked?"+worked);
-			
 		}
 		zipinputstream.closeEntry();
 		zipentry = zipinputstream.getNextEntry();
@@ -75,7 +74,7 @@ public class ZipExtractor {
 		byte[] buf = new byte[1024];
 		int n;
 		FileOutputStream fileoutputstream = new FileOutputStream(destinationname+entryName);             
-
+		
 		while ((n = zipinputstream.read(buf, 0, 1024)) > -1)
 			fileoutputstream.write(buf, 0, n);
 

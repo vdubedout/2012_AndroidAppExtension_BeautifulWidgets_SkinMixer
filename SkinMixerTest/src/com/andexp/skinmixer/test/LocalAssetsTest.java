@@ -7,7 +7,9 @@ import android.test.InstrumentationTestCase;
 
 public class LocalAssetsTest extends InstrumentationTestCase{
 	private final int DEFAULT_ASSETS_FILE_NUMBER=3;
-	public static String[] mAssetsTestFiles = new String[]{"scskins.zip","skins.zip"};
+	public static String[] SKIN_DIRECTORY_ZIP = new String[]{"scskins.zip","skins.zip"};
+	public static String[] SUPER_SKINS = new String[]{"bordering-ice-red", "golden", "icsphoenix"};
+	public static String[] CLASSIC_SKINS = new String[]{"kawaplus","sunburn"};
 	Context localContext;
 	
 	@Override
@@ -32,7 +34,7 @@ public class LocalAssetsTest extends InstrumentationTestCase{
 	
 	public void testAssetsTestFilesPresent() {
 		try {
-			for (String fileString: mAssetsTestFiles) {
+			for (String fileString: SKIN_DIRECTORY_ZIP) {
 				assertNotNull(localContext.getAssets().open(fileString));
 			}
 		} catch (IOException e) {

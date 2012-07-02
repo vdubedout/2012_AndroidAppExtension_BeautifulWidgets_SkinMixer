@@ -18,7 +18,7 @@ public class SkinDirectory {
 	
 	private String loadLocalVariableFrom(String path){
 		int index = path.indexOf(File.separator, mPath.length()-1);
-		if(index != -1) path;
+//		if(index != -1) path;
 		return null;
 	}
 }
