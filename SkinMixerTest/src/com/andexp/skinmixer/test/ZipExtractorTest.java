@@ -7,24 +7,25 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Environment;
 import android.test.InstrumentationTestCase;
-import android.util.Log;
 
 import com.andexp.skinmixer.utils.SDCardSkinPath;
 
 public class ZipExtractorTest extends InstrumentationTestCase {
 	ZipExtractor mZipExtractor;
-	String testPath;
 	Context mContext;
+	String testPath;
 	String baseTestDirectory = "tests/";
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		mContext = getInstrumentation().getContext();
-		SDCardSkinPath.BASE_PATH += baseTestDirectory;
-		deleteDir(new File(SDCardSkinPath.BASE_PATH));
 		
-		mZipExtractor = new ZipExtractor(SDCardSkinPath.BASE_PATH);
+		SDCardSkinPath.BASE_PATH += baseTestDirectory;
+		testPath = Environment.getExternalStorageDirectory() + SDCardSkinPath.BASE_PATH;
+		deleteDir(new File(testPath));
+		
+		mZipExtractor = new ZipExtractor(testPath);
 		extractZips();
 	}
 	
