@@ -2,7 +2,7 @@ package com.andexp.skinmixer.utils;
 
 import java.util.ArrayList;
 
-public class SkinLister {
+public class SkinLister extends SDCardSkinPath{
 	private static SkinLister mInstance;
 
 	public SkinLister() {

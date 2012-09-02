@@ -22,7 +22,7 @@ public class TestingAssets {
 		mZipExtractor = new ZipExtractor(path);
 	}
 	
-	public void extractZips() {
+	public void extract() {
 		for (String mZip : LocalAssetsTest.SKIN_DIRECTORY_ZIP) {
 				try {
 					mZipExtractor.extractZipFile(mContext.getAssets().open(mZip, AssetManager.ACCESS_STREAMING));
@@ -33,7 +33,7 @@ public class TestingAssets {
 	}
 	
 	
-	public void deleteZips(){
+	public void delete(){
 		deleteDir(new File(mPath));
 	}
 	

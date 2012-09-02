@@ -1,16 +1,15 @@
-package com.andexp.skinmixer.zipextractor;
+package com.andexp.skinmixer.utils;
 
 import java.io.File;
-import java.io.IOException;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.os.Environment;
 import android.test.InstrumentationTestCase;
 
 import com.andexp.skinmixer.LocalAssetsTest;
 import com.andexp.skinmixer.TestingAssets;
 import com.andexp.skinmixer.utils.SDCardSkinPath;
+import com.andexp.skinmixer.zipextractor.ZipExtractor;
 
 public class ZipExtractorTest extends InstrumentationTestCase {
 	final String baseTestDirectory = "tests/";
@@ -27,11 +26,12 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 		mContext = getInstrumentation().getContext();
 		testPath = getBaseTestPath();
 		assets = new TestingAssets(mContext, testPath);
-		assets.extractZips();
+		assets.extract();
 	}
 
 	private String getBaseTestPath() {
-		path = new SDCardSkinPath(SDCardSkinPath.BASE_PATH + baseTestDirectory);
+		path = new SDCardSkinPath();
+		path.setBasePath(SDCardSkinPath.BASE_PATH + baseTestDirectory);
 		testPath = path.getBasePath();
 		return testPath;
 	}
@@ -62,7 +62,8 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 	
 	@Override
 	protected void tearDown() throws Exception {
-		assets.deleteZips();
+		assets.delete();
+		path.resetBasePath();
 		super.tearDown();
 	}
 }

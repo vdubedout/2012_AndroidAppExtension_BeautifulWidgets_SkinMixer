@@ -1,25 +1,23 @@
-package com.andexp.skinmixer;
+package com.andexp.skinmixer.utils;
 
-import android.os.Environment;
 import android.test.AndroidTestCase;
 
+import com.andexp.skinmixer.TestingAssets;
 import com.andexp.skinmixer.utils.SDCardSkinPath;
 import com.andexp.skinmixer.utils.SkinLister;
 
 public class SkinListerTest extends AndroidTestCase{
+	private SDCardSkinPath mSdCardPath;
+	private TestingAssets assets;
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-//		String testPath = modifyBasePathToTest();
-//		TestingAssets assets = new TestingAssets(getContext(), testPath);
+		mSdCardPath = SDCardSkinPath.getInstance();
+		mSdCardPath.setBasePath(SDCardSkinPath.BASE_PATH+"tests/");
+		assets = new TestingAssets(getContext(), mSdCardPath.getBasePath());
+		assets.extract();
 	}
-	
-//	private String modifyBasePathToTest() {
-//		String testPath;
-//		SDCardSkinPath.BASE_PATH += "/test";
-//		testPath = Environment.getExternalStorageDirectory() + SDCardSkinPath.BASE_PATH;
-//		return testPath;
-//	}
 
 	public void testSkinListerNotNull() {
 		assertNotNull(SkinLister.getInstance());
@@ -40,6 +38,8 @@ public class SkinListerTest extends AndroidTestCase{
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		assets.delete();
+		mSdCardPath.resetBasePath();
 	}
 	
 	

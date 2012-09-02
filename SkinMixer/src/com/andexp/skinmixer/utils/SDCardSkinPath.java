@@ -18,26 +18,29 @@ public class SDCardSkinPath {
 		mSuperClockPath = SUPERCLOCK_PATH;
 		mClassicClockPath = CLASSICCLOCK_PATH;
 	}
-
-	public SDCardSkinPath(String basePath) {
-		mBasePath = basePath;
-		mSuperClockPath = SUPERCLOCK_PATH;
-		mClassicClockPath = CLASSICCLOCK_PATH;
-	}
-
+	
 	public static SDCardSkinPath getInstance() {
 		if (mInstance == null)
 			mInstance = new SDCardSkinPath();
 		return mInstance;
 	}
 
-	public File getSuperClockDirectory() throws IOException {
-		return getFileFromPath(getSuperClockPath());
+	protected void setBasePath(String basePath){
+		mBasePath = basePath;
+	}
+
+	protected void resetBasePath() {
+		mBasePath = BASE_PATH;
 	}
 
 	public String getBasePath() {
 		return Environment.getExternalStorageDirectory() + mBasePath;
 	}
+
+	public File getSuperClockDirectory() throws IOException {
+		return getFileFromPath(getSuperClockPath());
+	}
+
 	
 	public String getSuperClockPath() {
 		return getBasePath() + mSuperClockPath;
