@@ -12,27 +12,27 @@ import com.andexp.skinmixer.LocalAssetsTest;
 import com.andexp.skinmixer.utils.SDCardSkinPath;
 
 public class ZipExtractorTest extends InstrumentationTestCase {
+	final String baseTestDirectory = "tests/";
+
 	ZipExtractor mZipExtractor;
 	Context mContext;
 	String testPath;
-	String baseTestDirectory = "tests/";
+	SDCardSkinPath path;
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		mContext = getInstrumentation().getContext();
-		
-		SDCardSkinPath.BASE_PATH += baseTestDirectory;
-		testPath = Environment.getExternalStorageDirectory() + SDCardSkinPath.BASE_PATH;
-		deleteDir(new File(testPath));
+		testPath = getBaseTestPath();
 		
 		mZipExtractor = new ZipExtractor(testPath);
 		extractZips();
 	}
-	
-	public void testSDCardMounted(){
-		String state = Environment.getExternalStorageState();
-		assertTrue(state.equalsIgnoreCase(Environment.MEDIA_MOUNTED));
+
+	private String getBaseTestPath() {
+		path = new SDCardSkinPath(SDCardSkinPath.BASE_PATH + baseTestDirectory);
+		testPath = path.getBasePath();
+		return testPath;
 	}
 	
 	private void extractZips() {
@@ -45,6 +45,13 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 			}
 		}
 	}
+	
+	
+	public void testSDCardMounted(){
+		String state = Environment.getExternalStorageState();
+		assertTrue(state.equalsIgnoreCase(Environment.MEDIA_MOUNTED));
+	}
+	
 	
 	public void testZipExtractorNotNull() {
 		assertNotNull(mZipExtractor);
@@ -64,7 +71,7 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 	}
 	
 	public void testSuperClockSkinsDirectoryCreated(){
-		String mSuperClockDir = SDCardSkinPath.getInstance().getSuperClockPath();
+		String mSuperClockDir = path.getSuperClockPath();
 		for(String mSkin : LocalAssetsTest.SUPER_SKINS){
 			assertTrue(new File(mSuperClockDir+mSkin).isDirectory());
 		}
@@ -72,8 +79,7 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 	
 	@Override
 	protected void tearDown() throws Exception {
-//		deleteDir(new File(testPath));
-		SDCardSkinPath.BASE_PATH = SDCardSkinPath.BASE_PATH.substring(0, SDCardSkinPath.BASE_PATH.indexOf(baseTestDirectory));
+		deleteDir(new File(testPath));
 		super.tearDown();
 	}
 	

@@ -6,12 +6,23 @@ import java.io.IOException;
 import android.os.Environment;
 
 public class SDCardSkinPath {
-	public static String BASE_PATH = "/data/beautifulwidgets/";
-	public static String SUPERCLOCK_PATH = "scskins/";
-	public static String CLASSICCLOCK_PATH = "skins/";
+	public static final String BASE_PATH = "/data/beautifulwidgets/";
+	public static final String SUPERCLOCK_PATH = "scskins/";
+	public static final String CLASSICCLOCK_PATH = "skins/";
 	private static SDCardSkinPath mInstance;
-
+	
+	String mBasePath, mSuperClockPath, mClassicClockPath;
+	
 	public SDCardSkinPath() {
+		mBasePath = BASE_PATH;
+		mSuperClockPath = SUPERCLOCK_PATH;
+		mClassicClockPath = CLASSICCLOCK_PATH;
+	}
+
+	public SDCardSkinPath(String basePath) {
+		mBasePath = basePath;
+		mSuperClockPath = SUPERCLOCK_PATH;
+		mClassicClockPath = CLASSICCLOCK_PATH;
 	}
 
 	public static SDCardSkinPath getInstance() {
@@ -24,8 +35,12 @@ public class SDCardSkinPath {
 		return getFileFromPath(getSuperClockPath());
 	}
 
+	public String getBasePath() {
+		return Environment.getExternalStorageDirectory() + mBasePath;
+	}
+	
 	public String getSuperClockPath() {
-		return Environment.getExternalStorageDirectory() + BASE_PATH + SUPERCLOCK_PATH;
+		return getBasePath() + mSuperClockPath;
 	}
 
 	public File getClassicClockDirectory() throws IOException {
@@ -33,7 +48,7 @@ public class SDCardSkinPath {
 	}
 	
 	public String getClassicClockPath() {
-		return Environment.getExternalStorageDirectory() + BASE_PATH + CLASSICCLOCK_PATH;
+		return getBasePath() + mClassicClockPath;
 	}
 	
 	public File getFileFromPath(String path) throws IOException {
@@ -42,5 +57,6 @@ public class SDCardSkinPath {
 		mFile.mkdirs();
 		return mFile;
 	}
+
 	
 }
