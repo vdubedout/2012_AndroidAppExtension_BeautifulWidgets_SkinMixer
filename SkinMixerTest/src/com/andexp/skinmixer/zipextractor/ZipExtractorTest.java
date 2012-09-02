@@ -9,11 +9,13 @@ import android.os.Environment;
 import android.test.InstrumentationTestCase;
 
 import com.andexp.skinmixer.LocalAssetsTest;
+import com.andexp.skinmixer.TestingAssets;
 import com.andexp.skinmixer.utils.SDCardSkinPath;
 
 public class ZipExtractorTest extends InstrumentationTestCase {
 	final String baseTestDirectory = "tests/";
-
+	TestingAssets assets;
+	
 	ZipExtractor mZipExtractor;
 	Context mContext;
 	String testPath;
@@ -24,9 +26,8 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 		super.setUp();
 		mContext = getInstrumentation().getContext();
 		testPath = getBaseTestPath();
-		
-		mZipExtractor = new ZipExtractor(testPath);
-		extractZips();
+		assets = new TestingAssets(mContext, testPath);
+		assets.extractZips();
 	}
 
 	private String getBaseTestPath() {
@@ -35,30 +36,12 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 		return testPath;
 	}
 	
-	private void extractZips() {
-		for (String mZip : LocalAssetsTest.SKIN_DIRECTORY_ZIP) {
-			try {
-				mZipExtractor.extractZipFile(mContext.getAssets().open(mZip, AssetManager.ACCESS_STREAMING));
-			} catch (IOException e) {
-				e.printStackTrace();
-				fail("Fail getting assets");
-			}
-		}
-	}
-	
-	
 	public void testSDCardMounted(){
 		String state = Environment.getExternalStorageState();
 		assertTrue(state.equalsIgnoreCase(Environment.MEDIA_MOUNTED));
 	}
 	
-	
-	public void testZipExtractorNotNull() {
-		assertNotNull(mZipExtractor);
-	}
-	
 	public void testDestinationPathCreated(){
-		mZipExtractor.createDestinationPath();
 		assertTrue(new File(testPath).isDirectory());
 	}
 	
@@ -79,23 +62,7 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 	
 	@Override
 	protected void tearDown() throws Exception {
-		deleteDir(new File(testPath));
+		assets.deleteZips();
 		super.tearDown();
 	}
-	
-	public static boolean deleteDir(File dir) {
-	    if (dir.isDirectory()) {
-	        String[] children = dir.list();
-	        for (int i=0; i<children.length; i++) {
-	            boolean success = deleteDir(new File(dir, children[i]));
-	            if (!success) {
-	                return false;
-	            }
-	        }
-	    }
-
-	    return dir.delete();
-	}
-
-	
 }
