@@ -11,7 +11,7 @@ public class SDCardSkinPath {
 	public static final String CLASSICCLOCK_PATH = "skins/";
 	private static SDCardSkinPath mInstance;
 	
-	String mBasePath, mSuperClockPath, mClassicClockPath;
+	private String mBasePath, mSuperClockPath, mClassicClockPath;
 	
 	public SDCardSkinPath() {
 		mBasePath = BASE_PATH;

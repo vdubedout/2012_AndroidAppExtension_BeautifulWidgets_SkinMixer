@@ -1,5 +1,7 @@
 package com.andexp.skinmixer.utils;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.test.InstrumentationTestCase;
 
@@ -27,22 +29,38 @@ public class SkinListerTest extends InstrumentationTestCase{
 	}
 	
 	public void testSkinListerSingleton() {
-		assertSame(SkinLister.getInstance(), SkinLister.getInstance());
+		assertSame(lister, SkinLister.getInstance());
 	}
 	
 	public void testSuperClockListNotNull(){
-		assertNotNull(SkinLister.getInstance().getSuperClockSkinList());
+		assertNotNull(lister.getSuperClockSkinList());
 	}
 	
 	public void testSuperClockListNotEmpty(){
-		assertTrue(SkinLister.getInstance().getSuperClockSkinList().size() >= 1);
+		assertTrue(lister.getSuperClockSkinList().size() >= 1);
 	}
+	
+	public void testSuperClockListCorrectlyFilled(){
+		assertEquals(3, lister.getSuperClockSkinList().size());
+	}
+	
+	public void testNotCrashing(){
+		try{
+			lister.getSkinsIn(lister.getBasePath()+"toto/toto");
+			lister.populateSkins(null, new ArrayList<String>());
+		} catch (Exception e) {
+			fail("Crash : "+e.getMessage());
+		}
+	}
+	
+	
+	
 	
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-//		assets.delete();
-//		mSdCardPath.resetBasePath();
+		assets.delete();
+		lister.resetBasePath();
 	}
 	
 	
