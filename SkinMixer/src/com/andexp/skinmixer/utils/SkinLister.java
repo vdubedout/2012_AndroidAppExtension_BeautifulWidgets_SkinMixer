@@ -1,11 +1,14 @@
 package com.andexp.skinmixer.utils;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class SkinLister extends SDCardSkinPath{
 	private static SkinLister mInstance;
-
-	public SkinLister() {
+	ArrayList<String> mSuperClockSkins;
+	
+	private SkinLister() {
+		mSuperClockSkins = new ArrayList<String>();
 	}
 
 	public static SkinLister getInstance() {
@@ -14,6 +17,11 @@ public class SkinLister extends SDCardSkinPath{
 	}
 
 	public ArrayList<String> getSuperClockSkinList() {
-		return new ArrayList<String>();
+		File dir = new File(getSuperClockPath());
+		String[] skins = dir.list();
+		for (String string : skins) {
+			mSuperClockSkins.add(string);
+		}
+		return mSuperClockSkins;
 	}
 }

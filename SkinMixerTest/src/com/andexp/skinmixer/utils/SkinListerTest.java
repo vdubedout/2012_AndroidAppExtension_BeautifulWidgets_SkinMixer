@@ -1,21 +1,24 @@
 package com.andexp.skinmixer.utils;
 
-import android.test.AndroidTestCase;
+import android.content.Context;
+import android.test.InstrumentationTestCase;
 
 import com.andexp.skinmixer.TestingAssets;
-import com.andexp.skinmixer.utils.SDCardSkinPath;
-import com.andexp.skinmixer.utils.SkinLister;
 
-public class SkinListerTest extends AndroidTestCase{
-	private SDCardSkinPath mSdCardPath;
+public class SkinListerTest extends InstrumentationTestCase{
 	private TestingAssets assets;
-
+	private Context mContext;
+	private SkinLister lister;
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		mSdCardPath = SDCardSkinPath.getInstance();
-		mSdCardPath.setBasePath(SDCardSkinPath.BASE_PATH+"tests/");
-		assets = new TestingAssets(getContext(), mSdCardPath.getBasePath());
+		mContext = getInstrumentation().getContext();
+		
+		lister = SkinLister.getInstance();
+		lister.setBasePath(SDCardSkinPath.BASE_PATH+"tests/");
+		
+		assets = new TestingAssets(mContext, lister.getBasePath());
 		assets.extract();
 	}
 
@@ -31,15 +34,15 @@ public class SkinListerTest extends AndroidTestCase{
 		assertNotNull(SkinLister.getInstance().getSuperClockSkinList());
 	}
 	
-//	public void testSuperClockListNotEmpty(){
-//		assertTrue(SkinLister.getInstance().getSuperClockSkinList().size() >= 1);
-//	}
+	public void testSuperClockListNotEmpty(){
+		assertTrue(SkinLister.getInstance().getSuperClockSkinList().size() >= 1);
+	}
 	
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		assets.delete();
-		mSdCardPath.resetBasePath();
+//		assets.delete();
+//		mSdCardPath.resetBasePath();
 	}
 	
 	
