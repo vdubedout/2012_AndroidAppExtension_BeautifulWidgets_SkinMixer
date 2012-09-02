@@ -1,4 +1,4 @@
-package com.andexp.skinmixer.test;
+package com.andexp.skinmixer.zipextractor;
 
 import java.io.File;
 import java.io.FileNotFoundException;

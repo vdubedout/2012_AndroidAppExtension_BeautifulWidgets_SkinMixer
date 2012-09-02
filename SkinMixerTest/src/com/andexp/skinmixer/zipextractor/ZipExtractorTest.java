@@ -1,4 +1,4 @@
-package com.andexp.skinmixer.test;
+package com.andexp.skinmixer.zipextractor;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import android.content.res.AssetManager;
 import android.os.Environment;
 import android.test.InstrumentationTestCase;
 
+import com.andexp.skinmixer.LocalAssetsTest;
 import com.andexp.skinmixer.utils.SDCardSkinPath;
 
 public class ZipExtractorTest extends InstrumentationTestCase {

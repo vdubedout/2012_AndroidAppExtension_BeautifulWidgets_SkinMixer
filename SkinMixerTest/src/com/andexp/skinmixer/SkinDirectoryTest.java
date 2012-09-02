@@ -1,4 +1,4 @@
-package com.andexp.skinmixer.test;
+package com.andexp.skinmixer;
 
 import android.test.AndroidTestCase;
 
