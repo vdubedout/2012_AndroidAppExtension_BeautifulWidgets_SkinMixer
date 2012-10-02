@@ -53,9 +53,6 @@ public class SkinListerTest extends InstrumentationTestCase{
 		}
 	}
 	
-	
-	
-	
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
