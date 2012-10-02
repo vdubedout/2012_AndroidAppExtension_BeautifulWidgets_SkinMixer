@@ -1,13 +1,9 @@
 package com.andexp.skinmixer.path;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.test.InstrumentationTestCase;
 
 import com.andexp.skinmixer.TestingAssets;
-import com.andexp.skinmixer.path.SDCardSkinPath;
-import com.andexp.skinmixer.path.SkinLister;
 
 public class SkinListerTest extends InstrumentationTestCase{
 	private TestingAssets assets;
@@ -35,24 +31,15 @@ public class SkinListerTest extends InstrumentationTestCase{
 	}
 	
 	public void testSuperClockListNotNull(){
-		assertNotNull(lister.getSuperClockSkinList());
+		assertNotNull(lister.getSuperClockSkinPathList());
 	}
 	
 	public void testSuperClockListNotEmpty(){
-		assertTrue(lister.getSuperClockSkinList().size() >= 1);
+		assertTrue(lister.getSuperClockSkinPathList().size() >= 1);
 	}
 	
 	public void testSuperClockListCorrectlyFilled(){
-		assertEquals(3, lister.getSuperClockSkinList().size());
-	}
-	
-	public void testNotCrashing(){
-		try{
-			lister.getSkinsIn(lister.getBasePath()+"toto/toto");
-			lister.populateSkins(null, new ArrayList<String>());
-		} catch (Exception e) {
-			fail("Crash : "+e.getMessage());
-		}
+		assertEquals(3, lister.getSuperClockSkinPathList().size());
 	}
 	
 	@Override
