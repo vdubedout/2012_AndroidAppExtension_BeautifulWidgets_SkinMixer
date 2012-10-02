@@ -34,6 +34,9 @@ public class SkinLister extends SDCardSkinPath {
 	}
 
 	protected ArrayList<String> populateSkins(String[] skins, ArrayList<String> skinList) {
+		if (skinList == null)
+			skinList = new ArrayList<String>();
+		
 		if (skins != null) {
 			for (String string : skins) {
 				skinList.add(string);
