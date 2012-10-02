@@ -5,7 +5,7 @@ import java.io.IOException;
 import android.test.AndroidTestCase;
 import android.test.IsolatedContext;
 
-import com.andexp.skinmixer.utils.SDCardSkinPath;
+import com.andexp.skinmixer.path.SDCardSkinPath;
 
 public class SDCardSkinPathTest extends AndroidTestCase {
 	IsolatedContext mContext;

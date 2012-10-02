@@ -1,4 +1,4 @@
-package com.andexp.skinmixer.utils;
+package com.andexp.skinmixer.path;
 
 import java.io.File;
 import java.io.IOException;

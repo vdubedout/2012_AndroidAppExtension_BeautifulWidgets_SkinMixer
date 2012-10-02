@@ -1,4 +1,4 @@
-package com.andexp.skinmixer.utils;
+package com.andexp.skinmixer.path;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,8 @@ import android.content.Context;
 import android.test.InstrumentationTestCase;
 
 import com.andexp.skinmixer.TestingAssets;
+import com.andexp.skinmixer.path.SDCardSkinPath;
+import com.andexp.skinmixer.path.SkinLister;
 
 public class SkinListerTest extends InstrumentationTestCase{
 	private TestingAssets assets;
@@ -59,6 +61,4 @@ public class SkinListerTest extends InstrumentationTestCase{
 		assets.delete();
 		lister.resetBasePath();
 	}
-	
-	
 }

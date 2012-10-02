@@ -1,4 +1,4 @@
-package com.andexp.skinmixer.utils;
+package com.andexp.skinmixer.path;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,6 +9,12 @@ public class SkinLister extends SDCardSkinPath {
 
 	private SkinLister() {
 		mSuperClockSkins = new ArrayList<String>();
+		load(mSuperClockSkins);
+	}
+
+	private void load(ArrayList<String> skinList) {
+		String[] skins = getSkinsIn(getSuperClockPath());
+		mSuperClockSkins = populateSkins(skins, mSuperClockSkins);
 	}
 
 	public static SkinLister getInstance() {
@@ -18,25 +24,29 @@ public class SkinLister extends SDCardSkinPath {
 	}
 
 	public ArrayList<String> getSuperClockSkinList() {
-		String[] skins = getSkinsIn(getSuperClockPath());
-		mSuperClockSkins = populateSkins(skins, mSuperClockSkins);
-		return mSuperClockSkins; 
+		return mSuperClockSkins;
 	}
+	
 
 	protected String[] getSkinsIn(String path) {
 		File dir = new File(path);
 		String[] skins = dir.list();
-		if(skins==null) skins = new String[0];
+		if (skins == null)
+			skins = new String[0];
 		return skins;
 	}
 
-	protected ArrayList<String> populateSkins(String[] skins, ArrayList<String> skinList) {
+	protected ArrayList<String> populateSkins(String[] skins,
+			ArrayList<String> skinList) {
+		if (skinList != null && skinList.size() > 0)
+			skinList = new ArrayList<String>();
+		
 		if (skins != null) {
 			for (String string : skins) {
 				skinList.add(string);
 			}
 		}
-		
+
 		return skinList;
 	}
 }
