@@ -33,11 +33,12 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 
 	private void setLayoutForType(SkinPartType skinPart) {
 		switch (skinPart) {
-		case NUMBER_0:
-			setMonoImageSkinPartAdapter();
+		case BACKGROUND:
+		case BACKGROUND_NUMBERS:
+			setMultiImageSkinPartAdapter();
 			break;
 		default:
-			setMultiImageSkinPartAdapter();
+			setMonoImageSkinPartAdapter();
 			break;
 		}
 	}
