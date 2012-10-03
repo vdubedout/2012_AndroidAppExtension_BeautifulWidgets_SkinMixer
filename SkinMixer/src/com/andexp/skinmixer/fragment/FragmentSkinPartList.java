@@ -18,10 +18,12 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 	private ArrayList<String> mSuperClockSkinPathList;
 	
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		getListView().setClickable(false);
 	}
+
+
 
 	public void setSkinPartType(SkinPartType skinPart){
 		mType = skinPart;

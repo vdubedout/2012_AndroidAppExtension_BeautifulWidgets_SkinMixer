@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 	private SkinPartType mSkinPartType;
 	private LayoutInflater mLayoutInflater;
 	private OnSkinPartClickListener mOnSkinPartClickListener;
+	private static ImageView mlastImageViewClicked; 
 
 	public AdapterMonoImageSkinPart(Activity activity, ArrayList<String> skinPathList,
 			SkinPartType skinPart, OnSkinPartClickListener listener) {
@@ -107,9 +109,23 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 
 		@Override
 		public void onClick(View v) {
+			int position = getArrayListPosition();
+			mOnSkinPartClickListener.OnSkinPartClick(position, v);
+			setSelectedBackgroundColor(v);
+		}
+
+		private void setSelectedBackgroundColor(View v) {
+			if(mlastImageViewClicked!=null){
+				mlastImageViewClicked.setBackgroundColor(Color.parseColor("#00000000"));
+			}
+			v.setBackgroundColor(Color.parseColor("#FFFFCC00"));
+			mlastImageViewClicked = (ImageView) v;
+		}
+
+		private int getArrayListPosition() {
 			int position = mPosition * 2;
 			if(isRightImage) position++;
-			mOnSkinPartClickListener.OnSkinPartClick(position, v);
+			return position;
 		}
 	}
 
