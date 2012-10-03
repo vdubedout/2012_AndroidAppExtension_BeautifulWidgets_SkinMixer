@@ -18,11 +18,11 @@ public class SkinLister extends SDCardSkinPath {
 	}
 
 	public ArrayList<String> getSuperClockSkinPathList() {
-		if (mSuperClockSkins.size() == 0) {
+//		if (mSuperClockSkins.size() == 0) {
 			String path = getSuperClockPath();
 			String[] skins = getSkinsIn(path);
 			mSuperClockSkins = populateSkinsPaths(skins, path, mSuperClockSkins);
-		}
+//		}
 		return mSuperClockSkins;
 	}
 
