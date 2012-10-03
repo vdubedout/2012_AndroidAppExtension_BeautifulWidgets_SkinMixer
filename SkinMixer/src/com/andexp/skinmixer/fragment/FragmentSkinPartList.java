@@ -20,10 +20,11 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		ListView listView = getListView();
+		listView.setSelector(android.R.color.transparent);
 		getListView().setClickable(false);
+		getListView().setFocusable(false);
 	}
-
-
 
 	public void setSkinPartType(SkinPartType skinPart){
 		mType = skinPart;

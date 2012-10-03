@@ -75,12 +75,17 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 	}
 
 	private void loadImages(int position, ViewHolder holder) {
-		String leftImagePath = mSkinPathList.get(position * 2) + "/";
-		leftImagePath += (mSkinPartType == SkinPartType.BACKGROUND) ? BACKGROUND_IMAGE
-				: BACKGROUNDNUMBERS_IMAGE;
-		holder.imageViewLeft.setImageBitmap(new BitmapDrawable(mContext.getResources(),
-				leftImagePath).getBitmap());
+		loadLeftImage(position, holder);
+		loadImageRight(position, holder);
+		removeAnyBackgroundColors(holder);
+	}
 
+	private void removeAnyBackgroundColors(ViewHolder holder) {
+		holder.imageViewLeft.setBackgroundColor(Color.parseColor("#00000000"));
+		holder.imageViewRight.setBackgroundColor(Color.parseColor("#00000000"));
+	}
+
+	private void loadImageRight(int position, ViewHolder holder) {
 		if (mSkinPathList.size() > position * 2 + 1) {
 			holder.imageViewRight.setVisibility(View.VISIBLE);
 			String rightImagePath = mSkinPathList.get(position * 2 + 1) + "/";
@@ -91,6 +96,14 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 		} else {
 			holder.imageViewRight.setVisibility(View.INVISIBLE);
 		}
+	}
+
+	private void loadLeftImage(int position, ViewHolder holder) {
+		String leftImagePath = mSkinPathList.get(position * 2) + "/";
+		leftImagePath += (mSkinPartType == SkinPartType.BACKGROUND) ? BACKGROUND_IMAGE
+				: BACKGROUNDNUMBERS_IMAGE;
+		holder.imageViewLeft.setImageBitmap(new BitmapDrawable(mContext.getResources(),
+				leftImagePath).getBitmap());
 	}
 
 	private void addOnClickListeners(int position, ViewHolder holder) {
