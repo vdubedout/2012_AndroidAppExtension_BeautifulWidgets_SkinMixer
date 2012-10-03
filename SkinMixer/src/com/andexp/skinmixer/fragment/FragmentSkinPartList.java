@@ -50,7 +50,7 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 
 	@Override
 	public void OnSkinPartClick(int arrayPosition, View v) {
-		Toast.makeText(getActivity(), "click on "+mSuperClockSkinPathList.get(arrayPosition), 2000).show();
+		Toast.makeText(getActivity(), "click on "+mSuperClockSkinPathList.get(arrayPosition), 1000).show();
 	}
 	
 }
