@@ -55,6 +55,7 @@
                 android:textColor="@android:color/black" />
 
             <TextView
+                android:id="@+id/skinmixer_backgroundlabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -85,6 +86,7 @@
                 android:textColor="@android:color/black" />
 
             <TextView
+                android:id="@+id/skinmixer_backgroundnumberslabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -117,6 +119,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/skinmixer_numberslabel"
                 android:layout_alignParentRight="true"
                 android:text="TotoBackground"
                 android:textColor="@android:color/black" />
