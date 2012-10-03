@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -32,9 +33,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:layout_below="@+id/btn_validate"
         android:orientation="vertical"
         android:weightSum="1" >
@@ -49,28 +50,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:textColor="@android:color/black"
-                android:text="Background" />
+                android:text="Background"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:textColor="@android:color/black"
-                android:text="TotoBackground" />
+                android:text="TotoBackground"
+                android:textColor="@android:color/black" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1" >
 
-            <ImageView
+            <fragment
+                android:id="@+id/skinmixer_fragment_background"
+                android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/custompreview" />
+                android:layout_height="fill_parent"
+                tools:layout="@layout/list_oneimage_skinpart" />
         </LinearLayout>
-        
+        <!--
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -81,15 +84,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:textColor="@android:color/black"
-                android:text="Background Numbers" />
+                android:text="Background Numbers"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:textColor="@android:color/black"
-                android:text="TotoBackground" />
+                android:text="TotoBackground"
+                android:textColor="@android:color/black" />
         </RelativeLayout>
 
         <LinearLayout
@@ -103,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/custompreview" />
         </LinearLayout>
-        
+
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -114,15 +117,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:textColor="@android:color/black"
-                android:text="Numbers" />
+                android:text="Numbers"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:textColor="@android:color/black"
-                android:text="TotoBackground" />
+                android:text="TotoBackground"
+                android:textColor="@android:color/black" />
         </RelativeLayout>
 
         <LinearLayout
@@ -136,8 +139,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/custompreview" />
         </LinearLayout>
+        -->
+
     </LinearLayout>
-    
-    
 
 </RelativeLayout>

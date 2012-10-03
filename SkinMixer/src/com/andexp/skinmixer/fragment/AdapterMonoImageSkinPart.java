@@ -2,11 +2,8 @@ package com.andexp.skinmixer.fragment;
 
 import java.util.ArrayList;
 
-import com.andexp.skinmixer.R;
-
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +12,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 
-public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter {
+import com.andexp.skinmixer.R;
 
+public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter {
+private static String BACKGROUND_IMAGE = "background.png";
+private static String BACKGROUNDNUMBERS_IMAGE = "background_numbers.png";
 	private ArrayList<String> mSkinPathList;
 	private Context mContext;
 	private SkinPartType mSkinPartType;
@@ -47,15 +47,14 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder holder = loadHolder(convertView);
-		holder.imageViewLeft.setImageBitmap(new BitmapDrawable(mContext.getResources(), mSkinPathList.get(position*2)).getBitmap());
-		if(mSkinPathList.get(position*2+1) != null)
-			holder.imageViewRight.setImageBitmap(new BitmapDrawable(mContext.getResources(), mSkinPathList.get(position*2+1)).getBitmap());
+		convertView = loadConvertView(convertView);
+		ViewHolder holder = (ViewHolder) convertView.getTag();
+		loadImages(position, holder);
 		
 		return convertView;
 	}
 
-	private ViewHolder loadHolder(View convertView) {
+	private View loadConvertView(View convertView) {
 		ViewHolder holder;
 		if(convertView == null){
 			convertView = mLayoutInflater.inflate(R.layout.list_oneimage_skinpart, null); 
@@ -64,12 +63,25 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 			holder.imageViewRight = (ImageView) convertView.findViewById(R.id.iv_imageRight);
 			
 			convertView.setTag(holder);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
-		return holder;
+		} 
+		return convertView;
 	}
-	
+
+	private void loadImages(int position, ViewHolder holder) {
+		String leftImagePath = mSkinPathList.get(position*2)+"/";
+		leftImagePath += (mSkinPartType==SkinPartType.BACKGROUND)?BACKGROUND_IMAGE:BACKGROUNDNUMBERS_IMAGE;
+		holder.imageViewLeft.setImageBitmap(new BitmapDrawable(mContext.getResources(), leftImagePath).getBitmap());
+		
+		if(mSkinPathList.size() > position*2+1){
+			holder.imageViewRight.setVisibility(View.VISIBLE);
+			String rightImagePath = mSkinPathList.get(position*2+1)+"/";
+			rightImagePath += (mSkinPartType==SkinPartType.BACKGROUND)?BACKGROUND_IMAGE:BACKGROUNDNUMBERS_IMAGE;
+			holder.imageViewRight.setImageBitmap(new BitmapDrawable(mContext.getResources(), rightImagePath).getBitmap());
+		} else {
+			holder.imageViewRight.setVisibility(View.INVISIBLE);
+		}
+	}
+
 	static class ViewHolder{
 		ImageView imageViewLeft;
 		ImageView imageViewRight;

@@ -1,5 +1,9 @@
 package com.andexp.skinmixer.fragment;
 
+import java.util.ArrayList;
+
+import com.andexp.skinmixer.path.SkinLister;
+
 import android.app.ListFragment;
 
 public class FragmentSkinPartList extends ListFragment {
@@ -23,12 +27,11 @@ public class FragmentSkinPartList extends ListFragment {
 	}
 
 	private void setMultiImageSkinPartAdapter() {
-		// TODO Auto-generated method stub
-		
+		ArrayList<String> superClockSkinPathList = SkinLister.getInstance().getSuperClockSkinPathList();
+		setListAdapter(new AdapterMonoImageSkinPart(getActivity(), superClockSkinPathList, mType));
 	}
 
 	private void setMonoImageSkinPartAdapter() {
-		// TODO Auto-generated method stub
 		
 	}
 	
