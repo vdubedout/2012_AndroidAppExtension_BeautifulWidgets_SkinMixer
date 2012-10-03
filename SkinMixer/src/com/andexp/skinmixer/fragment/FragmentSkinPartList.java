@@ -2,16 +2,13 @@ package com.andexp.skinmixer.fragment;
 
 import java.util.ArrayList;
 
-import com.andexp.skinmixer.path.SkinLister;
-
-import android.app.Activity;
 import android.app.ListFragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.andexp.skinmixer.path.SkinLister;
 
 public class FragmentSkinPartList extends ListFragment implements OnSkinPartClickListener{
 	private SkinPartType mType;
@@ -56,5 +53,4 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 	public void OnSkinPartClick(int arrayPosition, View v) {
 		Toast.makeText(getActivity(), "click on "+mSuperClockSkinPathList.get(arrayPosition), 1000).show();
 	}
-	
 }
