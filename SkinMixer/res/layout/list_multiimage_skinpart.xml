@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/layoutLeft"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/left_number4"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_partial_secure" />
+
+        <ImageView
+            android:id="@+id/left_number7"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_partial_secure" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutRight"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/right_number4"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_partial_secure" />
+
+        <ImageView
+            android:id="@+id/right_number7"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_partial_secure" />
+    </LinearLayout>
+
+</LinearLayout>
