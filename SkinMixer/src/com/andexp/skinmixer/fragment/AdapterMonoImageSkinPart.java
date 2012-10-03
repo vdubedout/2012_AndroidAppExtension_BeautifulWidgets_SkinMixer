@@ -24,7 +24,7 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 	private SkinPartType mSkinPartType;
 	private LayoutInflater mLayoutInflater;
 	private OnSkinPartClickListener mOnSkinPartClickListener;
-	private static ImageView mlastImageViewClicked; 
+	private static ImageView mlastImageViewClicked;
 
 	public AdapterMonoImageSkinPart(Activity activity, ArrayList<String> skinPathList,
 			SkinPartType skinPart, OnSkinPartClickListener listener) {
@@ -89,8 +89,7 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 		if (mSkinPathList.size() > position * 2 + 1) {
 			holder.imageViewRight.setVisibility(View.VISIBLE);
 			String rightImagePath = mSkinPathList.get(position * 2 + 1) + "/";
-			rightImagePath += (mSkinPartType == SkinPartType.BACKGROUND) ? BACKGROUND_IMAGE
-					: BACKGROUNDNUMBERS_IMAGE;
+			rightImagePath += getImagePathName(mSkinPartType);
 			holder.imageViewRight.setImageBitmap(new BitmapDrawable(mContext.getResources(),
 					rightImagePath).getBitmap());
 		} else {
@@ -100,10 +99,14 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 
 	private void loadLeftImage(int position, ViewHolder holder) {
 		String leftImagePath = mSkinPathList.get(position * 2) + "/";
-		leftImagePath += (mSkinPartType == SkinPartType.BACKGROUND) ? BACKGROUND_IMAGE
-				: BACKGROUNDNUMBERS_IMAGE;
+		leftImagePath += getImagePathName(mSkinPartType);
 		holder.imageViewLeft.setImageBitmap(new BitmapDrawable(mContext.getResources(),
 				leftImagePath).getBitmap());
+	}
+
+	private String getImagePathName(SkinPartType skinPartType) {
+		return (skinPartType == SkinPartType.BACKGROUND) ? BACKGROUND_IMAGE
+				: BACKGROUNDNUMBERS_IMAGE;
 	}
 
 	private void addOnClickListeners(int position, ViewHolder holder) {
@@ -128,7 +131,7 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 		}
 
 		private void setSelectedBackgroundColor(View v) {
-			if(mlastImageViewClicked!=null){
+			if (mlastImageViewClicked != null) {
 				mlastImageViewClicked.setBackgroundColor(Color.parseColor("#00000000"));
 			}
 			v.setBackgroundColor(Color.parseColor("#FFFFCC00"));
@@ -137,7 +140,8 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 
 		private int getArrayListPosition() {
 			int position = mPosition * 2;
-			if(isRightImage) position++;
+			if (isRightImage)
+				position++;
 			return position;
 		}
 	}

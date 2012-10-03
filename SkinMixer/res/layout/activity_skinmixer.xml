@@ -62,20 +62,14 @@
                 android:textColor="@android:color/black" />
         </RelativeLayout>
 
-        <LinearLayout
+        <fragment
+            android:id="@+id/skinmixer_fragment_background"
+            android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            tools:layout="@layout/list_oneimage_skinpart" />
 
-            <fragment
-                android:id="@+id/skinmixer_fragment_background"
-                android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                tools:layout="@layout/list_oneimage_skinpart"
-                 />
-        </LinearLayout>
-        
         <RelativeLayout
             android:id="@+id/skinmixer_backgroundnumberslabel_layout"
             android:layout_width="fill_parent"
@@ -98,20 +92,13 @@
                 android:textColor="@android:color/black" />
         </RelativeLayout>
 
-        <LinearLayout
+        <fragment
+            android:id="@+id/skinmixer_fragment_backgroundnumbers"
+            android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:visibility="gone" >
-
-           <fragment
-                android:id="@+id/skinmixer_fragment_backgroundnumbers"
-                android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                tools:layout="@layout/list_oneimage_skinpart"
-                 />
-        </LinearLayout>
+            tools:layout="@layout/list_oneimage_skinpart" />
 
         <RelativeLayout
             android:id="@+id/skinmixer_numberslabel_layout"
@@ -135,22 +122,13 @@
                 android:textColor="@android:color/black" />
         </RelativeLayout>
 
-        <LinearLayout
+        <fragment
+            android:id="@+id/skinmixer_fragment_numbers"
+            android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:visibility="gone" >
-
-            <fragment
-                android:id="@+id/skinmixer_fragment_numbers"
-                android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                tools:layout="@layout/list_oneimage_skinpart"
-                 />
-        </LinearLayout>
-        
-
+            tools:layout="@layout/list_oneimage_skinpart" />
     </LinearLayout>
 
 </RelativeLayout>

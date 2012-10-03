@@ -10,10 +10,10 @@ import android.widget.Toast;
 
 import com.andexp.skinmixer.path.SkinLister;
 
-public class FragmentSkinPartList extends ListFragment implements OnSkinPartClickListener{
+public class FragmentSkinPartList extends ListFragment implements OnSkinPartClickListener {
 	private SkinPartType mType;
 	private ArrayList<String> mSuperClockSkinPathList;
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -23,7 +23,7 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 		getListView().setFocusable(false);
 	}
 
-	public void setSkinPartType(SkinPartType skinPart){
+	public void setSkinPartType(SkinPartType skinPart) {
 		mType = skinPart;
 		setLayoutForType(mType);
 	}
@@ -42,15 +42,17 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 
 	private void setMultiImageSkinPartAdapter() {
 		mSuperClockSkinPathList = SkinLister.getInstance().getSuperClockSkinPathList();
-		setListAdapter(new AdapterMonoImageSkinPart(getActivity(), mSuperClockSkinPathList, mType, this));
+		setListAdapter(new AdapterMonoImageSkinPart(getActivity(), mSuperClockSkinPathList, mType,
+				this));
 	}
 
 	private void setMonoImageSkinPartAdapter() {
-		
+
 	}
 
 	@Override
 	public void OnSkinPartClick(int arrayPosition, View v) {
-		Toast.makeText(getActivity(), "click on "+mSuperClockSkinPathList.get(arrayPosition), 1000).show();
+		Toast.makeText(getActivity(), "click on " + mSuperClockSkinPathList.get(arrayPosition),
+				1000).show();
 	}
 }
