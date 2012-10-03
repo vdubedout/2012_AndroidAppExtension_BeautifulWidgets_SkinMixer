@@ -47,7 +47,8 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 	}
 
 	private void setMonoImageSkinPartAdapter() {
-
+		mSuperClockSkinPathList = SkinLister.getInstance().getSuperClockSkinPathList();
+		setListAdapter(new AdapterMultiImageSkinPart(getActivity(), mSuperClockSkinPathList, this));
 	}
 
 	@Override
