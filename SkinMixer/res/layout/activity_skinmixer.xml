@@ -104,10 +104,13 @@
             android:layout_weight="1"
             android:visibility="gone" >
 
-            <ImageView
+           <fragment
+                android:id="@+id/skinmixer_fragment_backgroundnumbers"
+                android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/custompreview" />
+                android:layout_height="fill_parent"
+                tools:layout="@layout/list_oneimage_skinpart"
+                 />
         </LinearLayout>
 
         <RelativeLayout
@@ -138,10 +141,13 @@
             android:layout_weight="1"
             android:visibility="gone" >
 
-            <ImageView
+            <fragment
+                android:id="@+id/skinmixer_fragment_numbers"
+                android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/custompreview" />
+                android:layout_height="fill_parent"
+                tools:layout="@layout/list_oneimage_skinpart"
+                 />
         </LinearLayout>
         
 
