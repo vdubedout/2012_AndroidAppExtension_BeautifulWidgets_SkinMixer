@@ -42,7 +42,7 @@ public class PreviewManager {
 			@Override
 			public void run() {
 				String mPath = getFinalPath(path, skinPart);
-				Bitmap[][] bitmapArray = mNinePatchCutter.getNinePatches(path);
+				Bitmap[][] bitmapArray = mNinePatchCutter.getNinePatches(mPath);
 				Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray, skinPart);
 				mStatusListener.onSkinPartPreviewFinished(bitmapSkinPartPreview, skinPart);
 			}
