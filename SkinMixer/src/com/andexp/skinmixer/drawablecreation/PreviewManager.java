@@ -17,7 +17,7 @@ public class PreviewManager {
 	}
 
 	private static final String VOID_PREVIEW_BACKGROUND = "voidpreviewbackground.png";
-	
+
 	private String mBackgroundPath;
 	private String mBackgroundNumberPath;
 	private String[] mNumberPath = new String[4];
@@ -36,23 +36,24 @@ public class PreviewManager {
 		mNinePatchCutter = new NinePatchCutter();
 		mBitmapComposer = new BitmapComposer();
 	}
-	
-	public void getSkinPartPreview(final String path, final SkinPartType skinPart){
+
+	public void getSkinPartPreview(final String path, final SkinPartType skinPart) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				String mPath = getFinalPath(path, skinPart);
-				Bitmap[][] bitmapArray = mNinePatchCutter.getNinePatches(mPath);
+				Bitmap[][] bitmapArray = mNinePatchCutter.getBitmapNinePatches(mPath);
 				Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray, skinPart);
 				mStatusListener.onSkinPartPreviewFinished(bitmapSkinPartPreview, skinPart);
 			}
 		}).run();
 	}
-	
+
 	private String getFinalPath(String path, SkinPartType skinPart) {
-		if(skinPart == SkinPartType.BACKGROUND)
+		if (skinPart == SkinPartType.BACKGROUND)
 			return File.separator + SkinImagePath.BACKGROUND;
-		else return File.separator + SkinImagePath.BACKGROUND_NUMBERS;
+		else
+			return File.separator + SkinImagePath.BACKGROUND_NUMBERS;
 	}
 
 	public void getFullPreviewBitmap(String backgroundPath, String backgroundNumberPath,
@@ -60,7 +61,6 @@ public class PreviewManager {
 		initializePaths(backgroundPath, backgroundNumberPath, numbersPath);
 		mVoidBackgroundPreview = getVoidPreviewBackground();
 	}
-
 
 	private Bitmap getVoidPreviewBackground() throws IOException {
 		if (mVoidBackgroundPreview == null) {
