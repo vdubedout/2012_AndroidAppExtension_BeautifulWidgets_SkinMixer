@@ -43,18 +43,24 @@ public class NinePatchCutterTest extends InstrumentationTestCase {
 	public void testBackgroundBounds(){
 		try {
 			Bitmap backgroundBitmap = mNinePatchCutter.getBitmapFromSDCard(mBackgroundImagePath);
-			ArrayList<Integer> heightBoundsMap = mNinePatchCutter.getHeightBoundsMap(backgroundBitmap);
-			assertNotNull(heightBoundsMap);
-			assertEquals(4, heightBoundsMap.size());
+			ArrayList<Integer> rowsBoundsMap = mNinePatchCutter.getRowBoundsMap(backgroundBitmap);
+			assertNotNull(rowsBoundsMap);
+			assertEquals(4, rowsBoundsMap.size());
 			
-			ArrayList<Integer> widthBoundsMap = mNinePatchCutter.getWidthBoundsMap(backgroundBitmap);
-			assertNotNull(widthBoundsMap);
-			assertEquals(4, widthBoundsMap.size());
+			ArrayList<Integer> columnBoundsMap = mNinePatchCutter.getColumnBoundsMap(backgroundBitmap);
+			assertNotNull(columnBoundsMap);
+			assertEquals(4, columnBoundsMap.size());
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
 	}
 	
+	
+	public void testBackgroundBitmapCutted(){
+		Bitmap[][] cuttedBitmap = mNinePatchCutter.getBitmapNinePatches(mBackgroundImagePath);
+		assertEquals(3, cuttedBitmap.length);
+		assertEquals(3, cuttedBitmap[0].length);
+	}
 
 	@Override
 	protected void tearDown() throws Exception {
