@@ -14,12 +14,12 @@ public class NinePatchCutter {
 	public NinePatchCutter() {
 	}
 
-	public Bitmap[][] getNinePatches(String path) {
+	public Bitmap[][] getBitmapNinePatches(String path) {
 		try {
 			Bitmap bitmapToCut = getBitmapFromSDCard(path);
-			ArrayList<Integer> widthBoundsMap = getWidthBoundsMap(bitmapToCut);
-			ArrayList<Integer> heightBoundsMap = getHeightBoundsMap(bitmapToCut);
-			Bitmap[][] bitmapProcessed = getBitmapCutted(bitmapToCut, widthBoundsMap, heightBoundsMap);
+			ArrayList<Integer> columnBoundsMap = getColumnBoundsMap(bitmapToCut);
+			ArrayList<Integer> rowBoundsMap = getRowBoundsMap(bitmapToCut);
+			Bitmap[][] bitmapProcessed = getBitmapCutted(bitmapToCut, columnBoundsMap, rowBoundsMap);
 			return bitmapProcessed;
 		} catch (Exception e) {
 			return null;
@@ -33,7 +33,7 @@ public class NinePatchCutter {
 			throw new IOException("Image not found");
 	}
 
-	protected ArrayList<Integer> getWidthBoundsMap(Bitmap bitmapToCut) {
+	protected ArrayList<Integer> getColumnBoundsMap(Bitmap bitmapToCut) {
 		int[] pixelLine = new int[bitmapToCut.getWidth()];
 		bitmapToCut.getPixels(pixelLine, 0, bitmapToCut.getWidth() - 1, 0, 0,
 				bitmapToCut.getWidth() - 1, 1);
@@ -60,34 +60,28 @@ public class NinePatchCutter {
 		return mBounds;
 	}
 
-	protected ArrayList<Integer> getHeightBoundsMap(Bitmap bitmapToCut) {
+	protected ArrayList<Integer> getRowBoundsMap(Bitmap bitmapToCut) {
 		int[] pixelLine = new int[bitmapToCut.getHeight()];
 		bitmapToCut.getPixels(pixelLine, 0, 1, 0, 0, 1, bitmapToCut.getHeight() - 1);
 		return getLineBounds(pixelLine);
 	}
 
-	protected Bitmap[][] getBitmapCutted(Bitmap bitmapToCut, ArrayList<Integer> widthBoundsMap,
-			ArrayList<Integer> heightBoundsMap) {
-		Bitmap[][] bitmapPreviewArray = new Bitmap[widthBoundsMap.size() - 1][3];
+	protected Bitmap[][] getBitmapCutted(Bitmap bitmapToCut, ArrayList<Integer> columnsBoundsMap,
+			ArrayList<Integer> rowsBoundsMap) {
+		Bitmap[][] bitmapPreviewArray = new Bitmap[columnsBoundsMap.size() - 1][rowsBoundsMap.size() - 1];
 
-		for (int widthBoundIndex = 0; widthBoundIndex < widthBoundsMap.size(); widthBoundIndex++) {
-			for (int heightBoundIndex = 0; heightBoundIndex < heightBoundsMap.size(); heightBoundIndex++) {
-				int x = getStartingValue(widthBoundIndex, widthBoundsMap);
-				int y = getStartingValue(heightBoundIndex, heightBoundsMap);
-				int width = getSizeValue(widthBoundIndex, widthBoundsMap);
-				int height = getSizeValue(heightBoundIndex, heightBoundsMap);
+		for (int rowBoundIndex = 0; rowBoundIndex < columnsBoundsMap.size(); rowBoundIndex++) {
+			for (int columnBoundIndex = 0; columnBoundIndex < rowsBoundsMap.size(); columnBoundIndex++) {
+				int x = columnsBoundsMap.get(columnBoundIndex);
+				int y = rowsBoundsMap.get(rowBoundIndex);
+				int width = getSizeValue(rowBoundIndex, rowsBoundsMap);
+				int height = getSizeValue(columnBoundIndex, columnsBoundsMap);
 				Bitmap tmpBmp = Bitmap.createBitmap(bitmapToCut, x, y, width, height); 
-				bitmapPreviewArray[widthBoundIndex][heightBoundIndex] = tmpBmp;
+				bitmapPreviewArray[rowBoundIndex][columnBoundIndex] = tmpBmp;
 			}
 		}
 
 		return bitmapPreviewArray;
-	}
-
-	private int getStartingValue(int boundIndex, ArrayList<Integer>boundsMap) {
-		if(boundIndex==0)
-			return boundsMap.get(boundIndex)+OFFSET_IMAGE;
-		else return boundsMap.get(boundIndex);
 	}
 
 	private int getSizeValue(int boundIndex, ArrayList<Integer> boundsMap) {
