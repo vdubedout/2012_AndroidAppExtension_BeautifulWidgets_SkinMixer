@@ -24,16 +24,23 @@ public class PreviewManager {
 	private ProcessListener mStatusListener;
 	private Context mContext;
 
+	NinePatchCutter mNinePatchCutter;
+	private BitmapComposer mBitmapComposer;
+
 	private Bitmap mVoidBackgroundPreview;
 
 	public PreviewManager(Context context, ProcessListener listener) {
 		mContext = context;
 		mStatusListener = listener;
-
+		mNinePatchCutter = new NinePatchCutter();
+		mBitmapComposer = new BitmapComposer();
 	}
 	
 	public void getSkinPartPreview(String path, SkinPartType skinPart){
 		path = getFinalPath(path, skinPart);
+		Bitmap[][] bitmapArray = mNinePatchCutter.getBitmapCutted(path);
+		Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray);
+		mStatusListener.onFinish(bitmapSkinPartPreview, skinPart);
 	}
 	
 	private String getFinalPath(String path, SkinPartType skinPart) {
