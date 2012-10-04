@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Assets>
+    <scskins>
+        <bordering-ice-red>
+            <nomedia/>
+            <am.png/>
+            <background.png/>
+            <background_numbers/>
+            <bordering-ice-red.jpg/>
+            <bordering-ice-red.txt/>
+            <dots.png/>
+            <number_0.png/>
+            <number_1.png/>
+            <number_2.png/>
+            <number_3.png/>
+            <number_4.png/>
+            <number_5.png/>
+            <number_6png/>
+            <number_7.png/>
+            <number_8.png/>
+            <number_9.png/>
+            <pm.png/>    
+        </bordering-ice-red>
+
+        <golden>
+            <nomedia/>
+            <am.png/>
+            <background.png/>
+            <background_numbers/>
+            <golden.jpg/>
+            <golden.txt/>
+            <dots.png/>
+            <number_0.png/>
+            <number_1.png/>
+            <number_2.png/>
+            <number_3.png/>
+            <number_4.png/>
+            <number_5.png/>
+            <number_6png/>
+            <number_7.png/>
+            <number_8.png/>
+            <number_9.png/>
+            <pm.png/>
+        </golden>
+        
+        <icsphoenix>
+            <nomedia/>
+            <am.png/>
+            <background.png/>
+            <background_numbers/>
+            <icsphoenix.jpg/>
+            <icsphoenix.txt/>
+            <dots.png/>
+            <number_0.png/>
+            <number_1.png/>
+            <number_2.png/>
+            <number_3.png/>
+            <number_4.png/>
+            <number_5.png/>
+            <number_6png/>
+            <number_7.png/>
+            <number_8.png/>
+            <number_9.png/>
+            <pm.png/>
+        </icsphoenix>
+    </scskins>
+    
+    <skins>
+        
+        
+    </skins>
+
+</Assets>
