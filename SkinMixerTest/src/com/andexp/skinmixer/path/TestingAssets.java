@@ -1,8 +1,11 @@
-package com.andexp.skinmixer;
+package com.andexp.skinmixer.path;
 
 import java.io.File;
 import java.io.IOException;
 
+import com.andexp.skinmixer.LocalAssetsTest;
+import com.andexp.skinmixer.path.SDCardSkinPath;
+import com.andexp.skinmixer.path.SkinLister;
 import com.andexp.skinmixer.zipextractor.ZipExtractor;
 
 import android.content.Context;
@@ -15,11 +18,16 @@ public class TestingAssets {
 	private ZipExtractor mZipExtractor;
 	private Context mContext;
 	private String mPath;
+	private SkinLister lister;
 	
-	public TestingAssets(Context context, String path) {
+	public TestingAssets(Context context) {
 		mContext = context;
-		mPath = path;
-		mZipExtractor = new ZipExtractor(path);
+		
+		lister = SkinLister.getInstance();
+		lister.setBasePath(SDCardSkinPath.BASE_PATH+"tests/");
+
+		mPath = lister.getBasePath();
+		mZipExtractor = new ZipExtractor(mPath);
 	}
 	
 	public void extract() {
@@ -35,6 +43,7 @@ public class TestingAssets {
 	
 	public void delete(){
 		deleteDir(new File(mPath));
+		lister.resetBasePath();
 	}
 	
 	protected static boolean deleteDir(File dir) {
@@ -50,4 +59,6 @@ public class TestingAssets {
 
 	    return dir.delete();
 	}
+	
+	
 }

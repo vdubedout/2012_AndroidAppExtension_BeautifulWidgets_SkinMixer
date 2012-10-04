@@ -3,7 +3,6 @@ package com.andexp.skinmixer.path;
 import android.content.Context;
 import android.test.InstrumentationTestCase;
 
-import com.andexp.skinmixer.TestingAssets;
 
 public class SkinListerTest extends InstrumentationTestCase{
 	private TestingAssets assets;
@@ -15,11 +14,10 @@ public class SkinListerTest extends InstrumentationTestCase{
 		super.setUp();
 		mContext = getInstrumentation().getContext();
 		
-		lister = SkinLister.getInstance();
-		lister.setBasePath(SDCardSkinPath.BASE_PATH+"tests/");
-		
-		assets = new TestingAssets(mContext, lister.getBasePath());
+		assets = new TestingAssets(mContext);
 		assets.extract();
+		
+		lister = SkinLister.getInstance();
 	}
 
 	public void testSkinListerNotNull() {
@@ -46,6 +44,5 @@ public class SkinListerTest extends InstrumentationTestCase{
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		assets.delete();
-		lister.resetBasePath();
 	}
 }

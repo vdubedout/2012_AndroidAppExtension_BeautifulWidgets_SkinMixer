@@ -7,7 +7,6 @@ import android.os.Environment;
 import android.test.InstrumentationTestCase;
 
 import com.andexp.skinmixer.LocalAssetsTest;
-import com.andexp.skinmixer.TestingAssets;
 import com.andexp.skinmixer.path.SDCardSkinPath;
 import com.andexp.skinmixer.zipextractor.ZipExtractor;
 
@@ -18,22 +17,16 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 	ZipExtractor mZipExtractor;
 	Context mContext;
 	String testPath;
-	SDCardSkinPath path;
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		mContext = getInstrumentation().getContext();
-		testPath = getBaseTestPath();
-		assets = new TestingAssets(mContext, testPath);
-		assets.extract();
-	}
 
-	private String getBaseTestPath() {
-		path = new SDCardSkinPath();
-		path.setBasePath(SDCardSkinPath.BASE_PATH + baseTestDirectory);
-		testPath = path.getBasePath();
-		return testPath;
+		assets = new TestingAssets(mContext);
+		assets.extract();
+		
+		testPath = SkinLister.getInstance().getBasePath();
 	}
 	
 	public void testSDCardMounted(){
@@ -54,7 +47,7 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 	}
 	
 	public void testSuperClockSkinsDirectoryCreated(){
-		String mSuperClockDir = path.getSuperClockPath();
+		String mSuperClockDir = SkinLister.getInstance().getSuperClockPath();
 		for(String mSkin : LocalAssetsTest.SUPER_SKINS){
 			assertTrue(new File(mSuperClockDir+mSkin).isDirectory());
 		}
@@ -63,7 +56,6 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		assets.delete();
-		path.resetBasePath();
 		super.tearDown();
 	}
 }
