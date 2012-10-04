@@ -9,11 +9,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-import com.andexp.skinmixer.path.SkinPartImagePath;
+import com.andexp.skinmixer.fragment.SkinPartType;
+import com.andexp.skinmixer.path.SkinImagePath;
 
 public class PreviewManager {
 	public interface ProcessListener {
-		public void onFinish(Bitmap previewBitmap);
+		public void onFinish(Bitmap previewBitmap, SkinPartType skinPart);
 	}
 
 	private static final String VOID_PREVIEW_BACKGROUND = "voidpreviewbackground.png";
@@ -30,34 +31,23 @@ public class PreviewManager {
 		mStatusListener = listener;
 
 	}
+	
+	public void getSkinPartPreview(String path, SkinPartType skinPart){
+		path = getFinalPath(path, skinPart);
+	}
+	
+	private String getFinalPath(String path, SkinPartType skinPart) {
+		if(skinPart == SkinPartType.BACKGROUND)
+			return File.separator + SkinImagePath.BACKGROUND;
+		else return File.separator + SkinImagePath.BACKGROUND_NUMBERS;
+	}
 
 	public void getPreviewBitmap(String backgroundPath, String backgroundNumberPath,
 			String numbersPath) throws IOException {
 		initializePaths(backgroundPath, backgroundNumberPath, numbersPath);
 		mVoidBackgroundPreview = getVoidPreviewBackground();
-		Canvas outputCanvas = new Canvas(mVoidBackgroundPreview);
-		processBackgroundToCanvas(outputCanvas);
-		processBackgroundNumbersToCanvas(outputCanvas);
-		processNumbersToCanvas(outputCanvas);
 	}
 
-	private void processBackgroundToCanvas(Canvas outputCanvas) {
-		Bitmap background[][] = getBackgroundCutted();
-		
-	}
-
-	private Bitmap[][] getBackgroundCutted() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private void processBackgroundNumbersToCanvas(Canvas outputCanvas) {
-		
-	}
-
-	private void processNumbersToCanvas(Canvas outputCanvas) {
-		
-	}
 
 	private Bitmap getVoidPreviewBackground() throws IOException {
 		if (mVoidBackgroundPreview == null) {
@@ -69,13 +59,13 @@ public class PreviewManager {
 
 	private void initializePaths(String backgroundPath, String backgroundNumberPath,
 			String numbersPath) {
-		mBackgroundPath = backgroundPath + File.separator + SkinPartImagePath.BACKGROUND;
+		mBackgroundPath = backgroundPath + File.separator + SkinImagePath.BACKGROUND;
 		mBackgroundNumberPath = backgroundNumberPath + File.separator
-				+ SkinPartImagePath.BACKGROUND_NUMBERS;
-		mNumberPath[0] = numbersPath + File.separator + SkinPartImagePath.NUMBER[0];
-		mNumberPath[1] = numbersPath + File.separator + SkinPartImagePath.NUMBER[1];
-		mNumberPath[2] = numbersPath + File.separator + SkinPartImagePath.NUMBER[2];
-		mNumberPath[3] = numbersPath + File.separator + SkinPartImagePath.NUMBER[3];
+				+ SkinImagePath.BACKGROUND_NUMBERS;
+		mNumberPath[0] = numbersPath + File.separator + SkinImagePath.NUMBER[0];
+		mNumberPath[1] = numbersPath + File.separator + SkinImagePath.NUMBER[1];
+		mNumberPath[2] = numbersPath + File.separator + SkinImagePath.NUMBER[2];
+		mNumberPath[3] = numbersPath + File.separator + SkinImagePath.NUMBER[3];
 	}
 
 }
