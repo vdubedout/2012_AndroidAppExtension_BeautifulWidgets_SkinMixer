@@ -36,11 +36,16 @@ public class PreviewManager {
 		mBitmapComposer = new BitmapComposer();
 	}
 	
-	public void getSkinPartPreview(String path, SkinPartType skinPart){
-		path = getFinalPath(path, skinPart);
-		Bitmap[][] bitmapArray = mNinePatchCutter.getBitmapCutted(path);
-		Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray);
-		mStatusListener.onFinish(bitmapSkinPartPreview, skinPart);
+	public void getSkinPartPreview(final String path, final SkinPartType skinPart){
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String mPath = getFinalPath(path, skinPart);
+				Bitmap[][] bitmapArray = mNinePatchCutter.getBitmapCutted(path);
+				Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray, skinPart);
+				mStatusListener.onFinish(bitmapSkinPartPreview, skinPart);
+			}
+		}).run();
 	}
 	
 	private String getFinalPath(String path, SkinPartType skinPart) {
