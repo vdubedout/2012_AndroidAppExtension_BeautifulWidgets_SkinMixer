@@ -7,7 +7,6 @@ import android.os.Environment;
 import android.test.InstrumentationTestCase;
 
 import com.andexp.skinmixer.LocalAssetsTest;
-import com.andexp.skinmixer.path.SDCardSkinPath;
 import com.andexp.skinmixer.zipextractor.ZipExtractor;
 
 public class ZipExtractorTest extends InstrumentationTestCase {
