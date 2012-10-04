@@ -15,7 +15,7 @@ import com.andexp.skinmixer.path.SkinLister;
 public class FragmentSkinPartList extends ListFragment implements OnSkinPartClickListener {
 	private TextView mLabelSkinName;
 
-	private SkinPartType mType;
+	private SkinPartType mSkinPartType;
 	private ArrayList<String> mSuperClockSkinPathList;
 
 	@Override
@@ -29,8 +29,8 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 
 	
 	public void setSkinPartType(SkinPartType skinPart) {
-		mType = skinPart;
-		setLayoutForType(mType);
+		mSkinPartType = skinPart;
+		setLayoutForType(mSkinPartType);
 		mLabelSkinName = getLabelView(skinPart);
 	}
 
@@ -58,7 +58,7 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 
 	private void setMultiImageSkinPartAdapter() {
 		mSuperClockSkinPathList = SkinLister.getInstance().getSuperClockSkinPathList();
-		setListAdapter(new AdapterMonoImageSkinPart(getActivity(), mSuperClockSkinPathList, mType,
+		setListAdapter(new AdapterMonoImageSkinPart(getActivity(), mSuperClockSkinPathList, mSkinPartType,
 				this));
 	}
 
@@ -69,7 +69,12 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 
 	@Override
 	public void OnSkinPartClick(int arrayPosition, View v) {
-		String[] splitResult = mSuperClockSkinPathList.get(arrayPosition).split("/");
+		changeLabelName(mSuperClockSkinPathList.get(arrayPosition));
+	}
+
+
+	private void changeLabelName(String path) {
+		String[] splitResult = path.split("/");
 		String skinName = splitResult[splitResult.length-1];
 		mLabelSkinName.setText(skinName);
 	}
