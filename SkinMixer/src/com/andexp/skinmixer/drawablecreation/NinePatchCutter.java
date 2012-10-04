@@ -4,29 +4,23 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
-import com.andexp.skinmixer.fragment.SkinPartType;
-
 public class NinePatchCutter {
 	private final int OFFSET_IMAGE = 1;
-	private Context mContext;
 
-	public NinePatchCutter(Context ctx) {
-		mContext = ctx;
+	public NinePatchCutter() {
 	}
 
-	public Bitmap[][] getBitmapCutted(String path, SkinPartType skinPartType) {
+	public Bitmap[][] getBitmapCutted(String path) {
 		try {
 			Bitmap bitmapToCut = loadBitmapFromSDCard(path);
 			ArrayList<Integer> widthBoundsMap = getWidthBoundsMap(bitmapToCut);
 			ArrayList<Integer> heightBoundsMap = getHeightBoundsMap(bitmapToCut);
-			Bitmap[][] bitmapProcessed = getBitmapCutted(bitmapToCut, widthBoundsMap,
-					heightBoundsMap);
-			return null;
+			Bitmap[][] bitmapProcessed = getBitmapCutted(bitmapToCut, widthBoundsMap, heightBoundsMap);
+			return bitmapProcessed;
 		} catch (Exception e) {
 			return null;
 		}
@@ -50,9 +44,9 @@ public class NinePatchCutter {
 		ArrayList<Integer> mBounds = new ArrayList<Integer>();
 
 		int length = pixelLine.length;
-		mBounds.add(0);
+		mBounds.add(1);
 		if (pixelLine[0] == Color.BLACK)
-			mBounds.add(0);
+			mBounds.add(1);
 		for (int i = 1; i < length; i++) {
 			if (pixelLine[i] == Color.BLACK && pixelLine[i - 1] != Color.BLACK)
 				mBounds.add(i);
@@ -87,7 +81,7 @@ public class NinePatchCutter {
 			}
 		}
 
-		return null;
+		return bitmapPreviewArray;
 	}
 
 	private int getStartingValue(int boundIndex, ArrayList<Integer>boundsMap) {
