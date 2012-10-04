@@ -7,21 +7,22 @@ import java.io.InputStream;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 
 import com.andexp.skinmixer.fragment.SkinPartType;
 import com.andexp.skinmixer.path.SkinImagePath;
 
 public class PreviewManager {
-	public interface ProcessListener {
-		public void onFinish(Bitmap previewBitmap, SkinPartType skinPart);
+	public interface ImagePreviewProcessListener {
+		public void onSkinPartPreviewFinished(Bitmap previewBitmap, SkinPartType skinPart);
 	}
 
 	private static final String VOID_PREVIEW_BACKGROUND = "voidpreviewbackground.png";
+	
 	private String mBackgroundPath;
 	private String mBackgroundNumberPath;
 	private String[] mNumberPath = new String[4];
-	private ProcessListener mStatusListener;
+
+	private ImagePreviewProcessListener mStatusListener;
 	private Context mContext;
 
 	NinePatchCutter mNinePatchCutter;
@@ -29,7 +30,7 @@ public class PreviewManager {
 
 	private Bitmap mVoidBackgroundPreview;
 
-	public PreviewManager(Context context, ProcessListener listener) {
+	public PreviewManager(Context context, ImagePreviewProcessListener listener) {
 		mContext = context;
 		mStatusListener = listener;
 		mNinePatchCutter = new NinePatchCutter();
@@ -43,7 +44,7 @@ public class PreviewManager {
 				String mPath = getFinalPath(path, skinPart);
 				Bitmap[][] bitmapArray = mNinePatchCutter.getBitmapCutted(path);
 				Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray, skinPart);
-				mStatusListener.onFinish(bitmapSkinPartPreview, skinPart);
+				mStatusListener.onSkinPartPreviewFinished(bitmapSkinPartPreview, skinPart);
 			}
 		}).run();
 	}
@@ -54,7 +55,7 @@ public class PreviewManager {
 		else return File.separator + SkinImagePath.BACKGROUND_NUMBERS;
 	}
 
-	public void getPreviewBitmap(String backgroundPath, String backgroundNumberPath,
+	public void getFullPreviewBitmap(String backgroundPath, String backgroundNumberPath,
 			String numbersPath) throws IOException {
 		initializePaths(backgroundPath, backgroundNumberPath, numbersPath);
 		mVoidBackgroundPreview = getVoidPreviewBackground();
