@@ -3,6 +3,7 @@ package com.andexp.skinmixer.fragment;
 import java.util.ArrayList;
 
 import android.app.ListFragment;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -10,9 +11,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.andexp.skinmixer.R;
+import com.andexp.skinmixer.drawablecreation.PreviewManager.ImagePreviewProcessListener;
 import com.andexp.skinmixer.path.SkinLister;
 
-public class FragmentSkinPartList extends ListFragment implements OnSkinPartClickListener {
+public class FragmentSkinPartList extends ListFragment implements OnSkinPartClickListener, ImagePreviewProcessListener {
 	private TextView mLabelSkinName;
 
 	private SkinPartType mSkinPartType;
@@ -77,5 +79,11 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 		String[] splitResult = path.split("/");
 		String skinName = splitResult[splitResult.length-1];
 		mLabelSkinName.setText(skinName);
+	}
+
+
+	@Override
+	public void onSkinPartPreviewFinished(Bitmap previewBitmap, SkinPartType skinPart) {
+		
 	}
 }

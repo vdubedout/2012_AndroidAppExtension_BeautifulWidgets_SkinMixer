@@ -26,21 +26,21 @@ public class NinePatchCutter {
 		}
 	}
 
-	private Bitmap loadBitmapFromSDCard(String path) throws IOException {
+	protected Bitmap loadBitmapFromSDCard(String path) throws IOException {
 		if (new File(path).exists())
 			return BitmapFactory.decodeFile(path);
 		else
 			throw new IOException("Image not found");
 	}
 
-	private ArrayList<Integer> getWidthBoundsMap(Bitmap bitmapToCut) {
+	protected ArrayList<Integer> getWidthBoundsMap(Bitmap bitmapToCut) {
 		int[] pixelLine = new int[bitmapToCut.getWidth()];
 		bitmapToCut.getPixels(pixelLine, 0, bitmapToCut.getWidth() - 1, 0, 0,
 				bitmapToCut.getWidth() - 1, 1);
 		return getLineBounds(pixelLine);
 	}
 
-	private ArrayList<Integer> getLineBounds(int[] pixelLine) {
+	protected ArrayList<Integer> getLineBounds(int[] pixelLine) {
 		ArrayList<Integer> mBounds = new ArrayList<Integer>();
 
 		int length = pixelLine.length;
@@ -60,13 +60,13 @@ public class NinePatchCutter {
 		return mBounds;
 	}
 
-	private ArrayList<Integer> getHeightBoundsMap(Bitmap bitmapToCut) {
+	protected ArrayList<Integer> getHeightBoundsMap(Bitmap bitmapToCut) {
 		int[] pixelLine = new int[bitmapToCut.getHeight()];
 		bitmapToCut.getPixels(pixelLine, 0, 1, 0, 0, 1, bitmapToCut.getHeight() - 1);
 		return getLineBounds(pixelLine);
 	}
 
-	private Bitmap[][] getBitmapCutted(Bitmap bitmapToCut, ArrayList<Integer> widthBoundsMap,
+	protected Bitmap[][] getBitmapCutted(Bitmap bitmapToCut, ArrayList<Integer> widthBoundsMap,
 			ArrayList<Integer> heightBoundsMap) {
 		Bitmap[][] bitmapPreviewArray = new Bitmap[widthBoundsMap.size() - 1][3];
 
