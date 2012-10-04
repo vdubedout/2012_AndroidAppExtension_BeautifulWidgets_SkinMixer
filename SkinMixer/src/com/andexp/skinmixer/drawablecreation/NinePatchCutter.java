@@ -14,9 +14,9 @@ public class NinePatchCutter {
 	public NinePatchCutter() {
 	}
 
-	public Bitmap[][] getBitmapCutted(String path) {
+	public Bitmap[][] getNinePatches(String path) {
 		try {
-			Bitmap bitmapToCut = loadBitmapFromSDCard(path);
+			Bitmap bitmapToCut = getBitmapFromSDCard(path);
 			ArrayList<Integer> widthBoundsMap = getWidthBoundsMap(bitmapToCut);
 			ArrayList<Integer> heightBoundsMap = getHeightBoundsMap(bitmapToCut);
 			Bitmap[][] bitmapProcessed = getBitmapCutted(bitmapToCut, widthBoundsMap, heightBoundsMap);
@@ -26,7 +26,7 @@ public class NinePatchCutter {
 		}
 	}
 
-	protected Bitmap loadBitmapFromSDCard(String path) throws IOException {
+	protected Bitmap getBitmapFromSDCard(String path) throws IOException {
 		if (new File(path).exists())
 			return BitmapFactory.decodeFile(path);
 		else
