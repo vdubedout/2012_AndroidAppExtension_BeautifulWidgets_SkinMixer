@@ -32,13 +32,13 @@ public class BitmapComposer {
 		Bitmap bitmapDrawn = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapDrawn);
 		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);
-		drawBackgroundCorners(bitmapArray, width, height, canvas, paint);
-		drawBackgroundScaledBitmaps(bitmapArray, width, height, canvas, paint);
+		drawCorners(bitmapArray, width, height, canvas, paint);
+		drawBackgroundStretchedBitmaps(bitmapArray, width, height, canvas, paint);
 		resizeBitmap(canvas);
 		return bitmapDrawn;
 	}
 
-	private void drawBackgroundCorners(Bitmap[][] bitmapArray, int width, int height, Canvas canvas, Paint paint) {
+	private void drawCorners(Bitmap[][] bitmapArray, int width, int height, Canvas canvas, Paint paint) {
 		int maxIndex = bitmapArray[0].length;
 		canvas.drawBitmap(bitmapArray[0][0], 0, 0, paint);
 		canvas.drawBitmap(bitmapArray[0][maxIndex], width-1 - bitmapArray[0][maxIndex].getWidth(), 0, paint);
@@ -46,25 +46,50 @@ public class BitmapComposer {
 		canvas.drawBitmap(bitmapArray[maxIndex][maxIndex], width-1 - bitmapArray[maxIndex][maxIndex].getWidth(), height-1-bitmapArray[2][0].getHeight(), paint);
 	}
 
-	private void drawBackgroundScaledBitmaps(Bitmap[][] bitmapArray, int width, int height,
+	private void drawBackgroundStretchedBitmaps(Bitmap[][] bitmapArray, int width, int height,
+			Canvas canvas, Paint paint) {
+		drawBackgroundTop(bitmapArray, width, canvas, paint);
+		drawBackgroundBottom(bitmapArray, width, height, canvas, paint);
+		drawBackgroundLeft(bitmapArray, height, canvas, paint);
+		drawBackgroundRight(bitmapArray, width, height, canvas, paint);
+		drawBackgroundCenter(bitmapArray, width, height, canvas, paint);
+	}
+
+	private void drawBackgroundTop(Bitmap[][] bitmapArray, int width,
 			Canvas canvas, Paint paint) {
 		Rect middleTop = new Rect(bitmapArray[0][0].getWidth(), 0, width-1-bitmapArray[0][2].getWidth(), bitmapArray[0][1].getHeight());
 		canvas.drawBitmap(bitmapArray[0][1], null, middleTop, paint);
+	}
+
+	private void drawBackgroundBottom(Bitmap[][] bitmapArray, int width,
+			int height, Canvas canvas, Paint paint) {
 		Rect middleBottom = new Rect(bitmapArray[2][0].getWidth(), 
 				height - 1 - bitmapArray[2][1].getHeight(), 
 				width-1-bitmapArray[2][2].getWidth(), 
 				height-1);
 		canvas.drawBitmap(bitmapArray[2][1], null, middleBottom, paint);
+	}
+
+	private void drawBackgroundLeft(Bitmap[][] bitmapArray, int height,
+			Canvas canvas, Paint paint) {
 		Rect middleLeft = new Rect(0, 
 				bitmapArray[0][1].getHeight(), 
 				bitmapArray[1][0].getWidth(), 
 				height - 1 - bitmapArray[2][0].getHeight());
 		canvas.drawBitmap(bitmapArray[1][0], null, middleLeft, paint);
+	}
+
+	private void drawBackgroundRight(Bitmap[][] bitmapArray, int width,
+			int height, Canvas canvas, Paint paint) {
 		Rect middleRight = new Rect(width - 1 - bitmapArray[1][2].getWidth(), 
 				bitmapArray[0][2].getHeight(), 
 				width - 1, 
 				height - 1 - bitmapArray[2][2].getHeight());
 		canvas.drawBitmap(bitmapArray[1][2], null, middleRight, paint);
+	}
+
+	private void drawBackgroundCenter(Bitmap[][] bitmapArray, int width,
+			int height, Canvas canvas, Paint paint) {
 		Rect center = new Rect(bitmapArray[1][0].getWidth(),
 				bitmapArray[0][1].getHeight(), 
 				width - 1 - bitmapArray[1][2].getWidth(), 
