@@ -39,10 +39,11 @@ public class BitmapComposer {
 	}
 
 	private void drawBackgroundCorners(Bitmap[][] bitmapArray, int width, int height, Canvas canvas, Paint paint) {
+		int maxIndex = bitmapArray[0].length;
 		canvas.drawBitmap(bitmapArray[0][0], 0, 0, paint);
-		canvas.drawBitmap(bitmapArray[0][2], width-1 - bitmapArray[0][2].getWidth(), 0, paint);
-		canvas.drawBitmap(bitmapArray[2][0], 0, height-1-bitmapArray[2][0].getHeight(), paint);
-		canvas.drawBitmap(bitmapArray[2][2], width-1 - bitmapArray[2][2].getWidth(), height-1-bitmapArray[2][0].getHeight(), paint);
+		canvas.drawBitmap(bitmapArray[0][maxIndex], width-1 - bitmapArray[0][maxIndex].getWidth(), 0, paint);
+		canvas.drawBitmap(bitmapArray[maxIndex][0], 0, height-1-bitmapArray[maxIndex][0].getHeight(), paint);
+		canvas.drawBitmap(bitmapArray[maxIndex][maxIndex], width-1 - bitmapArray[maxIndex][maxIndex].getWidth(), height-1-bitmapArray[2][0].getHeight(), paint);
 	}
 
 	private void drawBackgroundScaledBitmaps(Bitmap[][] bitmapArray, int width, int height,
