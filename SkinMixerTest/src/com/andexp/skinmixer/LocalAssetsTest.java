@@ -6,7 +6,8 @@ import android.content.Context;
 import android.test.InstrumentationTestCase;
 
 public class LocalAssetsTest extends InstrumentationTestCase{
-	private final int DEFAULT_ASSETS_FILE_NUMBER=3;
+	private final int SYSTEM_ASSETS_FILE_NUMBER=3;
+	private final int MY_ASSETS_FILE_NUMBER = 3;
 	public static String[] SKIN_DIRECTORY_ZIP = new String[]{"scskins.zip","skins.zip"};
 	public static String[] SUPER_SKINS = new String[]{"bordering-ice-red", "golden", "icsphoenix"};
 	public static String[] CLASSIC_SKINS = new String[]{"kawaplus","sunburn"};
@@ -20,7 +21,7 @@ public class LocalAssetsTest extends InstrumentationTestCase{
 	
 	public void testAssetsTestFilesNumber() {
 		String testList[] = getLocalAssetsList();
-		assertEquals(DEFAULT_ASSETS_FILE_NUMBER + 2, testList.length);
+		assertEquals(SYSTEM_ASSETS_FILE_NUMBER + MY_ASSETS_FILE_NUMBER, testList.length);
 	}
 
 	private String[] getLocalAssetsList() {

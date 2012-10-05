@@ -36,6 +36,10 @@ public class SkinListerTest extends InstrumentationTestCase{
 		assertTrue(lister.getSuperClockSkinPathList().size() >= 1);
 	}
 	
+	public void testListNotAddingToItself(){
+		assertEquals(lister.getSuperClockSkinPathList().size(), lister.getSuperClockSkinPathList().size());
+	}
+	
 	public void testSuperClockListCorrectlyFilled(){
 		assertEquals(3, lister.getSuperClockSkinPathList().size());
 	}
