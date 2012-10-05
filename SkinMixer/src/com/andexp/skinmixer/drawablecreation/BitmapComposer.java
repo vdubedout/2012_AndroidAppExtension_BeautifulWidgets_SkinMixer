@@ -9,11 +9,11 @@ import android.graphics.Rect;
 import com.andexp.skinmixer.fragment.SkinPartType;
 
 public class BitmapComposer {
-	public static final int BACKGROUND_WIDTH = 580;
-	public static final int BACKGROUND_HEIGHT = 333;
-	public static final int BACKGROUNDNUMBERS_WIDTH = 504;
-	public static final int BACKGROUNDNUMBERS_HEIGHT = 207;
-	public static final float SCALE_FACTOR = 0.29f;
+	public static final int BACKGROUND_WIDTH = 386;
+	public static final int BACKGROUND_HEIGHT = 221;
+	public static final int BACKGROUNDNUMBERS_WIDTH = 335;
+	public static final int BACKGROUNDNUMBERS_HEIGHT = 137;
+	public static final float SCALE_FACTOR = 0.44f;
 	
 	public BitmapComposer() {
 	}
@@ -64,10 +64,11 @@ public class BitmapComposer {
 				width - 1, 
 				height - 1 - bitmapArray[2][2].getHeight());
 		canvas.drawBitmap(bitmapArray[1][2], null, middleRight, paint);
-		Rect center = new Rect(bitmapArray[1][1].getWidth(),
+		Rect center = new Rect(bitmapArray[1][0].getWidth(),
 				bitmapArray[0][1].getHeight(), 
 				width - 1 - bitmapArray[1][2].getWidth(), 
 				height - 1 - bitmapArray[2][1].getHeight());
+		canvas.drawBitmap(bitmapArray[1][1], null, center, paint);
 	}
 
 	private void resizeBitmap(Canvas canvas) {

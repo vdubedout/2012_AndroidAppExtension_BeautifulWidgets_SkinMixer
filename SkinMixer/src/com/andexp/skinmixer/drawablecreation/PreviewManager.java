@@ -13,6 +13,8 @@ import com.andexp.skinmixer.path.SkinImagePath;
 
 public class PreviewManager {
 	public interface ImagePreviewProcessListener {
+		public void onSkinPartPreviewBeginned();
+
 		public void onSkinPartPreviewFinished(Bitmap previewBitmap, SkinPartType skinPart);
 	}
 
@@ -37,37 +39,14 @@ public class PreviewManager {
 		mBitmapComposer = new BitmapComposer();
 	}
 
-	public void getSkinPartPreview(final String path, final SkinPartType skinPart) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				String mPath = getFinalPath(path, skinPart);
-				Bitmap[][] bitmapArray = mNinePatchCutter.getBitmapNinePatches(mPath);
-				Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray, skinPart);
-				mStatusListener.onSkinPartPreviewFinished(bitmapSkinPartPreview, skinPart);
-			}
-		}).run();
-	}
-
-	private String getFinalPath(String path, SkinPartType skinPart) {
-		if (skinPart == SkinPartType.BACKGROUND)
-			return File.separator + SkinImagePath.BACKGROUND;
-		else
-			return File.separator + SkinImagePath.BACKGROUND_NUMBERS;
+	public void launchSkinPartPreviewCreation(String path, SkinPartType skinPart) {
+		new Thread(new ImageCreationRunnable(path, skinPart)).run();
 	}
 
 	public void getFullPreviewBitmap(String backgroundPath, String backgroundNumberPath,
 			String numbersPath) throws IOException {
 		initializePaths(backgroundPath, backgroundNumberPath, numbersPath);
 		mVoidBackgroundPreview = getVoidPreviewBackground();
-	}
-
-	private Bitmap getVoidPreviewBackground() throws IOException {
-		if (mVoidBackgroundPreview == null) {
-			InputStream in = mContext.getAssets().open(VOID_PREVIEW_BACKGROUND);
-			mVoidBackgroundPreview = BitmapFactory.decodeStream(in);
-		}
-		return mVoidBackgroundPreview;
 	}
 
 	private void initializePaths(String backgroundPath, String backgroundNumberPath,
@@ -79,6 +58,38 @@ public class PreviewManager {
 		mNumberPath[1] = numbersPath + File.separator + SkinImagePath.NUMBER[1];
 		mNumberPath[2] = numbersPath + File.separator + SkinImagePath.NUMBER[2];
 		mNumberPath[3] = numbersPath + File.separator + SkinImagePath.NUMBER[3];
+	}
+
+	private Bitmap getVoidPreviewBackground() throws IOException {
+		if (mVoidBackgroundPreview == null) {
+			InputStream in = mContext.getAssets().open(VOID_PREVIEW_BACKGROUND);
+			mVoidBackgroundPreview = BitmapFactory.decodeStream(in);
+		}
+		return mVoidBackgroundPreview;
+	}
+
+	class ImageCreationRunnable implements Runnable {
+		private String mPath;
+		private SkinPartType mSkinPart;
+
+		public ImageCreationRunnable(String path, SkinPartType skinPart) {
+			mSkinPart = skinPart;
+			mPath = getFinalPath(path, mSkinPart);
+		}
+
+		private String getFinalPath(String path, SkinPartType skinPart) {
+			if (skinPart == SkinPartType.BACKGROUND)
+				return path + File.separator + SkinImagePath.BACKGROUND;
+			else
+				return path + File.separator + SkinImagePath.BACKGROUND_NUMBERS;
+		}
+
+		@Override
+		public void run() {
+			Bitmap[][] bitmapArray = mNinePatchCutter.getBitmapNinePatches(mPath);
+			Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray, mSkinPart);
+			mStatusListener.onSkinPartPreviewFinished(bitmapSkinPartPreview, mSkinPart);
+		}
 	}
 
 }

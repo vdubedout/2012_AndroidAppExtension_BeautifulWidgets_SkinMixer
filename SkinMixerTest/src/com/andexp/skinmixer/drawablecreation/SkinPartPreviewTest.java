@@ -7,10 +7,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.test.InstrumentationTestCase;
 
+import com.andexp.skinmixer.fragment.SkinPartType;
 import com.andexp.skinmixer.path.SkinLister;
 import com.andexp.skinmixer.path.TestingAssets;
 
-public class NinePatchCutterTest extends InstrumentationTestCase {
+public class SkinPartPreviewTest extends InstrumentationTestCase {
 	final String BACKGROUND_IMAGE = "golden/background.png";
 	
 	TestingAssets mAssets;
@@ -18,6 +19,8 @@ public class NinePatchCutterTest extends InstrumentationTestCase {
 	private NinePatchCutter mNinePatchCutter;
 
 	private String mBackgroundImagePath;
+
+	private BitmapComposer mBitmapComposer;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -28,6 +31,7 @@ public class NinePatchCutterTest extends InstrumentationTestCase {
 		mAssets.extract();
 		
 		mNinePatchCutter = new NinePatchCutter();
+		mBitmapComposer = new BitmapComposer();
 		mBackgroundImagePath = SkinLister.getInstance().getSuperClockPath()+BACKGROUND_IMAGE;
 	}
 	
@@ -61,6 +65,13 @@ public class NinePatchCutterTest extends InstrumentationTestCase {
 		assertEquals(3, cuttedBitmap.length);
 		assertEquals(3, cuttedBitmap[0].length);
 	}
+	
+	public void testImageComposer(){
+		Bitmap[][] bitmapArray = mNinePatchCutter.getBitmapNinePatches(mBackgroundImagePath);
+		Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray, SkinPartType.BACKGROUND);
+		assertNotNull(bitmapSkinPartPreview);
+	}
+	
 
 	@Override
 	protected void tearDown() throws Exception {

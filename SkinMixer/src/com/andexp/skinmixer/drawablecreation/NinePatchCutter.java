@@ -44,9 +44,9 @@ public class NinePatchCutter {
 		ArrayList<Integer> mBounds = new ArrayList<Integer>();
 
 		int length = pixelLine.length;
-		mBounds.add(1);
+		mBounds.add(0);
 		if (pixelLine[0] == Color.BLACK)
-			mBounds.add(1);
+			mBounds.add(0);
 		for (int i = 1; i < length; i++) {
 			if (pixelLine[i] == Color.BLACK && pixelLine[i - 1] != Color.BLACK)
 				mBounds.add(i);
@@ -54,8 +54,8 @@ public class NinePatchCutter {
 				mBounds.add(i);
 		}
 		if (pixelLine[length - 1] == Color.BLACK)
-			mBounds.add(length - 1);
-		mBounds.add(length - 1);
+			mBounds.add(length);
+		mBounds.add(length);
 
 		return mBounds;
 	}

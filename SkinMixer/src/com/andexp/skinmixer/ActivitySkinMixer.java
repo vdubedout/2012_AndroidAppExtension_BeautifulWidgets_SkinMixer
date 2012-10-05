@@ -2,14 +2,19 @@ package com.andexp.skinmixer;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 
+import com.andexp.skinmixer.drawablecreation.PreviewManager.ImagePreviewProcessListener;
 import com.andexp.skinmixer.fragment.FragmentSkinPartList;
 import com.andexp.skinmixer.fragment.SkinPartType;
 
-public class ActivitySkinMixer extends Activity {
+public class ActivitySkinMixer extends Activity implements ImagePreviewProcessListener{
+	ImageView miv_preview;
+	
 	View mLabelBackgroundView;
 	View mLabelBackgroundNumbersView;
 	View mLabelNumbersView;
@@ -23,19 +28,27 @@ public class ActivitySkinMixer extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_skinmixer);
 		initializeLabelViews();
+		initializePreview();
 		initializeOnClicksOnLabels();
 		initializeFragments();
 
 		displayFragmentWithLabelView(mLabelBackgroundView);
 	}
 
+	private void initializePreview() {
+		miv_preview = (ImageView) findViewById(R.id.preview);
+	}
+
 	private void initializeFragments() {
 		mFragmentBackground = getFragmentId(R.id.skinmixer_fragment_background);
 		mFragmentBackground.setSkinPartType(SkinPartType.BACKGROUND);
+		mFragmentBackground.setOnImageProcessListener(this);
 		mFragmentBackgroundNumbers = getFragmentId(R.id.skinmixer_fragment_backgroundnumbers);
 		mFragmentBackgroundNumbers.setSkinPartType(SkinPartType.BACKGROUND_NUMBERS);
+		mFragmentBackgroundNumbers.setOnImageProcessListener(this);
 		mFragmentNumbers = getFragmentId(R.id.skinmixer_fragment_numbers);
 		mFragmentNumbers.setSkinPartType(SkinPartType.NUMBER_0);
+		mFragmentNumbers.setOnImageProcessListener(this);
 	}
 
 	private FragmentSkinPartList getFragmentId(int id) {
@@ -80,5 +93,15 @@ public class ActivitySkinMixer extends Activity {
 			ft.hide(mFragmentBackground);
 			ft.commit();
 		}
+	}
+
+	@Override
+	public void onSkinPartPreviewBeginned() {
+		
+	}
+
+	@Override
+	public void onSkinPartPreviewFinished(Bitmap previewBitmap, SkinPartType skinPart) {
+		miv_preview.setImageBitmap(previewBitmap);
 	}
 }
