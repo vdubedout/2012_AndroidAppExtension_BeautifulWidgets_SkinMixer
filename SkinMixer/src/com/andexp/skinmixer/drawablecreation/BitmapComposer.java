@@ -40,7 +40,7 @@ public class BitmapComposer {
 	}
 
 	private void drawCorners(Bitmap[][] bitmapArray, int width, int height, Canvas canvas) {
-		int maxIndex = bitmapArray[0].length;
+		int maxIndex = bitmapArray[0].length-1;
 		canvas.drawBitmap(bitmapArray[0][0], 0, 0, mPaint);
 		canvas.drawBitmap(bitmapArray[0][maxIndex], width-1 - bitmapArray[0][maxIndex].getWidth(), 0, mPaint);
 		canvas.drawBitmap(bitmapArray[maxIndex][0], 0, height-1-bitmapArray[maxIndex][0].getHeight(), mPaint);
@@ -51,8 +51,8 @@ public class BitmapComposer {
 			Canvas canvas) {
 		drawBackgroundTop(bitmapArray, width, canvas);
 		drawBackgroundBottom(bitmapArray, width, height, canvas);
-		drawBackgroundLeft(bitmapArray, height, canvas);
-		drawBackgroundRight(bitmapArray, width, height, canvas);
+		drawMiddleLeft(bitmapArray, height, canvas);
+		drawMiddleRight(bitmapArray, width, height, canvas);
 		drawBackgroundCenter(bitmapArray, width, height, canvas);
 	}
 
@@ -71,7 +71,7 @@ public class BitmapComposer {
 		canvas.drawBitmap(bitmapArray[2][1], null, middleBottom, mPaint);
 	}
 
-	private void drawBackgroundLeft(Bitmap[][] bitmapArray, int height,
+	private void drawMiddleLeft(Bitmap[][] bitmapArray, int height,
 			Canvas canvas) {
 		Rect middleLeft = new Rect(0, 
 				bitmapArray[0][1].getHeight(), 
@@ -80,13 +80,14 @@ public class BitmapComposer {
 		canvas.drawBitmap(bitmapArray[1][0], null, middleLeft, mPaint);
 	}
 
-	private void drawBackgroundRight(Bitmap[][] bitmapArray, int width,
+	private void drawMiddleRight(Bitmap[][] bitmapArray, int width,
 			int height, Canvas canvas) {
-		Rect middleRight = new Rect(width - 1 - bitmapArray[1][2].getWidth(), 
-				bitmapArray[0][2].getHeight(), 
+		int maxIndex = bitmapArray[0].length-1;
+		Rect middleRight = new Rect(width - 1 - bitmapArray[1][maxIndex].getWidth(), 
+				bitmapArray[0][maxIndex].getHeight(), 
 				width - 1, 
-				height - 1 - bitmapArray[2][2].getHeight());
-		canvas.drawBitmap(bitmapArray[1][2], null, middleRight, mPaint);
+				height - 1 - bitmapArray[2][maxIndex].getHeight());
+		canvas.drawBitmap(bitmapArray[1][maxIndex], null, middleRight, mPaint);
 	}
 
 	private void drawBackgroundCenter(Bitmap[][] bitmapArray, int width,
@@ -109,9 +110,30 @@ public class BitmapComposer {
 		Bitmap bitmapDrawn = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapDrawn);
 		drawCorners(bitmapArray, width, height, canvas);
-		drawBackgroundStretchedBitmaps(bitmapArray, width, height, canvas);
+		drawForegroundStretchedBitmaps(bitmapArray, width, height, canvas);
 		resizeBitmap(canvas);
 		return bitmapDrawn;
+	}
+
+	private void drawForegroundStretchedBitmaps(Bitmap[][] bitmapArray,
+			int width, int height, Canvas canvas) {
+		//TopMiddle
+		int widthCenter = width/2;
+		Bitmap bitmap = bitmapArray[0][2];
+		int bitmapWidth = bitmap.getWidth();
+		int bitmapHeight = bitmap.getHeight();
+		Rect rect = new Rect(widthCenter - bitmapWidth/2, 0, widthCenter+bitmapWidth/2 + bitmapWidth%2, bitmapHeight);
+		canvas.drawBitmap(bitmap, null, rect, mPaint);
+		//BottomMiddle
+		//CenterMiddle
+		//TopLeft
+		//TopRight
+		//Left
+		//Right
+		//BottomLeft
+		//BottomRight
+		//CenterLeft
+		//CenterRight
 	}
 
 }
