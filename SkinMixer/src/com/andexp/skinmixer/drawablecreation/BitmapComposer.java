@@ -42,14 +42,17 @@ public class BitmapComposer {
 
 	private void drawCorners(Bitmap[][] bitmapArray, int width, int height, Canvas canvas) {
 		int maxIndex = bitmapArray[0].length - 1;
+		//topleft
 		canvas.drawBitmap(bitmapArray[0][0], 0, 0, mPaint);
+		//topRight
 		canvas.drawBitmap(bitmapArray[0][maxIndex],
 				width - 1 - bitmapArray[0][maxIndex].getWidth(), 0, mPaint);
-		canvas.drawBitmap(bitmapArray[maxIndex][0], 0,
-				height - 1 - bitmapArray[maxIndex][0].getHeight(), mPaint);
-		canvas.drawBitmap(bitmapArray[maxIndex][maxIndex], width - 1
-				- bitmapArray[maxIndex][maxIndex].getWidth(),
-				height - 1 - bitmapArray[2][0].getHeight(), mPaint);
+		//bottomLeft
+		canvas.drawBitmap(bitmapArray[2][0], 0, height - bitmapArray[2][0].getHeight(), mPaint);
+		//bottomRight
+		canvas.drawBitmap(bitmapArray[2][maxIndex],
+				width - 1 - bitmapArray[2][maxIndex].getWidth(),
+				height - bitmapArray[2][0].getHeight(), mPaint);
 	}
 
 	private void drawBackgroundStretchedBitmaps(Bitmap[][] bitmapArray, int width, int height,
@@ -77,14 +80,14 @@ public class BitmapComposer {
 	private void drawFarLeftCenter(Bitmap[][] bitmapArray, int height, Canvas canvas) {
 
 		Rect middleLeft = new Rect(0, bitmapArray[0][1].getHeight(), bitmapArray[1][0].getWidth(),
-				height - 1 - bitmapArray[2][0].getHeight());
+				height - bitmapArray[2][0].getHeight());
 		canvas.drawBitmap(bitmapArray[1][0], null, middleLeft, mPaint);
 	}
 
 	private void drawFarRightCenter(Bitmap[][] bitmapArray, int width, int height, Canvas canvas) {
 		int maxIndex = bitmapArray[0].length - 1;
 		Rect middleRight = new Rect(width - 1 - bitmapArray[1][maxIndex].getWidth(),
-				bitmapArray[0][maxIndex].getHeight(), width - 1, height - 1
+				bitmapArray[0][maxIndex].getHeight(), width - 1, height
 						- bitmapArray[2][maxIndex].getHeight());
 		canvas.drawBitmap(bitmapArray[1][maxIndex], null, middleRight, mPaint);
 	}
