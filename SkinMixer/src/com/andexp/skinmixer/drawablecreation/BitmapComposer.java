@@ -71,9 +71,9 @@ public class BitmapComposer {
 	}
 
 	private void drawBackgroundBottom(Bitmap[][] bitmapArray, int width, int height, Canvas canvas) {
-		Rect middleBottom = new Rect(bitmapArray[2][0].getWidth(), height - 1
+		Rect middleBottom = new Rect(bitmapArray[2][0].getWidth(), height
 				- bitmapArray[2][1].getHeight(), width - 1 - bitmapArray[2][2].getWidth(),
-				height - 1);
+				height);
 		canvas.drawBitmap(bitmapArray[2][1], null, middleBottom, mPaint);
 	}
 
