@@ -68,10 +68,10 @@ public class NinePatchCutter {
 
 	protected Bitmap[][] getBitmapCutted(Bitmap bitmapToCut, ArrayList<Integer> columnsBoundsMap,
 			ArrayList<Integer> rowsBoundsMap) {
-		Bitmap[][] bitmapPreviewArray = new Bitmap[columnsBoundsMap.size() - 1][rowsBoundsMap.size() - 1];
+		Bitmap[][] bitmapPreviewArray = new Bitmap[rowsBoundsMap.size() - 1][columnsBoundsMap.size() - 1];
 
-		for (int rowBoundIndex = 0; rowBoundIndex < columnsBoundsMap.size() - 1; rowBoundIndex++) {
-			for (int columnBoundIndex = 0; columnBoundIndex < rowsBoundsMap.size() - 1; columnBoundIndex++) {
+		for (int rowBoundIndex = 0; rowBoundIndex < rowsBoundsMap.size() - 1; rowBoundIndex++) {
+			for (int columnBoundIndex = 0; columnBoundIndex < columnsBoundsMap.size() - 1; columnBoundIndex++) {
 				int x = columnsBoundsMap.get(columnBoundIndex);
 				int y = rowsBoundsMap.get(rowBoundIndex);
 				int width = getSizeValue(columnBoundIndex, columnsBoundsMap);
