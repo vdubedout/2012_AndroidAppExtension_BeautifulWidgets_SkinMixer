@@ -50,7 +50,7 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 		LinearLayout parent = (LinearLayout) getView().getParent();
 		if (skinPart == SkinPartType.BACKGROUND) {
 			return (TextView) parent.findViewById(R.id.skinmixer_backgroundlabel);
-		} else if (skinPart == SkinPartType.BACKGROUND_NUMBERS) {
+		} else if (skinPart == SkinPartType.FOREGROUND) {
 			return (TextView) parent.findViewById(R.id.skinmixer_backgroundnumberslabel);
 		} else
 			return (TextView) parent.findViewById(R.id.skinmixer_numberslabel);
@@ -59,7 +59,7 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 	private void setLayoutForType(SkinPartType skinPart) {
 		switch (skinPart) {
 		case BACKGROUND:
-		case BACKGROUND_NUMBERS:
+		case FOREGROUND:
 			setMultiImageSkinPartAdapter();
 			break;
 		default:

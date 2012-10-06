@@ -2,7 +2,7 @@ package com.andexp.skinmixer.fragment;
 
 public enum SkinPartType {
 	BACKGROUND(0),
-	BACKGROUND_NUMBERS(1), 
+	FOREGROUND(1), 
 	NUMBER_0(2), 
 	NUMBER_1(3), 
 	NUMBER_2(4), 

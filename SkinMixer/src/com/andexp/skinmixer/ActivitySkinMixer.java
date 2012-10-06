@@ -6,19 +6,19 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 
+import com.andexp.skinmixer.customviews.SkinPreviewView;
 import com.andexp.skinmixer.drawablecreation.PreviewManager.ImagePreviewProcessListener;
 import com.andexp.skinmixer.fragment.FragmentSkinPartList;
 import com.andexp.skinmixer.fragment.SkinPartType;
 
 public class ActivitySkinMixer extends Activity implements ImagePreviewProcessListener{
-	ImageView miv_preview;
-	
 	View mLabelBackgroundView;
 	View mLabelBackgroundNumbersView;
 	View mLabelNumbersView;
-
+	
+	SkinPreviewView mPreview;
+	
 	FragmentSkinPartList mFragmentBackground;
 	FragmentSkinPartList mFragmentBackgroundNumbers;
 	FragmentSkinPartList mFragmentNumbers;
@@ -36,7 +36,7 @@ public class ActivitySkinMixer extends Activity implements ImagePreviewProcessLi
 	}
 
 	private void initializePreview() {
-		miv_preview = (ImageView) findViewById(R.id.preview);
+		mPreview = (SkinPreviewView) findViewById(R.id.skinpreview_preview);
 	}
 
 	private void initializeFragments() {
@@ -44,7 +44,7 @@ public class ActivitySkinMixer extends Activity implements ImagePreviewProcessLi
 		mFragmentBackground.setSkinPartType(SkinPartType.BACKGROUND);
 		mFragmentBackground.setOnImageProcessListener(this);
 		mFragmentBackgroundNumbers = getFragmentId(R.id.skinmixer_fragment_backgroundnumbers);
-		mFragmentBackgroundNumbers.setSkinPartType(SkinPartType.BACKGROUND_NUMBERS);
+		mFragmentBackgroundNumbers.setSkinPartType(SkinPartType.FOREGROUND);
 		mFragmentBackgroundNumbers.setOnImageProcessListener(this);
 		mFragmentNumbers = getFragmentId(R.id.skinmixer_fragment_numbers);
 		mFragmentNumbers.setSkinPartType(SkinPartType.NUMBER_0);
@@ -102,6 +102,6 @@ public class ActivitySkinMixer extends Activity implements ImagePreviewProcessLi
 
 	@Override
 	public void onSkinPartPreviewFinished(Bitmap previewBitmap, SkinPartType skinPart) {
-		miv_preview.setImageBitmap(previewBitmap);
+		mPreview.setImageBitmap(previewBitmap, skinPart);
 	}
 }

@@ -23,7 +23,7 @@ public class BitmapComposer {
 	public Bitmap getAssembledBitmap(Bitmap[][] bitmapArray, SkinPartType skinType) {
 		if (skinType == SkinPartType.BACKGROUND) {
 			return getAssembledBackground(bitmapArray);
-		} else if (skinType == SkinPartType.BACKGROUND_NUMBERS) {
+		} else if (skinType == SkinPartType.FOREGROUND) {
 			return getAssembledForeground(bitmapArray);
 		} else
 			return null;

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.andexp.skinmixer.customviews.SkinPreviewView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:background="@android:color/white" >
+
+    <ImageView
+        android:id="@+id/skinpreview_stripebackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true" />
+
+    <ImageView
+        android:id="@+id/skinpreview_background"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp" />
+
+    <View
+        android:id="@+id/center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true" />
+
+    <ImageView
+        android:id="@+id/skinpreview_foreground"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/center"
+        android:layout_alignTop="@+id/skinpreview_background"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="-8dp" />
+
+</com.andexp.skinmixer.customviews.SkinPreviewView>
