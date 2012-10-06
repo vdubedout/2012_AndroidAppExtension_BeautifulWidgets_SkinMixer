@@ -13,14 +13,15 @@ import com.andexp.skinmixer.path.TestingAssets;
 
 public class SkinPartPreviewTest extends InstrumentationTestCase {
 	final String BACKGROUND_IMAGE = "golden/background.png";
+	final String FOREGROUND_IMAGE = "golden/background_numbers.png";
 	
 	TestingAssets mAssets;
 	private Context mContext;
 	private NinePatchCutter mNinePatchCutter;
+	private BitmapComposer mBitmapComposer;
 
 	private String mBackgroundImagePath;
-
-	private BitmapComposer mBitmapComposer;
+	private String mForegroundImagePath;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -33,6 +34,7 @@ public class SkinPartPreviewTest extends InstrumentationTestCase {
 		mNinePatchCutter = new NinePatchCutter();
 		mBitmapComposer = new BitmapComposer();
 		mBackgroundImagePath = SkinLister.getInstance().getSuperClockPath()+BACKGROUND_IMAGE;
+		mForegroundImagePath = SkinLister.getInstance().getSuperClockPath()+FOREGROUND_IMAGE;
 	}
 	
 	public void testBitmapLoading(){
@@ -59,7 +61,6 @@ public class SkinPartPreviewTest extends InstrumentationTestCase {
 		}
 	}
 	
-	
 	public void testBackgroundBitmapCutted(){
 		Bitmap[][] cuttedBitmap = mNinePatchCutter.getBitmapNinePatches(mBackgroundImagePath);
 		assertEquals(3, cuttedBitmap.length);
@@ -70,6 +71,38 @@ public class SkinPartPreviewTest extends InstrumentationTestCase {
 		Bitmap[][] bitmapArray = mNinePatchCutter.getBitmapNinePatches(mBackgroundImagePath);
 		Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray, SkinPartType.BACKGROUND);
 		assertNotNull(bitmapSkinPartPreview);
+	}
+	
+	public void testForegroundLoaded(){
+		try {
+			Bitmap foregroundBitmap = mNinePatchCutter.getBitmapFromSDCard(mForegroundImagePath); 
+			assertNotNull(foregroundBitmap);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	public void testForegroundBounds(){
+		try {
+			Bitmap foregroundBitmap = mNinePatchCutter.getBitmapFromSDCard(mForegroundImagePath);
+			ArrayList<Integer> columnBoundsMap = mNinePatchCutter.getColumnBoundsMap(foregroundBitmap);
+			ArrayList<Integer> rowBoundsMap = mNinePatchCutter.getRowBoundsMap(foregroundBitmap);
+			
+			assertNotNull(columnBoundsMap);
+			assertEquals(6, columnBoundsMap.size());
+			
+			assertNotNull(rowBoundsMap);
+			assertEquals(4, rowBoundsMap.size());
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	public void testForegroundCutted(){
+		Bitmap[][] bitmapNinePatches = mNinePatchCutter.getBitmapNinePatches(mForegroundImagePath);
+		assertNotNull(bitmapNinePatches);
+		assertEquals(3, bitmapNinePatches.length);
+		assertEquals(5, bitmapNinePatches[0].length);
 	}
 	
 
