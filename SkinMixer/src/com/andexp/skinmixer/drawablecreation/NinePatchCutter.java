@@ -44,9 +44,9 @@ public class NinePatchCutter {
 		ArrayList<Integer> mBounds = new ArrayList<Integer>();
 
 		int length = pixelLine.length;
-		mBounds.add(0);
+		mBounds.add(OFFSET_IMAGE);
 		if (pixelLine[0] == Color.BLACK)
-			mBounds.add(0);
+			mBounds.add(OFFSET_IMAGE);
 		for (int i = 1; i < length; i++) {
 			if (pixelLine[i] == Color.BLACK && pixelLine[i - 1] != Color.BLACK)
 				mBounds.add(i);
