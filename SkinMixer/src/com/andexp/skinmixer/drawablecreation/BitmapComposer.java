@@ -94,7 +94,7 @@ public class BitmapComposer {
 
 	private void drawBackgroundCenter(Bitmap[][] bitmapArray, int width, int height, Canvas canvas) {
 		Rect center = new Rect(bitmapArray[1][0].getWidth(), bitmapArray[0][1].getHeight(), width
-				- 1 - bitmapArray[1][2].getWidth(), height - 1 - bitmapArray[2][1].getHeight());
+				- 1 - bitmapArray[1][2].getWidth(), height - bitmapArray[2][1].getHeight());
 		canvas.drawBitmap(bitmapArray[1][1], null, center, mPaint);
 	}
 
@@ -166,7 +166,7 @@ public class BitmapComposer {
 			int centerRightBounds, int width, int height, Canvas canvas) {
 		drawForegroundTopMiddle(bitmapArray, centerLeftBounds, centerRightBounds, canvas);
 		drawForegroundCenterMiddle(bitmapArray, height, centerLeftBounds, centerRightBounds, canvas);
-		drawForegroundBottomMiddle(bitmapArray, width, height, centerLeftBounds, canvas);
+		drawForegroundBottomMiddle(bitmapArray, height, centerLeftBounds, centerRightBounds, canvas);
 		return centerRightBounds;
 	}
 
@@ -197,10 +197,10 @@ public class BitmapComposer {
 	private void drawForegroundRight(Bitmap[][] bitmapArray, int leftBounds, int width, int height,
 			Canvas canvas) {
 		int rightBounds = width - bitmapArray[0][4].getWidth();
-		int bottom = drawForegroundTopRight(bitmapArray[0][4], leftBounds, rightBounds, canvas);
+		int bottom = drawForegroundTopRight(bitmapArray[0][3], leftBounds, rightBounds, canvas);
 		bottom = drawForegroundCenterRight(bitmapArray, leftBounds, bottom, rightBounds, height,
 				canvas);
-		drawForegroundBottomRight(bitmapArray[2][4], leftBounds, bottom, rightBounds, height,
+		drawForegroundBottomRight(bitmapArray[2][3], leftBounds, bottom, rightBounds, height,
 				canvas);
 	}
 
@@ -212,8 +212,8 @@ public class BitmapComposer {
 
 	private int drawForegroundCenterRight(Bitmap[][] bitmapArray, int leftBounds, int topBounds,
 			int rightBounds, int height, Canvas canvas) {
-		Bitmap bitmap = bitmapArray[1][4];
-		int bottom = height - bitmapArray[2][4].getHeight();
+		Bitmap bitmap = bitmapArray[1][3];
+		int bottom = height - bitmapArray[2][3].getHeight();
 		drawBitmapInCanvas(leftBounds, topBounds, rightBounds, bottom, bitmap, canvas);
 		return bottom;
 	}
