@@ -11,7 +11,7 @@
         android:layout_height="100dp"
         android:layout_weight="1"
         android:padding="10dp"
-        android:scaleType="fitXY"
+        android:scaleType="center"
         android:src="@drawable/custompreview" />
 
     <ImageView
@@ -20,7 +20,7 @@
         android:layout_height="100dp"
         android:layout_weight="1"
         android:padding="10dp"
-        android:scaleType="fitXY"
+        android:scaleType="center"
         android:src="@drawable/custompreview" />
 
 </LinearLayout>

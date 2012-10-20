@@ -14,10 +14,9 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 
 import com.andexp.skinmixer.R;
+import com.andexp.skinmixer.path.SkinImagePath;
 
 public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter {
-	private static String BACKGROUND_IMAGE = "background.png";
-	private static String BACKGROUNDNUMBERS_IMAGE = "background_numbers.png";
 	private ArrayList<String> mSkinPathList;
 	private Context mContext;
 	private SkinPartType mSkinPartType;
@@ -104,8 +103,15 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 	}
 
 	private String getImagePathName(SkinPartType skinPartType) {
-		return (skinPartType == SkinPartType.BACKGROUND) ? BACKGROUND_IMAGE
-				: BACKGROUNDNUMBERS_IMAGE;
+		switch (skinPartType) {
+		case BACKGROUND:
+			return SkinImagePath.BACKGROUND;
+		case FOREGROUND:
+			return SkinImagePath.FOREGROUND;
+		case DOTS:
+		default:
+			return SkinImagePath.DOTS;
+		}
 	}
 
 	private void addOnClickListeners(int position, ViewHolder holder) {

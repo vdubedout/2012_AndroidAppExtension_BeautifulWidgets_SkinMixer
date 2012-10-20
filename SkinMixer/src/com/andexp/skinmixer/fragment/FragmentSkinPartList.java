@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.andexp.skinmixer.drawablecreation.PreviewManager;
@@ -14,7 +13,6 @@ import com.andexp.skinmixer.drawablecreation.PreviewManager.ImagePreviewProcessL
 import com.andexp.skinmixer.path.SkinLister;
 
 public class FragmentSkinPartList extends SherlockListFragment implements OnSkinPartClickListener {
-	private TextView mLabelSkinName;
 	ImagePreviewProcessListener mImageCreationListener;
 	PreviewManager mPreviewManager;
 
@@ -41,17 +39,6 @@ public class FragmentSkinPartList extends SherlockListFragment implements OnSkin
 		getListView().setClickable(false);
 		getListView().setFocusable(false);
 	}
-
-	// private TextView getLabelView(SkinPartType skinPart) {
-	// LinearLayout parent = (LinearLayout) getView().getParent();
-	// if (skinPart == SkinPartType.BACKGROUND) {
-	// return (TextView) parent.findViewById(R.id.skinmixer_backgroundlabel);
-	// } else if (skinPart == SkinPartType.FOREGROUND) {
-	// return (TextView)
-	// parent.findViewById(R.id.skinmixer_backgroundnumberslabel);
-	// } else
-	// return (TextView) parent.findViewById(R.id.skinmixer_numberslabel);
-	// }
 
 	private void setLayoutForType(Context context, SkinPartType skinPart) {
 		switch (skinPart) {

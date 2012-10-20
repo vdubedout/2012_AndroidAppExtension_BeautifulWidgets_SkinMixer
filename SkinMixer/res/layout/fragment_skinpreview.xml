@@ -32,7 +32,7 @@
         android:layout_alignRight="@+id/skinpreview_foreground"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        android:padding="10dp" >
+        android:padding="12dp" >
 
         <ImageView
             android:id="@+id/skinpreview_hours_tens"
@@ -67,11 +67,10 @@
 
     <ImageView
         android:id="@+id/skinpreview_am"
-        android:layout_width="18dp"
+        android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/skinpreview_linear_numbers"
-        android:layout_alignLeft="@+id/skinpreview_linear_numbers"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="3dp" />
+        android:layout_alignBottom="@+id/skinpreview_foreground"
+        android:layout_alignLeft="@+id/skinpreview_foreground"
+        android:layout_marginLeft="3dp"/>
 
 </RelativeLayout>

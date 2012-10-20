@@ -1,6 +1,5 @@
 package com.andexp.skinmixer.drawablecreation;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -19,10 +18,6 @@ public class PreviewManager {
 	}
 
 	private static final String VOID_PREVIEW_BACKGROUND = "voidpreviewbackground.png";
-
-	private String mBackgroundPath;
-	private String mBackgroundNumberPath;
-	private String[] mNumberPath = new String[4];
 
 	private ImagePreviewProcessListener mStatusListener;
 	private Context mContext;
@@ -45,18 +40,7 @@ public class PreviewManager {
 
 	public void getFullPreviewBitmap(String backgroundPath, String backgroundNumberPath,
 			String numbersPath) throws IOException {
-		initializePaths(backgroundPath, backgroundNumberPath, numbersPath);
 		mVoidBackgroundPreview = getVoidPreviewBackground();
-	}
-
-	private void initializePaths(String backgroundPath, String backgroundNumberPath,
-			String numbersPath) {
-		mBackgroundPath = backgroundPath + SkinImagePath.BACKGROUND;
-		mBackgroundNumberPath = backgroundNumberPath + SkinImagePath.BACKGROUND_NUMBERS;
-		mNumberPath[0] = numbersPath + SkinImagePath.NUMBER[0];
-		mNumberPath[1] = numbersPath + SkinImagePath.NUMBER[1];
-		mNumberPath[2] = numbersPath + SkinImagePath.NUMBER[2];
-		mNumberPath[3] = numbersPath + SkinImagePath.NUMBER[3];
 	}
 
 	private Bitmap getVoidPreviewBackground() throws IOException {
@@ -80,7 +64,7 @@ public class PreviewManager {
 			if (skinPart == SkinPartType.BACKGROUND)
 				return path + SkinImagePath.BACKGROUND;
 			else
-				return path + SkinImagePath.BACKGROUND_NUMBERS;
+				return path + SkinImagePath.FOREGROUND;
 		}
 
 		@Override

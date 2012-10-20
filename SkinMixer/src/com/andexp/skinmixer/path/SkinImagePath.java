@@ -3,7 +3,7 @@ package com.andexp.skinmixer.path;
 public class SkinImagePath {
 	public static final String DOTS = "dots.png";
 	public static final String BACKGROUND = "background.png";
-	public static final String BACKGROUND_NUMBERS = "background_numbers.png";
+	public static final String FOREGROUND = "background_numbers.png";
 	public static final String[] NUMBER = new String[]{
 		"number_0.png",
 		"number_1.png",
@@ -17,5 +17,5 @@ public class SkinImagePath {
 		"number_9.png",
 	};
 	public static final String AM = "am.png";
-	public static final String PM = "am.png";
+	public static final String PM = "pm.png";
 }

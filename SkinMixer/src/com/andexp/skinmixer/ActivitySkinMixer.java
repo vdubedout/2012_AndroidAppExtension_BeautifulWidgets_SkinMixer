@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.andexp.skinmixer.fragment.FragmentPreviewDisplay;
 import com.andexp.skinmixer.fragment.FragmentSkinPartList;
@@ -35,9 +34,7 @@ public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFra
 	}
 
 	private void initializeActionBar() {
-		final ActionBar supportActionBar = getSupportActionBar();
-//		supportActionBar.setDisplayHomeAsUpEnabled(false);
-//		supportActionBar.setDisplayUseLogoEnabled(false);
+		getSupportActionBar();
 	}
 
 	private void initializeViewPager() {
