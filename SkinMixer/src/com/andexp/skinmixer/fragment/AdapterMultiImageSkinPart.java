@@ -1,5 +1,6 @@
 package com.andexp.skinmixer.fragment;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -14,18 +15,19 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 
 import com.andexp.skinmixer.R;
+import com.andexp.skinmixer.path.SkinImagePath;
 
 public class AdapterMultiImageSkinPart extends BaseAdapter implements ListAdapter {
-	private static String NUMBER_4_IMAGE = "number_4.png";
-	private static String NUMBER_7_IMAGE = "number_7.png";
 	private ArrayList<String> mSkinPathList;
 	private Context mContext;
 	private LayoutInflater mLayoutInflater;
 	private OnSkinPartClickListener mOnSkinPartClickListener;
+	private SkinPartType mSkinPart;
 	private static View mlastImageViewClicked;
 
 	public AdapterMultiImageSkinPart(Context context, ArrayList<String> skinPathList,
-			OnSkinPartClickListener listener) {
+			SkinPartType skinPart, OnSkinPartClickListener listener) {
+		mSkinPart = skinPart;
 		mContext = context;
 		mSkinPathList = skinPathList;
 		mLayoutInflater = LayoutInflater.from(mContext);
@@ -75,8 +77,8 @@ public class AdapterMultiImageSkinPart extends BaseAdapter implements ListAdapte
 	}
 
 	private void loadImages(int position, ViewHolder holder) {
-		loadLeftImage(position, holder);
-		loadImageRight(position, holder);
+		loadLeftPanel(position, holder);
+		loadRightPanel(position, holder);
 		removeAnyBackgroundColors(holder);
 	}
 
@@ -85,25 +87,58 @@ public class AdapterMultiImageSkinPart extends BaseAdapter implements ListAdapte
 		holder.layout_right.setBackgroundColor(Color.parseColor("#00000000"));
 	}
 
-	private void loadLeftImage(int position, ViewHolder holder) {
-		String leftImagePath = mSkinPathList.get(position * 2) + "/";
+	private void loadLeftPanel(int position, ViewHolder holder) {
+		int listPosition = position * 2;
 		holder.left_number4.setImageBitmap(new BitmapDrawable(mContext.getResources(),
-				leftImagePath+NUMBER_4_IMAGE).getBitmap());
+				getLeftImagePath(listPosition)).getBitmap());
 		holder.left_number7.setImageBitmap(new BitmapDrawable(mContext.getResources(),
-				leftImagePath+NUMBER_7_IMAGE).getBitmap());
+				getRightImagePath(listPosition)).getBitmap());
 	}
 
-	private void loadImageRight(int position, ViewHolder holder) {
-		if (mSkinPathList.size() > position * 2 + 1) {
+	private String getLeftImagePath(int listPosition) {
+		String path = mSkinPathList.get(listPosition) + File.separator;
+		String image;
+		switch (mSkinPart) {
+		case NUMBER_0:
+			image = SkinImagePath.NUMBER[4];
+			break;
+		case AM:
+		default:
+			image = SkinImagePath.AM;
+			break;
+		}
+
+		return path + image;
+	}
+
+	private String getRightImagePath(int listPosition) {
+		String path = mSkinPathList.get(listPosition) + File.separator;
+		String image;
+		switch (mSkinPart) {
+		case NUMBER_0:
+			image = SkinImagePath.NUMBER[7];
+			break;
+		case AM:
+		default:
+			image = SkinImagePath.PM;
+			break;
+		}
+
+		return path + image;
+	}
+
+	private void loadRightPanel(int position, ViewHolder holder) {
+		int listPosition = position * 2 + 1;
+		if (mSkinPathList.size() > listPosition) {
 			holder.layout_right.setVisibility(View.VISIBLE);
-			String rightImagePath = mSkinPathList.get(position * 2 + 1) + "/";
-			holder.right_number4.setImageBitmap(new BitmapDrawable(mContext.getResources(), rightImagePath+NUMBER_4_IMAGE).getBitmap());
-			holder.right_number7.setImageBitmap(new BitmapDrawable(mContext.getResources(), rightImagePath+NUMBER_7_IMAGE).getBitmap());
+			holder.right_number4.setImageBitmap(new BitmapDrawable(mContext.getResources(),
+					getLeftImagePath(listPosition)).getBitmap());
+			holder.right_number7.setImageBitmap(new BitmapDrawable(mContext.getResources(),
+					getRightImagePath(listPosition)).getBitmap());
 		} else {
 			holder.layout_right.setVisibility(View.INVISIBLE);
 		}
 	}
-
 
 	private void addOnClickListeners(int position, ViewHolder holder) {
 		holder.layout_left.setOnClickListener(new ImageOnClickListener(position, false));

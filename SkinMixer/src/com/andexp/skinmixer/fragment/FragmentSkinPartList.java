@@ -22,7 +22,8 @@ public class FragmentSkinPartList extends SherlockListFragment implements OnSkin
 	private ArrayList<String> mSuperClockSkinPathList;
 	private OnFragmentSkinListClick mListClickListener;
 
-	public FragmentSkinPartList(Context context, SkinPartType type, OnFragmentSkinListClick listClick) {
+	public FragmentSkinPartList(Context context, SkinPartType type,
+			OnFragmentSkinListClick listClick) {
 		this.mSkinPartType = type;
 		this.mListClickListener = listClick;
 		setLayoutForType(context, mSkinPartType);
@@ -56,23 +57,25 @@ public class FragmentSkinPartList extends SherlockListFragment implements OnSkin
 		switch (skinPart) {
 		case BACKGROUND:
 		case FOREGROUND:
-			setMultiImageSkinPartAdapter(context);
+		case DOTS:
+			setMonoImageSkinPartAdapter(context, skinPart);
 			break;
 		default:
-			setMonoImageSkinPartAdapter(context);
+			setMultiImageSkinPartAdapter(context, skinPart);
 			break;
 		}
 	}
 
-	private void setMultiImageSkinPartAdapter(Context context) {
+	private void setMultiImageSkinPartAdapter(Context context, SkinPartType skinPart) {
 		mSuperClockSkinPathList = SkinLister.getInstance().getSuperClockSkinPathList();
-		setListAdapter(new AdapterMonoImageSkinPart(context, mSuperClockSkinPathList,
-				mSkinPartType, this));
+		setListAdapter(new AdapterMultiImageSkinPart(context, mSuperClockSkinPathList, skinPart,
+				this));
 	}
 
-	private void setMonoImageSkinPartAdapter(Context context) {
+	private void setMonoImageSkinPartAdapter(Context context, SkinPartType skinPart) {
 		mSuperClockSkinPathList = SkinLister.getInstance().getSuperClockSkinPathList();
-		setListAdapter(new AdapterMultiImageSkinPart(context, mSuperClockSkinPathList, this));
+		setListAdapter(new AdapterMonoImageSkinPart(context, mSuperClockSkinPathList, skinPart,
+				this));
 	}
 
 	@Override

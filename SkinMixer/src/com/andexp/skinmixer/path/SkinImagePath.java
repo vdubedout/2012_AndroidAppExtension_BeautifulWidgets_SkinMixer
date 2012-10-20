@@ -17,4 +17,5 @@ public class SkinImagePath {
 		"number_9.png",
 	};
 	public static final String AM = "am.png";
+	public static final String PM = "am.png";
 }
