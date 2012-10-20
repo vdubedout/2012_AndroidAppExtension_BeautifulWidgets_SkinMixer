@@ -14,12 +14,8 @@ import com.andexp.skinmixer.fragment.OnFragmentSkinListClick;
 import com.andexp.skinmixer.fragment.SkinPartType;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFragmentSkinListClick {
+public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFragmentSkinListClick, OnPreviewCompleteListener {
 	FragmentPreviewDisplay mPreview;
-
-	FragmentSkinPartList mFragmentBackground;
-	FragmentSkinPartList mFragmentBackgroundNumbers;
-	FragmentSkinPartList mFragmentNumbers;
 
 	private ActivitySkinMixer mActivity;
 
@@ -78,10 +74,22 @@ public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFra
 	private void initializePreview() {
 		mPreview = (FragmentPreviewDisplay) getSupportFragmentManager().findFragmentById(
 				R.id.skinmixer_fragment_previewDisplay);
+		mPreview.setPreviewCompleteListener(this);
 	}
 
 	@Override
 	public void onFragmentSkinListClick(String path, SkinPartType skinPartType) {
 		mPreview.setImageType(path, skinPartType);
+	}
+
+	@Override
+	public void OnPreviewComplete() {
+		// TODO activate button next 
+	}
+
+	@Override
+	public void OnPreviewUncomplete() {
+		// TODO deactivate button next
+		
 	}
 }

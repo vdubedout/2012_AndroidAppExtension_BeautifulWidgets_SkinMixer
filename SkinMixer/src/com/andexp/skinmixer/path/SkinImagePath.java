@@ -1,6 +1,7 @@
 package com.andexp.skinmixer.path;
 
 public class SkinImagePath {
+	
 	public static final String DOTS = "dots.png";
 	public static final String BACKGROUND = "background.png";
 	public static final String FOREGROUND = "background_numbers.png";

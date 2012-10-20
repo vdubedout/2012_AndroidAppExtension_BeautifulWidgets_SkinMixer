@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.andexp.skinmixer.OnPreviewCompleteListener;
 import com.andexp.skinmixer.R;
 import com.andexp.skinmixer.drawablecreation.PreviewManager;
 import com.andexp.skinmixer.drawablecreation.PreviewManager.ImagePreviewProcessListener;
@@ -18,7 +19,7 @@ import com.andexp.skinmixer.utils.StripeHack;
 public class FragmentPreviewDisplay extends SherlockFragment {
 	PreviewManager mPreviewManager;
 
-	private View root;
+	private View mRootView;
 
 	private ImageView ivBackground;
 	private ImageView ivForeground;
@@ -29,9 +30,18 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 	private ImageView ivDots;
 	private ImageView ivAM;
 
+	private OnPreviewCompleteListener mPreviewCompleteListener;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		root = inflater.inflate(R.layout.fragment_skinpreview, null);
+		mRootView = inflater.inflate(R.layout.fragment_skinpreview, null);
+		mPreviewManager = new PreviewManager(mRootView.getContext(), new ImagePreview());
+		initializeViews(mRootView);
+		StripeHack.apply(mRootView);
+		return mRootView;
+	}
+
+	private void initializeViews(View root) {
 		ivBackground = (ImageView) root.findViewById(R.id.skinpreview_background);
 		ivForeground = (ImageView) root.findViewById(R.id.skinpreview_foreground);
 		ivNumberHoursTens = (ImageView) root.findViewById(R.id.skinpreview_hours_tens);
@@ -40,10 +50,10 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 		ivNumberMinutesUnits = (ImageView) root.findViewById(R.id.skinpreview_minutes_units);
 		ivDots = (ImageView) root.findViewById(R.id.skinpreview_dots);
 		ivAM = (ImageView) root.findViewById(R.id.skinpreview_am);
-		StripeHack.apply(root);
+	}
 
-		mPreviewManager = new PreviewManager(root.getContext(), new ImagePreview());
-		return root;
+	public void setPreviewCompleteListener(OnPreviewCompleteListener previewCompleteListener) {
+		this.mPreviewCompleteListener = previewCompleteListener;
 	}
 
 	@Override
@@ -57,6 +67,19 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 	}
 
 	public void setImageType(String path, SkinPartType skinPart) {
+		applyImageType(path, skinPart);
+		saveImagePart(path, skinPart);
+		
+		if(isPreviewComplete()){
+			mPreviewCompleteListener.OnPreviewComplete();
+		}
+	}
+
+	private void saveImagePart(String path, SkinPartType skinPart) {
+		
+	}
+
+	private void applyImageType(String path, SkinPartType skinPart) {
 		switch (skinPart) {
 		case BACKGROUND:
 		case FOREGROUND:
@@ -93,6 +116,10 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 		}
 	}
 
+	private boolean isPreviewComplete() {
+		return false;
+	}
+
 	class ImagePreview implements ImagePreviewProcessListener {
 		public ImagePreview() {
 		}
@@ -127,5 +154,6 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 	private void setForegroundBitmap(Bitmap bitmap) {
 		ivForeground.setImageBitmap(bitmap);
 	}
+
 
 }
