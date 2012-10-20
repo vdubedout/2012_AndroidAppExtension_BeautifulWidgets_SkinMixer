@@ -18,11 +18,11 @@ public class SkinLister extends SDCardSkinPath {
 	}
 
 	public ArrayList<String> getSuperClockSkinPathList() {
-//		if (mSuperClockSkins.size() == 0) {
-			String path = getSuperClockPath();
-			String[] skins = getSkinsIn(path);
-			mSuperClockSkins = populateSkinsPaths(skins, path, mSuperClockSkins);
-//		}
+		// if (mSuperClockSkins.size() == 0) {
+		String path = getSuperClockPath();
+		String[] skins = getSkinsIn(path);
+		mSuperClockSkins = populateSkinsPaths(skins, path, mSuperClockSkins);
+		// }
 		return mSuperClockSkins;
 	}
 
@@ -36,11 +36,11 @@ public class SkinLister extends SDCardSkinPath {
 
 	protected ArrayList<String> populateSkinsPaths(String[] skins, String path,
 			ArrayList<String> skinList) {
-			skinList = new ArrayList<String>();
+		skinList = new ArrayList<String>();
 
 		if (skins != null) {
-			for (String string : skins) {
-				skinList.add(path + string);
+			for (String skinFolderName : skins) {
+				skinList.add(path + skinFolderName + File.separator);
 			}
 		}
 
