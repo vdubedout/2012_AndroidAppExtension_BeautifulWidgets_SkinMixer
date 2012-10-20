@@ -24,7 +24,7 @@ public class FragmentPreviewDisplay extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		root = inflater.inflate(R.layout.view_skinpreview, null);
+		root = inflater.inflate(R.layout.fragment_skinpreview, null);
 		iv_background = (ImageView) root.findViewById(R.id.skinpreview_background);
 		iv_foreground = (ImageView) root.findViewById(R.id.skinpreview_foreground);
 		iv_numbers = new ImageView[4];
