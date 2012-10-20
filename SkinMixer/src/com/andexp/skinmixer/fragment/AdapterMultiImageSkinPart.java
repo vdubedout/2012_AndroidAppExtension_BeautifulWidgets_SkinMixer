@@ -165,7 +165,7 @@ public class AdapterMultiImageSkinPart extends BaseAdapter implements ListAdapte
 			if (mlastImageViewClicked != null) {
 				mlastImageViewClicked.setBackgroundColor(Color.parseColor("#00000000"));
 			}
-			v.setBackgroundColor(Color.parseColor("#FFFFCC00"));
+			v.setBackgroundColor(mContext.getResources().getColor(R.color.skinpart_selected));
 			mlastImageViewClicked = v;
 		}
 

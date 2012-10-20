@@ -139,7 +139,7 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 			if (mlastImageViewClicked != null) {
 				mlastImageViewClicked.setBackgroundColor(Color.parseColor("#00000000"));
 			}
-			v.setBackgroundColor(Color.parseColor("#FFFFCC00"));
+			v.setBackgroundColor(mContext.getResources().getColor(R.color.skinpart_selected));
 			mlastImageViewClicked = (ImageView) v;
 		}
 
