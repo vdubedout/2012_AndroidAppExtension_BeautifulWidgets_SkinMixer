@@ -11,113 +11,21 @@
         android:layout_height="150dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_alignParentTop="true"
+        tools:layout="@layout/fragment_skinpreview" />
+    
+    <com.viewpagerindicator.TabPageIndicator
+        android:id="@+id/skinmixer_viewpagerindicator"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
+        android:layout_width="match_parent"
         android:layout_below="@+id/skinmixer_fragment_previewDisplay"
-        android:orientation="vertical"
-        android:weightSum="1" >
-
-        <RelativeLayout
-            android:id="@+id/skinmixer_backgroundlabel_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_weight="0"
-            android:background="#FFA4D3EE"
-            android:gravity="center_vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="Background"
-                android:textColor="@android:color/black" />
-
-            <TextView
-                android:id="@+id/skinmixer_backgroundlabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="TotoBackground"
-                android:textColor="@android:color/black" />
-        </RelativeLayout>
-
-        <fragment
-            android:id="@+id/skinmixer_fragment_background"
-            android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            tools:layout="@layout/list_oneimage_skinpart" />
-
-        <RelativeLayout
-            android:id="@+id/skinmixer_backgroundnumberslabel_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_weight="0"
-            android:background="#FFA4D3EE"
-            android:gravity="center_vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="Background Numbers"
-                android:textColor="@android:color/black" />
-
-            <TextView
-                android:id="@+id/skinmixer_backgroundnumberslabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="TotoBackground"
-                android:textColor="@android:color/black" />
-        </RelativeLayout>
-
-        <fragment
-            android:id="@+id/skinmixer_fragment_backgroundnumbers"
-            android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            tools:layout="@layout/list_oneimage_skinpart" />
-
-        <RelativeLayout
-            android:id="@+id/skinmixer_numberslabel_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_weight="0"
-            android:background="#FFA4D3EE"
-            android:gravity="center_vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="Numbers"
-                android:textColor="@android:color/black" />
-
-            <TextView
-                android:id="@+id/skinmixer_numberslabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="TotoBackground"
-                android:textColor="@android:color/black" />
-        </RelativeLayout>
-
-        <fragment
-            android:id="@+id/skinmixer_fragment_numbers"
-            android:name="com.andexp.skinmixer.fragment.FragmentSkinPartList"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            tools:layout="@layout/list_oneimage_skinpart" />
-    </LinearLayout>
-
+        />
+    
+    <android.support.v4.view.ViewPager
+        android:id="@+id/skinmixer_viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/skinmixer_viewpagerindicator"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>

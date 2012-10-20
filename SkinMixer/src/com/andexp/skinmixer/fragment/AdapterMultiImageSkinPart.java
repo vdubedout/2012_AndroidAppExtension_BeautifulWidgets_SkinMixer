@@ -2,7 +2,6 @@ package com.andexp.skinmixer.fragment;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,9 +24,9 @@ public class AdapterMultiImageSkinPart extends BaseAdapter implements ListAdapte
 	private OnSkinPartClickListener mOnSkinPartClickListener;
 	private static View mlastImageViewClicked;
 
-	public AdapterMultiImageSkinPart(Activity activity, ArrayList<String> skinPathList,
+	public AdapterMultiImageSkinPart(Context context, ArrayList<String> skinPathList,
 			OnSkinPartClickListener listener) {
-		mContext = activity;
+		mContext = context;
 		mSkinPathList = skinPathList;
 		mLayoutInflater = LayoutInflater.from(mContext);
 		mOnSkinPartClickListener = listener;

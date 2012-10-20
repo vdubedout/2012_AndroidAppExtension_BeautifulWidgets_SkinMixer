@@ -1,97 +1,86 @@
 package com.andexp.skinmixer;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.andexp.skinmixer.fragment.FragmentPreviewDisplay;
 import com.andexp.skinmixer.fragment.FragmentSkinPartList;
 import com.andexp.skinmixer.fragment.OnFragmentSkinListClick;
 import com.andexp.skinmixer.fragment.SkinPartType;
+import com.viewpagerindicator.TabPageIndicator;
 
-public class ActivitySkinMixer extends Activity implements OnFragmentSkinListClick{
-	View mLabelBackgroundView;
-	View mLabelBackgroundNumbersView;
-	View mLabelNumbersView;
-	
+public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFragmentSkinListClick {
 	FragmentPreviewDisplay mPreview;
-	
+
 	FragmentSkinPartList mFragmentBackground;
 	FragmentSkinPartList mFragmentBackgroundNumbers;
 	FragmentSkinPartList mFragmentNumbers;
 
+	private ActivitySkinMixer mActivity;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mActivity = this;
 		setContentView(R.layout.activity_skinmixer);
-		initializeLabelViews();
+		initializeActionBar();
 		initializePreview();
-		initializeOnClicksOnLabels();
-		initializeFragments();
+		initializeViewPager();
+	}
 
-		displayFragmentWithLabelView(mLabelBackgroundView);
+	private void initializeActionBar() {
+		final ActionBar supportActionBar = getSupportActionBar();
+//		supportActionBar.setDisplayHomeAsUpEnabled(false);
+//		supportActionBar.setDisplayUseLogoEnabled(false);
+	}
+
+	private void initializeViewPager() {
+		SkinMixerAdapter adapter = new SkinMixerAdapter(this, getSupportFragmentManager());
+
+		ViewPager pager = (ViewPager) findViewById(R.id.skinmixer_viewpager);
+		pager.setAdapter(adapter);
+
+		TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.skinmixer_viewpagerindicator);
+		indicator.setViewPager(pager);
+	}
+
+	class SkinMixerAdapter extends FragmentPagerAdapter {
+		private Context mContext;
+		private String[] titleArray;
+
+		public SkinMixerAdapter(Context context, FragmentManager fragmentManager) {
+			super(fragmentManager);
+			mContext = context;
+			titleArray = mContext.getResources().getStringArray(R.array.skinpart_names);
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			SkinPartType type = SkinPartType.getSkinpartFromPartName(position);
+			return new FragmentSkinPartList(mContext, type, mActivity);
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return titleArray[position].toUpperCase();
+		}
+
+		@Override
+		public int getCount() {
+			return titleArray.length;
+		}
+
 	}
 
 	private void initializePreview() {
-		mPreview = (FragmentPreviewDisplay) getFragmentManager().findFragmentById(R.id.skinmixer_fragment_previewDisplay);
-	}
-
-	private void initializeFragments() {
-		mFragmentBackground = getFragmentListId(R.id.skinmixer_fragment_background);
-		mFragmentBackground.setSkinPartType(SkinPartType.BACKGROUND);
-		mFragmentBackground.setOnClickListener(this);
-		mFragmentBackgroundNumbers = getFragmentListId(R.id.skinmixer_fragment_backgroundnumbers);
-		mFragmentBackgroundNumbers.setSkinPartType(SkinPartType.FOREGROUND);
-		mFragmentBackgroundNumbers.setOnClickListener(this);
-		mFragmentNumbers = getFragmentListId(R.id.skinmixer_fragment_numbers);
-		mFragmentNumbers.setSkinPartType(SkinPartType.NUMBER_0);
-		mFragmentNumbers.setOnClickListener(this);
-	}
-
-	private FragmentSkinPartList getFragmentListId(int id) {
-		return (FragmentSkinPartList) getFragmentManager().findFragmentById(id);
-	}
-
-	private void initializeLabelViews() {
-		mLabelBackgroundView = findViewById(R.id.skinmixer_backgroundlabel_layout);
-		mLabelBackgroundNumbersView = findViewById(R.id.skinmixer_backgroundnumberslabel_layout);
-		mLabelNumbersView = findViewById(R.id.skinmixer_numberslabel_layout);
-	}
-
-	private void initializeOnClicksOnLabels() {
-		mLabelBackgroundView.setOnClickListener(new OnClickLabel());
-		mLabelBackgroundNumbersView.setOnClickListener(new OnClickLabel());
-		mLabelNumbersView.setOnClickListener(new OnClickLabel());
-	}
-
-	class OnClickLabel implements OnClickListener {
-		@Override
-		public void onClick(View v) {
-			displayFragmentWithLabelView(v);
-		}
-	}
-
-	private void displayFragmentWithLabelView(View v) {
-		FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-		if (v == mLabelBackgroundView) {
-			ft.show(mFragmentBackground);
-			ft.hide(mFragmentBackgroundNumbers);
-			ft.hide(mFragmentNumbers);
-			ft.commit();
-		} else if (v == mLabelBackgroundNumbersView) {
-			ft.show(mFragmentBackgroundNumbers);
-			ft.hide(mFragmentBackground);
-			ft.hide(mFragmentNumbers);
-			ft.commit();
-		} else {
-			ft.show(mFragmentNumbers);
-			ft.hide(mFragmentBackgroundNumbers);
-			ft.hide(mFragmentBackground);
-			ft.commit();
-		}
+		mPreview = (FragmentPreviewDisplay) getSupportFragmentManager().findFragmentById(
+				R.id.skinmixer_fragment_previewDisplay);
 	}
 
 	@Override

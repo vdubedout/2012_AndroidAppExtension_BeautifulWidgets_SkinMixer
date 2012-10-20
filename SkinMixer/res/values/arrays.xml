@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="skinpart_names">
+        <item>Background</item>
+        <item>Foreground</item>
+        <item>Numbers</item>
+        <item>Dots</item>
+        <item>AM / PM</item>
+    </string-array>
+
+</resources>

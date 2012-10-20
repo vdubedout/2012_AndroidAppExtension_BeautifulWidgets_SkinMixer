@@ -1,6 +1,5 @@
 package com.andexp.skinmixer.fragment;
 
-import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,13 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.andexp.skinmixer.R;
 import com.andexp.skinmixer.drawablecreation.PreviewManager;
 import com.andexp.skinmixer.drawablecreation.PreviewManager.ImagePreviewProcessListener;
 import com.andexp.skinmixer.path.SkinImagePath;
 import com.andexp.skinmixer.utils.StripeHack;
 
-public class FragmentPreviewDisplay extends Fragment {
+public class FragmentPreviewDisplay extends SherlockFragment {
 	PreviewManager mPreviewManager;
 
 	private View root;

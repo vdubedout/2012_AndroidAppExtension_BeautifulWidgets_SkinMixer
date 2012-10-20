@@ -2,19 +2,18 @@ package com.andexp.skinmixer.fragment;
 
 import java.util.ArrayList;
 
-import android.app.ListFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.andexp.skinmixer.R;
+import com.actionbarsherlock.app.SherlockListFragment;
 import com.andexp.skinmixer.drawablecreation.PreviewManager;
 import com.andexp.skinmixer.drawablecreation.PreviewManager.ImagePreviewProcessListener;
 import com.andexp.skinmixer.path.SkinLister;
 
-public class FragmentSkinPartList extends ListFragment implements OnSkinPartClickListener {
+public class FragmentSkinPartList extends SherlockListFragment implements OnSkinPartClickListener {
 	private TextView mLabelSkinName;
 	ImagePreviewProcessListener mImageCreationListener;
 	PreviewManager mPreviewManager;
@@ -22,6 +21,12 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 	private SkinPartType mSkinPartType;
 	private ArrayList<String> mSuperClockSkinPathList;
 	private OnFragmentSkinListClick mListClickListener;
+
+	public FragmentSkinPartList(Context context, SkinPartType type, OnFragmentSkinListClick listClick) {
+		this.mSkinPartType = type;
+		this.mListClickListener = listClick;
+		setLayoutForType(context, mSkinPartType);
+	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -36,60 +41,43 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 		getListView().setFocusable(false);
 	}
 
-	public void setSkinPartType(SkinPartType skinPart) {
-		mSkinPartType = skinPart;
-		setLayoutForType(mSkinPartType);
-		mLabelSkinName = getLabelView(skinPart);
-	}
-	
-	public void setOnClickListener(OnFragmentSkinListClick listClickListener) {
-		mListClickListener = listClickListener;
-	}
+	// private TextView getLabelView(SkinPartType skinPart) {
+	// LinearLayout parent = (LinearLayout) getView().getParent();
+	// if (skinPart == SkinPartType.BACKGROUND) {
+	// return (TextView) parent.findViewById(R.id.skinmixer_backgroundlabel);
+	// } else if (skinPart == SkinPartType.FOREGROUND) {
+	// return (TextView)
+	// parent.findViewById(R.id.skinmixer_backgroundnumberslabel);
+	// } else
+	// return (TextView) parent.findViewById(R.id.skinmixer_numberslabel);
+	// }
 
-	private TextView getLabelView(SkinPartType skinPart) {
-		LinearLayout parent = (LinearLayout) getView().getParent();
-		if (skinPart == SkinPartType.BACKGROUND) {
-			return (TextView) parent.findViewById(R.id.skinmixer_backgroundlabel);
-		} else if (skinPart == SkinPartType.FOREGROUND) {
-			return (TextView) parent.findViewById(R.id.skinmixer_backgroundnumberslabel);
-		} else
-			return (TextView) parent.findViewById(R.id.skinmixer_numberslabel);
-	}
-
-	private void setLayoutForType(SkinPartType skinPart) {
+	private void setLayoutForType(Context context, SkinPartType skinPart) {
 		switch (skinPart) {
 		case BACKGROUND:
 		case FOREGROUND:
-			setMultiImageSkinPartAdapter();
+			setMultiImageSkinPartAdapter(context);
 			break;
 		default:
-			setMonoImageSkinPartAdapter();
+			setMonoImageSkinPartAdapter(context);
 			break;
 		}
 	}
 
-	private void setMultiImageSkinPartAdapter() {
+	private void setMultiImageSkinPartAdapter(Context context) {
 		mSuperClockSkinPathList = SkinLister.getInstance().getSuperClockSkinPathList();
-		setListAdapter(new AdapterMonoImageSkinPart(getActivity(), mSuperClockSkinPathList,
+		setListAdapter(new AdapterMonoImageSkinPart(context, mSuperClockSkinPathList,
 				mSkinPartType, this));
 	}
 
-	private void setMonoImageSkinPartAdapter() {
+	private void setMonoImageSkinPartAdapter(Context context) {
 		mSuperClockSkinPathList = SkinLister.getInstance().getSuperClockSkinPathList();
-		setListAdapter(new AdapterMultiImageSkinPart(getActivity(), mSuperClockSkinPathList, this));
+		setListAdapter(new AdapterMultiImageSkinPart(context, mSuperClockSkinPathList, this));
 	}
 
 	@Override
 	public void OnSkinPartClick(int arrayPosition, View v) {
 		String path = mSuperClockSkinPathList.get(arrayPosition);
-		changeLabelName(path);
 		mListClickListener.onFragmentSkinListClick(path, mSkinPartType);
 	}
-
-	private void changeLabelName(String path) {
-		String[] splitResult = path.split("/");
-		String skinName = splitResult[splitResult.length - 1];
-		mLabelSkinName.setText(skinName);
-	}
-
 }
