@@ -1,52 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white" >
-
-    <ImageView
-        android:id="@+id/skinpreview_stripebackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true" />
+    android:layout_height="150dp"
+    android:background="@drawable/xml_cuberepeat" >
 
     <ImageView
         android:id="@+id/skinpreview_background"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_width="240dp"
+        android:layout_height="140dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:padding="10dp"
-        android:src="@drawable/default_background" />
-
-    <View
-        android:id="@+id/center"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerInParent="true" />
+        android:layout_margin="8dp"
+        android:scaleType="fitXY" />
 
     <ImageView
         android:id="@+id/skinpreview_foreground"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/center"
-        android:layout_alignTop="@+id/skinpreview_background"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-8dp"
-        android:layout_marginTop="7dp"
-        android:src="@drawable/default_foreground" />
+        android:layout_marginTop="5dp"
+        android:scaleType="fitXY" />
 
     <LinearLayout
         android:id="@+id/skinpreview_linear_numbers"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignTop="@+id/skinpreview_foreground"
         android:layout_alignBottom="@+id/skinpreview_foreground"
         android:layout_alignLeft="@+id/skinpreview_foreground"
         android:layout_alignRight="@+id/skinpreview_foreground"
-        android:layout_alignTop="@+id/skinpreview_foreground"
+        android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        android:padding="12dp" >
+        android:padding="10dp" >
 
         <ImageView
             android:id="@+id/skinpreview_hours_tens"
@@ -55,7 +41,7 @@
             android:layout_weight="45" />
 
         <ImageView
-            android:id="@+id/skinpreview_hours_unit"
+            android:id="@+id/skinpreview_hours_units"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="45" />
@@ -73,18 +59,18 @@
             android:layout_weight="45" />
 
         <ImageView
-            android:id="@+id/skinpreview_minutes_unit"
+            android:id="@+id/skinpreview_minutes_units"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="45" />
     </LinearLayout>
 
     <ImageView
-         android:layout_alignBottom="@+id/skinpreview_linear_numbers"
-         android:layout_alignLeft="@+id/skinpreview_linear_numbers"
-         android:layout_width="18dp"
-         android:layout_height="wrap_content"
-         android:layout_marginLeft="3dp"
-         android:layout_marginBottom="3dp" />
+        android:layout_width="18dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/skinpreview_linear_numbers"
+        android:layout_alignLeft="@+id/skinpreview_linear_numbers"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="3dp" />
 
 </RelativeLayout>
