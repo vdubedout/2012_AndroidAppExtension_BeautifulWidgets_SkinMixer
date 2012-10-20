@@ -27,6 +27,7 @@ public class FragmentPreviewDisplay extends Fragment {
 	private ImageView ivNumberMinutesTens;
 	private ImageView ivNumberMinutesUnits;
 	private ImageView ivDots;
+	private ImageView ivAM;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class FragmentPreviewDisplay extends Fragment {
 		ivNumberMinutesTens = (ImageView) root.findViewById(R.id.skinpreview_minutes_tens);
 		ivNumberMinutesUnits = (ImageView) root.findViewById(R.id.skinpreview_minutes_units);
 		ivDots = (ImageView) root.findViewById(R.id.skinpreview_dots);
+		ivAM = (ImageView) root.findViewById(R.id.skinpreview_am);
 		StripeHack.apply(root);
 
 		mPreviewManager = new PreviewManager(root.getContext(), new ImagePreview());
@@ -65,11 +67,27 @@ public class FragmentPreviewDisplay extends Fragment {
 			ivDots.setImageDrawable(Drawable.createFromPath(path + SkinImagePath.DOTS));
 			break;
 		case NUMBER_0:
-			ivNumberHoursTens.setImageDrawable(Drawable.createFromPath(path + SkinImagePath.NUMBER[1]));
-			ivNumberHoursUnits.setImageDrawable(Drawable.createFromPath(path + SkinImagePath.NUMBER[3]));
-			ivNumberMinutesTens.setImageDrawable(Drawable.createFromPath(path + SkinImagePath.NUMBER[3]));
-			ivNumberMinutesUnits.setImageDrawable(Drawable.createFromPath(path + SkinImagePath.NUMBER[7]));
+		case NUMBER_1:
+		case NUMBER_2:
+		case NUMBER_3:
+		case NUMBER_4:
+		case NUMBER_5:
+		case NUMBER_6:
+		case NUMBER_7:
+		case NUMBER_8:
+		case NUMBER_9:
+			ivNumberHoursTens.setImageDrawable(Drawable.createFromPath(path
+					+ SkinImagePath.NUMBER[1]));
+			ivNumberHoursUnits.setImageDrawable(Drawable.createFromPath(path
+					+ SkinImagePath.NUMBER[3]));
+			ivNumberMinutesTens.setImageDrawable(Drawable.createFromPath(path
+					+ SkinImagePath.NUMBER[3]));
+			ivNumberMinutesUnits.setImageDrawable(Drawable.createFromPath(path
+					+ SkinImagePath.NUMBER[7]));
 			break;
+		case AM:
+		case PM:
+			ivAM.setImageDrawable(Drawable.createFromPath(path + SkinImagePath.AM));
 		default:
 			break;
 		}
@@ -88,7 +106,6 @@ public class FragmentPreviewDisplay extends Fragment {
 		public void onSkinPartPreviewFinished(Bitmap previewBitmap, SkinPartType skinPart) {
 			setImageBitmap(previewBitmap, skinPart);
 		}
-
 	}
 
 	private void setImageBitmap(Bitmap bitmap, SkinPartType skinPart) {

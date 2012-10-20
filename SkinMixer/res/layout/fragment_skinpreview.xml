@@ -66,6 +66,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/skinpreview_am"
         android:layout_width="18dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/skinpreview_linear_numbers"
