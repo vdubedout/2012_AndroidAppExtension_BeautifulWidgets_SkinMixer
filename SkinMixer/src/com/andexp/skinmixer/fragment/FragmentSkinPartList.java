@@ -21,6 +21,7 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 
 	private SkinPartType mSkinPartType;
 	private ArrayList<String> mSuperClockSkinPathList;
+	private OnFragmentSkinListClick mListClickListener;
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -40,10 +41,9 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 		setLayoutForType(mSkinPartType);
 		mLabelSkinName = getLabelView(skinPart);
 	}
-
-	public void setOnImageProcessListener(ImagePreviewProcessListener listener) {
-		mImageCreationListener = listener;
-		mPreviewManager = new PreviewManager(getActivity(), mImageCreationListener);
+	
+	public void setOnClickListener(OnFragmentSkinListClick listClickListener) {
+		mListClickListener = listClickListener;
 	}
 
 	private TextView getLabelView(SkinPartType skinPart) {
@@ -83,7 +83,7 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 	public void OnSkinPartClick(int arrayPosition, View v) {
 		String path = mSuperClockSkinPathList.get(arrayPosition);
 		changeLabelName(path);
-		if(mPreviewManager != null) mPreviewManager.launchSkinPartPreviewCreation(path, mSkinPartType);
+		mListClickListener.onFragmentSkinListClick(path, mSkinPartType);
 	}
 
 	private void changeLabelName(String path) {
@@ -91,4 +91,5 @@ public class FragmentSkinPartList extends ListFragment implements OnSkinPartClic
 		String skinName = splitResult[splitResult.length - 1];
 		mLabelSkinName.setText(skinName);
 	}
+
 }
