@@ -17,7 +17,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:src="@drawable/default_background" />
 
     <View
         android:id="@+id/center"
@@ -32,7 +33,58 @@
         android:layout_alignBottom="@+id/center"
         android:layout_alignTop="@+id/skinpreview_background"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-8dp"
         android:layout_marginTop="7dp"
-        android:layout_marginBottom="-8dp" />
+        android:src="@drawable/default_foreground" />
+
+    <LinearLayout
+        android:id="@+id/skinpreview_linear_numbers"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignBottom="@+id/skinpreview_foreground"
+        android:layout_alignLeft="@+id/skinpreview_foreground"
+        android:layout_alignRight="@+id/skinpreview_foreground"
+        android:layout_alignTop="@+id/skinpreview_foreground"
+        android:orientation="horizontal"
+        android:padding="12dp" >
+
+        <ImageView
+            android:id="@+id/skinpreview_hours_tens"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="45" />
+
+        <ImageView
+            android:id="@+id/skinpreview_hours_unit"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="45" />
+
+        <ImageView
+            android:id="@+id/skinpreview_dots"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="20" />
+
+        <ImageView
+            android:id="@+id/skinpreview_minutes_tens"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="45" />
+
+        <ImageView
+            android:id="@+id/skinpreview_minutes_unit"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="45" />
+    </LinearLayout>
+
+    <ImageView
+         android:layout_alignBottom="@+id/skinpreview_linear_numbers"
+         android:layout_alignLeft="@+id/skinpreview_linear_numbers"
+         android:layout_width="18dp"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="3dp"
+         android:layout_marginBottom="3dp" />
 
 </RelativeLayout>
