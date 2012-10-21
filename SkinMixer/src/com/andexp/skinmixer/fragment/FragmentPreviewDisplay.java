@@ -174,4 +174,8 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 		ivForeground.setImageBitmap(bitmap);
 	}
 
+	public String[] getGroupPaths() {
+		return mGroupPartPaths;
+	}
+
 }

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:id="@+id/skincreation_skinname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/skincreation_imageView1"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <ImageView
+        android:id="@+id/skincreation_imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/skincreation_editText1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_action_send_clicked" />
+
+    <TextView
+        android:id="@+id/skincreation_textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/skincreation_skinname"
+        android:text="@string/created_thanks" />
+
+    <TextView
+        android:id="@+id/skincreation_tv_designer1_donate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/skincreation_textView1"
+        android:layout_marginRight="10dp"
+        android:text="@string/donate" />
+
+    <TextView
+        android:id="@+id/skincreation_tv_designer1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/skincreation_tv_designer1_donate"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@+id/skincreation_tv_designer1_donate"
+        android:singleLine="true"
+        android:text="Toto" />
+
+    <TextView
+        android:id="@+id/skincreation_tv_designer2_donate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/skincreation_tv_designer1_donate"
+        android:layout_alignRight="@+id/skincreation_tv_designer1_donate"
+        android:layout_below="@+id/skincreation_tv_designer1_donate"
+        android:text="@string/donate" />
+
+    <TextView
+        android:id="@+id/skincreation_tv_designer2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/skincreation_tv_designer2_donate"
+        android:layout_alignLeft="@+id/skincreation_tv_designer1"
+        android:layout_toLeftOf="@+id/skincreation_tv_designer1_donate"
+        android:singleLine="true"
+        android:text="Tata" />
+
+    <TextView
+        android:id="@+id/skincreation_tv_designer3_donate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/skincreation_tv_designer1_donate"
+        android:layout_alignRight="@+id/skincreation_tv_designer1_donate"
+        android:layout_below="@+id/skincreation_tv_designer2_donate"
+        android:text="@string/donate" />
+
+    <TextView
+        android:id="@+id/skincreation_tv_designer3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/skincreation_tv_designer3_donate"
+        android:layout_alignLeft="@+id/skincreation_tv_designer1"
+        android:layout_toLeftOf="@+id/skincreation_tv_designer1_donate"
+        android:singleLine="true"
+        android:text="Titi" />
+
+</RelativeLayout>

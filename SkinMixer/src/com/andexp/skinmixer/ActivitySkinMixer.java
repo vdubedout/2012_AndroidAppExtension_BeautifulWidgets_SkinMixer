@@ -1,6 +1,7 @@
 package com.andexp.skinmixer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -51,7 +52,10 @@ public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFra
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (mPreview.isComplete()) {
-			// TODO next
+			Intent intent = new Intent(ActivitySkinMixer.this, ActivitySkinCreation.class);
+			String[] mGroupPaths = mPreview.getGroupPaths();
+			intent.putExtra(SkinGroupType.class.toString(), mGroupPaths);
+			startActivity(intent);
 		} else {
 			Toast.makeText(mActivity, mSendMenu.getTitle(), Toast.LENGTH_LONG).show();
 		}

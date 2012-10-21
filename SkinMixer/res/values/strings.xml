@@ -3,5 +3,8 @@
 
     <string name="hello">Hello World, MainActivity!</string>
     <string name="app_name">SkinMixer</string>
+    <string name="created_thanks">You created this skin thanks to following designers</string>
+    <string name="donate">Donate</string>
+    <string name="base_skinname">SkinMixer_n</string>
 
 </resources>
