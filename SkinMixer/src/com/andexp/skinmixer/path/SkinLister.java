@@ -51,7 +51,7 @@ public class SkinLister extends SDCardSkinPath {
 	public static String getNameFromPath(String path){
 		if(path == null) return null;
 		String[] split = path.split(File.separator);
-		String name = split[split.length];
+		String name = split[split.length -1];
 		if(name.toLowerCase().contains(".png") 
 				|| name.toLowerCase().contains(".jpg")
 				|| name.toLowerCase().contains(".txt")){

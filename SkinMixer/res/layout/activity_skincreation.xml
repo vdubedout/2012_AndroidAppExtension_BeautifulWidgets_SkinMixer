@@ -34,10 +34,12 @@
         android:text="@string/sm_created_thanks" />
     
     <fragment
-		android:name="@+id/skincreation_designerList"
+        android:id="@+id/skincreation_designerList"
 		class="com.andexp.skinmixer.FragmentListDesigners"     
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentRight="true"
 		android:layout_below="@+id/skincreation_textView1"
         />
     

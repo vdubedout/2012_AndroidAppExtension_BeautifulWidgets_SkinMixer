@@ -10,7 +10,10 @@ import com.andexp.skinmixer.skindata.SkinData;
 
 public class FragmentListDesigners extends SherlockListFragment {
 	private AdapterDesignerList adapterDesignerList;
-
+	
+	public FragmentListDesigners() {
+	}
+	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);

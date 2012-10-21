@@ -5,8 +5,8 @@
         <item>Background</item>
         <item>Foreground</item>
         <item>Numbers</item>
-        <item>Dots</item>
         <item>AM / PM</item>
+        <item>Dots</item>
     </string-array>
 
 </resources>

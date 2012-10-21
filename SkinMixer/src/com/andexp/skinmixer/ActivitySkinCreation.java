@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.widget.EditText;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -16,21 +18,30 @@ import com.andexp.skinmixer.skindata.SkinDataReader;
 public class ActivitySkinCreation extends SherlockFragmentActivity implements SkinReaderListener{
 	
 	private String[] mSkinGroupPaths;
-	private SkinData[] dataFromGroups;
+	private SkinData[] mSkinDataFromGroups;
 
 	EditText et_skinName;
+	private FragmentListDesigners mFragmentDesignersList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_skincreation);
+		bindFragment();
 		
 		mSkinGroupPaths = getIntent().getExtras().getStringArray(SkinGroupType.class.toString());
 		et_skinName = (EditText) findViewById(R.id.skincreation_skinname);
-		new Thread(new SkinNameSearcherRunner(this, et_skinName)).run();
 		
+		new Thread(new SkinNameSearcherRunner(this, et_skinName)).run();
+		new Thread(new SkinDataLoading(mSkinGroupPaths, this)).run();
 	}
 
+	private void bindFragment() {
+		FragmentManager fragManager = getSupportFragmentManager();
+		Fragment fragment = fragManager.findFragmentById(R.id.skincreation_designerList);
+		mFragmentDesignersList = (FragmentListDesigners) fragment;
+	}
+	
 	class SkinNameSearcherRunner implements Runnable {
 		private final Context mContext;
 		private final EditText mEditText;
@@ -73,20 +84,38 @@ public class ActivitySkinCreation extends SherlockFragmentActivity implements Sk
 		
 		@Override
 		public void run() {
-			SkinData[] data = new SkinData[5];
-			for (int i = 0; i < data.length; i++) {
-				data[i] = new SkinDataReader(mGroupPaths[i]).getData();
+			ArrayList<String> mDifferentsPaths = getUniqueGroupPaths(mGroupPaths);
+			SkinData[] data = new SkinData[mDifferentsPaths.size()];
+			for (int i = 0; i < mDifferentsPaths.size(); i++) {
+				data[i] = new SkinDataReader(mDifferentsPaths.get(i)).getData();
 			}
-			mListener.skinDataLoaded(data);
+			this.mListener.skinDataLoaded(data);
+		}
+
+		private ArrayList<String> getUniqueGroupPaths(String[] paths) {
+			ArrayList<String> pathList = new ArrayList<String>();
+			for (String path : paths) {
+				boolean isInList = false;
+				for (int i = 0; i < pathList.size(); i++) {
+					if(pathList.get(i).contentEquals(path)){
+						isInList = true;
+					}
+				}
+				if(!isInList)
+					pathList.add(path);
+				
+			}
+			
+			return pathList;
 		}
 		
 	}
 
 	@Override
 	public void skinDataLoaded(SkinData[] data) {
-		dataFromGroups = data;
-		FragmentListDesigners designersList = (FragmentListDesigners) getSupportFragmentManager().findFragmentById(R.id.skincreation_designerList);
-		designersList.setListAdapter(this, data);
+		mSkinDataFromGroups = data;
+		if(mFragmentDesignersList!=null)
+			mFragmentDesignersList.setListAdapter(this, data);
 	}
 
 }
