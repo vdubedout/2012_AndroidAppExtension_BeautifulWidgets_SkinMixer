@@ -8,6 +8,7 @@ public class SkinLister extends SDCardSkinPath {
 	ArrayList<String> mSuperClockSkins;
 
 	private SkinLister() {
+		super();
 		mSuperClockSkins = new ArrayList<String>();
 	}
 

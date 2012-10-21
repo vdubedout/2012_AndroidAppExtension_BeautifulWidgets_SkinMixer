@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<string name="sm_skintext">skinname=%1$s\nauthor=%2$s\n\ngeneratedfrom=%3$s\nbackgroundid=%4$s\nbackgroundnumbersid=%5$s\nnumbersid=%6$s\nnumbersskintype=%7$s\n</string>
     <string name="sm_hello">Hello World, MainActivity!</string>
     <string name="sm_app_name">SkinMixer</string>
     <string name="sm_created_thanks">You created this skin thanks to following designers</string>

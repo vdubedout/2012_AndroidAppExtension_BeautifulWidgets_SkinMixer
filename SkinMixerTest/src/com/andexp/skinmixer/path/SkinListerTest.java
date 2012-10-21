@@ -1,11 +1,14 @@
 package com.andexp.skinmixer.path;
 
+import java.io.File;
+
 import android.content.Context;
+import android.os.Environment;
 import android.test.InstrumentationTestCase;
 
 
 public class SkinListerTest extends InstrumentationTestCase{
-	private TestingAssets assets;
+	private AssetsLoader assets;
 	private Context mContext;
 	private SkinLister lister;
 	
@@ -14,24 +17,12 @@ public class SkinListerTest extends InstrumentationTestCase{
 		super.setUp();
 		mContext = getInstrumentation().getContext();
 		
-		assets = new TestingAssets(mContext);
+		assets = new AssetsLoader(mContext, "test");
 		assets.extract();
 		
 		lister = SkinLister.getInstance();
 	}
 
-	public void testSkinListerNotNull() {
-		assertNotNull(SkinLister.getInstance());
-	}
-	
-	public void testSkinListerSingleton() {
-		assertSame(lister, SkinLister.getInstance());
-	}
-	
-	public void testSuperClockListNotNull(){
-		assertNotNull(lister.getSuperClockSkinPathList());
-	}
-	
 	public void testSuperClockListNotEmpty(){
 		assertTrue(lister.getSuperClockSkinPathList().size() >= 1);
 	}

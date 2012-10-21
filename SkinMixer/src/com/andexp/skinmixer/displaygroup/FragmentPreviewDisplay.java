@@ -36,6 +36,9 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 	private OnPreviewCompleteListener mPreviewCompleteListener;
 
 	private int mMissingGroupNumber;
+	
+	public FragmentPreviewDisplay() {
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -3,67 +3,61 @@ package com.andexp.skinmixer.path;
 import java.io.File;
 import java.io.IOException;
 
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.test.InstrumentationTestCase;
-
+import com.andexp.skinmixer.LocalAssetsTest;
+import com.andexp.skinmixer.path.SDCardSkinPath;
+import com.andexp.skinmixer.path.SkinLister;
 import com.andexp.skinmixer.zipextractor.ZipExtractor;
 
-public class AssetsLoader extends InstrumentationTestCase {
-	public static String[] SKIN_DIRECTORY_ZIP = new String[] { "data_test.zip" };
+import android.content.Context;
+import android.content.res.AssetManager;
+
+public class AssetsLoader {
+	public static String[] SKIN_DIRECTORY_ZIP = new String[]{"scskins.zip","skins.zip"};
+	public static String[] SUPER_SKINS = new String[]{"bordering-ice-red", "golden", "icsphoenix"};
+	public static String[] CLASSIC_SKINS = new String[]{"kawaplus","sunburn"};
 	private ZipExtractor mZipExtractor;
 	private Context mContext;
 	private String mPath;
-	private SkinLister mSkinLister;
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		mContext = getInstrumentation().getContext();
+	private SkinLister lister;
+	
+	public AssetsLoader(Context context, String pathModifier) {
+		mContext = context;
 		
-		mSkinLister = SkinLister.getInstance();
-		mPath = mSkinLister.getBasePath();
+		lister = SkinLister.getInstance();
+		lister.addToBasePath(pathModifier);
+		mPath = lister.getBeautifulWidgetsPath();
 		mZipExtractor = new ZipExtractor(mPath);
-		delete();
-		extract();
 	}
-
-	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
-	}
-
+	
 	public void extract() {
-		for (String mZip : SKIN_DIRECTORY_ZIP) {
-			try {
-				mZipExtractor.extractZipFile(mContext.getAssets().open(mZip, AssetManager.ACCESS_STREAMING));
-			} catch (IOException e) {
-				System.out.print("Error extracting zip files");
-			}
-		}
-	}
-	
-	public void testAssetsExtracted(){
-		assertTrue(mSkinLister.getSuperClockSkinPathList().size() > 1);
-	}
-	
-
-	public void delete() {
-		deleteDir(new File(mPath));
-	}
-
-	protected static boolean deleteDir(File dir) {
-		if (dir.isDirectory()) {
-			String[] children = dir.list();
-			for (int i = 0; i < children.length; i++) {
-				boolean success = deleteDir(new File(dir, children[i]));
-				if (!success) {
-					return false;
+		for (String mZip : LocalAssetsTest.SKIN_DIRECTORY_ZIP) {
+				try {
+					mZipExtractor.extractZipFile(mContext.getAssets().open(mZip, AssetManager.ACCESS_STREAMING));
+				} catch (IOException e) {
+					System.out.print("Error extracting zip files");
 				}
-			}
 		}
-
-		return dir.delete();
 	}
+	
+	
+	public void delete(){
+		deleteDir(new File(mPath));
+		lister.resetBasePath();
+	}
+	
+	protected static boolean deleteDir(File dir) {
+	    if (dir.isDirectory()) {
+	        String[] children = dir.list();
+	        for (int i=0; i<children.length; i++) {
+	            boolean success = deleteDir(new File(dir, children[i]));
+	            if (!success) {
+	                return false;
+	            }
+	        }
+	    }
 
+	    return dir.delete();
+	}
+	
+	
 }

@@ -11,7 +11,7 @@ import com.andexp.skinmixer.zipextractor.ZipExtractor;
 
 public class ZipExtractorTest extends InstrumentationTestCase {
 	final String baseTestDirectory = "tests/";
-	TestingAssets assets;
+	AssetsLoader assets;
 	
 	ZipExtractor mZipExtractor;
 	Context mContext;
@@ -22,10 +22,10 @@ public class ZipExtractorTest extends InstrumentationTestCase {
 		super.setUp();
 		mContext = getInstrumentation().getContext();
 
-		assets = new TestingAssets(mContext);
+		assets = new AssetsLoader(mContext, "test");
 		assets.extract();
 		
-		testPath = SkinLister.getInstance().getBasePath();
+		testPath = SkinLister.getInstance().getBeautifulWidgetsPath();
 	}
 	
 	public void testSDCardMounted(){

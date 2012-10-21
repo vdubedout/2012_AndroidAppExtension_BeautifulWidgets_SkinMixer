@@ -8,14 +8,14 @@ import android.graphics.Bitmap;
 import android.test.InstrumentationTestCase;
 
 import com.andexp.skinmixer.path.SkinLister;
-import com.andexp.skinmixer.path.TestingAssets;
+import com.andexp.skinmixer.path.AssetsLoader;
 import com.andexp.skinmixer.skin.SkinGroupType;
 
 public class SkinPartPreviewTest extends InstrumentationTestCase {
 	final String BACKGROUND_IMAGE = "golden/background.png";
 	final String FOREGROUND_IMAGE = "golden/background_numbers.png";
 	
-	TestingAssets mAssets;
+	AssetsLoader mAssets;
 	private Context mContext;
 	private NinePatchCutter mNinePatchCutter;
 	private BitmapComposer mBitmapComposer;
@@ -28,7 +28,7 @@ public class SkinPartPreviewTest extends InstrumentationTestCase {
 		super.setUp();
 		mContext = getInstrumentation().getContext();
 		
-		mAssets = new TestingAssets(mContext);
+		mAssets = new AssetsLoader(mContext, "test");
 		mAssets.extract();
 		
 		mNinePatchCutter = new NinePatchCutter();

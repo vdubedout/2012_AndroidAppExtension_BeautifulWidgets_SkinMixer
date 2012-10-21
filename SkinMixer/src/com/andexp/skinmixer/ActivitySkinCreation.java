@@ -7,12 +7,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.EditText;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.andexp.skinmixer.path.SkinLister;
 import com.andexp.skinmixer.skin.SkinGroupType;
+import com.andexp.skinmixer.skindata.SkinData;
+import com.andexp.skinmixer.skindata.SkinDataReader;
 
-public class ActivitySkinCreation extends SherlockActivity {
+public class ActivitySkinCreation extends SherlockFragmentActivity implements SkinReaderListener{
+	
 	private String[] mSkinGroupPaths;
+	private SkinData[] dataFromGroups;
 
 	EditText et_skinName;
 
@@ -57,5 +61,32 @@ public class ActivitySkinCreation extends SherlockActivity {
 		return isInList;
 	}
 	
+	
+	class SkinDataLoading implements Runnable{
+		private final SkinReaderListener mListener;
+		private final String[] mGroupPaths;
+
+		public SkinDataLoading(String[] paths, SkinReaderListener listener) {
+			this.mGroupPaths = paths;
+			this.mListener = listener;
+		}
+		
+		@Override
+		public void run() {
+			SkinData[] data = new SkinData[5];
+			for (int i = 0; i < data.length; i++) {
+				data[i] = new SkinDataReader(mGroupPaths[i]).getData();
+			}
+			mListener.skinDataLoaded(data);
+		}
+		
+	}
+
+	@Override
+	public void skinDataLoaded(SkinData[] data) {
+		dataFromGroups = data;
+		FragmentListDesigners designersList = (FragmentListDesigners) getSupportFragmentManager().findFragmentById(R.id.skincreation_designerList);
+		designersList.setListAdapter(this, data);
+	}
 
 }

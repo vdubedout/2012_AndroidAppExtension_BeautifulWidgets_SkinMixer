@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/skinmixer_fragment_previewDisplay"
-        android:name="com.andexp.skinmixer.fragment.FragmentPreviewDisplay"
+        android:name="com.andexp.skinmixer.displaygroup.FragmentPreviewDisplay"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentLeft="true"
