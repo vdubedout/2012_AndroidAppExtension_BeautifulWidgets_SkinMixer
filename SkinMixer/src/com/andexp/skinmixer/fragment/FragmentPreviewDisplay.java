@@ -70,7 +70,7 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 		applyImageType(path, skinPart);
 		saveImagePart(path, skinPart);
 		
-		if(isPreviewComplete()){
+		if(isComplete()){
 			mPreviewCompleteListener.OnPreviewComplete();
 		}
 	}
@@ -116,7 +116,7 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 		}
 	}
 
-	private boolean isPreviewComplete() {
+	public boolean isComplete() {
 		return false;
 	}
 
