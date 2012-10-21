@@ -1,4 +1,4 @@
-package com.andexp.skinmixer.fragment;
+package com.andexp.skinmixer.displaygroup;
 
 import com.andexp.skinmixer.skin.SkinGroupType;
 

@@ -12,9 +12,9 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.andexp.skinmixer.fragment.FragmentPreviewDisplay;
-import com.andexp.skinmixer.fragment.FragmentSkinPartList;
-import com.andexp.skinmixer.fragment.OnFragmentSkinListClick;
+import com.andexp.skinmixer.displaygroup.FragmentPreviewDisplay;
+import com.andexp.skinmixer.displaygroup.FragmentSkinPartList;
+import com.andexp.skinmixer.displaygroup.OnFragmentSkinListClick;
 import com.andexp.skinmixer.skin.SkinGroupType;
 import com.viewpagerindicator.TabPageIndicator;
 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, MainActivity!</string>
-    <string name="app_name">SkinMixer</string>
-    <string name="created_thanks">You created this skin thanks to following designers</string>
-    <string name="donate">Donate</string>
-    <string name="base_skinname">SkinMixer_n</string>
+    <string name="sm_hello">Hello World, MainActivity!</string>
+    <string name="sm_app_name">SkinMixer</string>
+    <string name="sm_created_thanks">You created this skin thanks to following designers</string>
+    <string name="sm_donate">Donate</string>
+    <string name="sm_base_skinname">SkinMixer_n</string>
+    <string name="sm_loadinglist">Loading</string>
 
 </resources>

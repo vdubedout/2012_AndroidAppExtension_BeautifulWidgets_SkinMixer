@@ -1,6 +1,6 @@
 package com.andexp.skinmixer.skin;
 
-import com.andexp.skinmixer.fragment.SkinPartType;
+import com.andexp.skinmixer.displaygroup.SkinPartType;
 
 public enum SkinGroupType {
 	//formatter:off

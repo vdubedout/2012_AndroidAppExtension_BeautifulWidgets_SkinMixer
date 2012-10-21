@@ -1,6 +1,6 @@
 package com.andexp.skinmixer.enums;
 
-import com.andexp.skinmixer.fragment.SkinPartType;
+import com.andexp.skinmixer.displaygroup.SkinPartType;
 
 import android.test.InstrumentationTestCase;
 
