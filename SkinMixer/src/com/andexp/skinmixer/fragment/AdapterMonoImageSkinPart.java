@@ -3,6 +3,7 @@ package com.andexp.skinmixer.fragment;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
@@ -14,21 +15,21 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 
 import com.andexp.skinmixer.R;
-import com.andexp.skinmixer.path.SkinImagePath;
+import com.andexp.skinmixer.skin.SkinGroupType;
 
 public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter {
-	private ArrayList<String> mSkinPathList;
+	protected ArrayList<String> mSkinPathList;
 	private Context mContext;
-	private SkinPartType mSkinPartType;
+	private SkinGroupType mSkinGroupType;
 	private LayoutInflater mLayoutInflater;
 	private OnSkinPartClickListener mOnSkinPartClickListener;
 	private static ImageView mlastImageViewClicked;
 
 	public AdapterMonoImageSkinPart(Context context, ArrayList<String> skinPathList,
-			SkinPartType skinPart, OnSkinPartClickListener listener) {
+			SkinGroupType groupType, OnSkinPartClickListener listener) {
 		mContext = context;
 		mSkinPathList = skinPathList;
-		mSkinPartType = skinPart;
+		mSkinGroupType = groupType;
 		mLayoutInflater = LayoutInflater.from(context);
 		mOnSkinPartClickListener = listener;
 	}
@@ -53,7 +54,7 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 	public View getView(int position, View convertView, ViewGroup parent) {
 		convertView = loadConvertView(convertView);
 		ViewHolder holder = (ViewHolder) convertView.getTag();
-		loadImages(position, holder);
+		loadImageViews(position, holder);
 		addOnClickListeners(position, holder);
 
 		return convertView;
@@ -72,46 +73,39 @@ public class AdapterMonoImageSkinPart extends BaseAdapter implements ListAdapter
 		return convertView;
 	}
 
-	private void loadImages(int position, ViewHolder holder) {
-		loadLeftImage(position, holder);
-		loadImageRight(position, holder);
+	private void loadImageViews(int position, ViewHolder holder) {
+		int listPositionLeftPanel = position * 2;
+		int listPositionRightPanel = listPositionLeftPanel + 1;
+		
+		loadPanel(listPositionLeftPanel, holder.imageViewLeft);
+			loadPanel(listPositionRightPanel, holder.imageViewRight);
+		
 		removeAnyBackgroundColors(holder);
+	}
+
+	private void loadPanel(int listPosition, ImageView imageView) {
+		if(mSkinPathList.size()> listPosition){
+			imageView.setVisibility(View.VISIBLE);
+			imageView.setImageBitmap(getBitmap(listPosition));
+			
+		} else {
+			imageView.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	private Bitmap getBitmap(int listPosition) {
+		String path = getPathFromPosition(listPosition);
+		return new BitmapDrawable(mContext.getResources(), path).getBitmap();
+	}
+
+	private String getPathFromPosition(int listPosition) {
+		String basePath = mSkinPathList.get(listPosition);
+		return basePath + mSkinGroupType.getContainedSkinPartType()[0].getFileName();
 	}
 
 	private void removeAnyBackgroundColors(ViewHolder holder) {
 		holder.imageViewLeft.setBackgroundColor(Color.parseColor("#00000000"));
 		holder.imageViewRight.setBackgroundColor(Color.parseColor("#00000000"));
-	}
-
-	private void loadImageRight(int position, ViewHolder holder) {
-		if (mSkinPathList.size() > position * 2 + 1) {
-			holder.imageViewRight.setVisibility(View.VISIBLE);
-			String rightImagePath = mSkinPathList.get(position * 2 + 1) + "/";
-			rightImagePath += getImagePathName(mSkinPartType);
-			holder.imageViewRight.setImageBitmap(new BitmapDrawable(mContext.getResources(),
-					rightImagePath).getBitmap());
-		} else {
-			holder.imageViewRight.setVisibility(View.INVISIBLE);
-		}
-	}
-
-	private void loadLeftImage(int position, ViewHolder holder) {
-		String leftImagePath = mSkinPathList.get(position * 2) + "/";
-		leftImagePath += getImagePathName(mSkinPartType);
-		holder.imageViewLeft.setImageBitmap(new BitmapDrawable(mContext.getResources(),
-				leftImagePath).getBitmap());
-	}
-
-	private String getImagePathName(SkinPartType skinPartType) {
-		switch (skinPartType) {
-		case BACKGROUND:
-			return SkinImagePath.BACKGROUND;
-		case FOREGROUND:
-			return SkinImagePath.FOREGROUND;
-		case DOTS:
-		default:
-			return SkinImagePath.DOTS;
-		}
 	}
 
 	private void addOnClickListeners(int position, ViewHolder holder) {

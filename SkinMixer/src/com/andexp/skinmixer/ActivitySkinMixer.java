@@ -13,7 +13,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.andexp.skinmixer.fragment.FragmentPreviewDisplay;
 import com.andexp.skinmixer.fragment.FragmentSkinPartList;
 import com.andexp.skinmixer.fragment.OnFragmentSkinListClick;
-import com.andexp.skinmixer.fragment.SkinPartType;
+import com.andexp.skinmixer.skin.SkinGroupType;
 import com.viewpagerindicator.TabPageIndicator;
 
 public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFragmentSkinListClick, OnPreviewCompleteListener {
@@ -89,7 +89,7 @@ public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFra
 
 		@Override
 		public Fragment getItem(int position) {
-			SkinPartType type = SkinPartType.getSkinpartFromPartName(position);
+			SkinGroupType type = SkinGroupType.getSkinGroupType(position);
 			return new FragmentSkinPartList(mContext, type, mActivity);
 		}
 
@@ -106,8 +106,8 @@ public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFra
 	}
 
 	@Override
-	public void onFragmentSkinListClick(String path, SkinPartType skinPartType) {
-		mPreview.setImageType(path, skinPartType);
+	public void onFragmentSkinListClick(String path, SkinGroupType skinGroupType) {
+		mPreview.setImageType(path, skinGroupType);
 	}
 
 	@Override

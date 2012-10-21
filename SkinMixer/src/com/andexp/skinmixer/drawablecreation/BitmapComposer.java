@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-import com.andexp.skinmixer.fragment.SkinPartType;
+import com.andexp.skinmixer.skin.SkinGroupType;
 
 public class BitmapComposer {
 	public static final int BACKGROUND_WIDTH = 386;
@@ -20,10 +20,10 @@ public class BitmapComposer {
 		mPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
 	}
 
-	public Bitmap getAssembledBitmap(Bitmap[][] bitmapArray, SkinPartType skinType) {
-		if (skinType == SkinPartType.BACKGROUND) {
+	public Bitmap getAssembledBitmap(Bitmap[][] bitmapArray, SkinGroupType groupType) {
+		if (groupType == SkinGroupType.BACKGROUND) {
 			return getAssembledBackground(bitmapArray);
-		} else if (skinType == SkinPartType.FOREGROUND) {
+		} else if (groupType == SkinGroupType.FOREGROUND) {
 			return getAssembledForeground(bitmapArray);
 		} else
 			return null;

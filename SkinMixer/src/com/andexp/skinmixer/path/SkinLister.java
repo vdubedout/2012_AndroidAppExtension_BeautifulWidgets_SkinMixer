@@ -46,4 +46,21 @@ public class SkinLister extends SDCardSkinPath {
 
 		return skinList;
 	}
+	
+	public static String getNameFromPath(String path){
+		if(path == null) return null;
+		String[] split = path.split(File.separator);
+		String name = split[split.length];
+		if(name.toLowerCase().contains(".png") 
+				|| name.toLowerCase().contains(".jpg")
+				|| name.toLowerCase().contains(".txt")){
+			name = getNameFromPath(path.replace(File.separator+name, ""));
+		}
+		
+		if(name.toLowerCase().endsWith("scskins")
+				|| name.toLowerCase().endsWith("skins")
+				|| name.toLowerCase().endsWith("beautifulwidgets"))
+			return null;
+		else return name;
+	}
 }

@@ -7,9 +7,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.test.InstrumentationTestCase;
 
-import com.andexp.skinmixer.fragment.SkinPartType;
 import com.andexp.skinmixer.path.SkinLister;
 import com.andexp.skinmixer.path.TestingAssets;
+import com.andexp.skinmixer.skin.SkinGroupType;
 
 public class SkinPartPreviewTest extends InstrumentationTestCase {
 	final String BACKGROUND_IMAGE = "golden/background.png";
@@ -69,7 +69,7 @@ public class SkinPartPreviewTest extends InstrumentationTestCase {
 	
 	public void testImageComposer(){
 		Bitmap[][] bitmapArray = mNinePatchCutter.getBitmapNinePatches(mBackgroundImagePath);
-		Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray, SkinPartType.BACKGROUND);
+		Bitmap bitmapSkinPartPreview = mBitmapComposer.getAssembledBitmap(bitmapArray, SkinGroupType.BACKGROUND);
 		assertNotNull(bitmapSkinPartPreview);
 	}
 	

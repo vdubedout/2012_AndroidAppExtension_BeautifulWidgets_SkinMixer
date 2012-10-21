@@ -15,19 +15,19 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 
 import com.andexp.skinmixer.R;
-import com.andexp.skinmixer.path.SkinImagePath;
+import com.andexp.skinmixer.skin.SkinGroupType;
 
 public class AdapterMultiImageSkinPart extends BaseAdapter implements ListAdapter {
 	private ArrayList<String> mSkinPathList;
 	private Context mContext;
 	private LayoutInflater mLayoutInflater;
 	private OnSkinPartClickListener mOnSkinPartClickListener;
-	private SkinPartType mSkinPart;
+	private SkinGroupType mGroupPart;
 	private static View mlastImageViewClicked;
 
 	public AdapterMultiImageSkinPart(Context context, ArrayList<String> skinPathList,
-			SkinPartType skinPart, OnSkinPartClickListener listener) {
-		mSkinPart = skinPart;
+			SkinGroupType groupType, OnSkinPartClickListener listener) {
+		mGroupPart = groupType;
 		mContext = context;
 		mSkinPathList = skinPathList;
 		mLayoutInflater = LayoutInflater.from(mContext);
@@ -97,30 +97,19 @@ public class AdapterMultiImageSkinPart extends BaseAdapter implements ListAdapte
 
 	private String getLeftImagePath(int listPosition) {
 		String path = mSkinPathList.get(listPosition) + File.separator;
-		String image;
-		switch (mSkinPart) {
-		case NUMBER_0:
-			image = SkinImagePath.NUMBER[4];
-			break;
-		case AM:
-		default:
-			image = SkinImagePath.AM;
-			break;
-		}
-
-		return path + image;
+		return path + mGroupPart.getContainedSkinPartType()[0].getFileName();
 	}
 
 	private String getRightImagePath(int listPosition) {
 		String path = mSkinPathList.get(listPosition) + File.separator;
 		String image;
-		switch (mSkinPart) {
-		case NUMBER_0:
-			image = SkinImagePath.NUMBER[7];
+		switch (mGroupPart) {
+		case NUMBERS:
+			image = mGroupPart.getContainedSkinPartType()[7].getFileName();
 			break;
-		case AM:
+		case AMPM:
 		default:
-			image = SkinImagePath.PM;
+			image = mGroupPart.getContainedSkinPartType()[1].getFileName();
 			break;
 		}
 

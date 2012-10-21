@@ -13,7 +13,7 @@ import com.andexp.skinmixer.OnPreviewCompleteListener;
 import com.andexp.skinmixer.R;
 import com.andexp.skinmixer.drawablecreation.PreviewManager;
 import com.andexp.skinmixer.drawablecreation.PreviewManager.ImagePreviewProcessListener;
-import com.andexp.skinmixer.path.SkinImagePath;
+import com.andexp.skinmixer.skin.SkinGroupType;
 import com.andexp.skinmixer.utils.StripeHack;
 
 public class FragmentPreviewDisplay extends SherlockFragment {
@@ -66,51 +66,38 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 		super.onDestroy();
 	}
 
-	public void setImageType(String path, SkinPartType skinPart) {
-		applyImageType(path, skinPart);
-		saveImagePart(path, skinPart);
+	public void setImageType(String path, SkinGroupType skinGroupType) {
+		applyImageType(path, skinGroupType);
 		
 		if(isComplete()){
 			mPreviewCompleteListener.OnPreviewComplete();
 		}
 	}
 
-	private void saveImagePart(String path, SkinPartType skinPart) {
+	private void applyImageType(String path, SkinGroupType skinGroupType) {
+		SkinPartType[] partType = skinGroupType.getContainedSkinPartType();
 		
-	}
-
-	private void applyImageType(String path, SkinPartType skinPart) {
-		switch (skinPart) {
+		switch (skinGroupType) {
 		case BACKGROUND:
 		case FOREGROUND:
 			if (mPreviewManager != null)
-				mPreviewManager.launchSkinPartPreviewCreation(path, skinPart);
+				mPreviewManager.launchSkinPartPreviewCreation(path, skinGroupType);
 			break;
 		case DOTS:
-			ivDots.setImageDrawable(Drawable.createFromPath(path + SkinImagePath.DOTS));
+			ivDots.setImageDrawable(Drawable.createFromPath(path + partType[0].getFileName()));
 			break;
-		case NUMBER_0:
-		case NUMBER_1:
-		case NUMBER_2:
-		case NUMBER_3:
-		case NUMBER_4:
-		case NUMBER_5:
-		case NUMBER_6:
-		case NUMBER_7:
-		case NUMBER_8:
-		case NUMBER_9:
+		case NUMBERS:
 			ivNumberHoursTens.setImageDrawable(Drawable.createFromPath(path
-					+ SkinImagePath.NUMBER[1]));
+					+ partType[1].getFileName()));
 			ivNumberHoursUnits.setImageDrawable(Drawable.createFromPath(path
-					+ SkinImagePath.NUMBER[3]));
+					+ partType[3].getFileName()));
 			ivNumberMinutesTens.setImageDrawable(Drawable.createFromPath(path
-					+ SkinImagePath.NUMBER[3]));
+					+ partType[3].getFileName()));
 			ivNumberMinutesUnits.setImageDrawable(Drawable.createFromPath(path
-					+ SkinImagePath.NUMBER[7]));
+					+ partType[7].getFileName()));
 			break;
-		case AM:
-		case PM:
-			ivAM.setImageDrawable(Drawable.createFromPath(path + SkinImagePath.AM));
+		case AMPM:
+			ivAM.setImageDrawable(Drawable.createFromPath(path + partType[0].getFileName()));
 		default:
 			break;
 		}
@@ -130,13 +117,13 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 		}
 
 		@Override
-		public void onSkinPartPreviewFinished(Bitmap previewBitmap, SkinPartType skinPart) {
+		public void onSkinPartPreviewFinished(Bitmap previewBitmap, SkinGroupType skinPart) {
 			setImageBitmap(previewBitmap, skinPart);
 		}
 	}
 
-	private void setImageBitmap(Bitmap bitmap, SkinPartType skinPart) {
-		switch (skinPart) {
+	private void setImageBitmap(Bitmap bitmap, SkinGroupType skinGroupType) {
+		switch (skinGroupType) {
 		case BACKGROUND:
 			setBackgroundBitmap(bitmap);
 			break;
