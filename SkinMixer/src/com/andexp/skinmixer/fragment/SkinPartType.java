@@ -1,54 +1,47 @@
 package com.andexp.skinmixer.fragment;
 
+import com.andexp.skinmixer.skin.SkinGroupType;
+
 public enum SkinPartType {
 	//formatter:off
-	BACKGROUND(0), 
-	FOREGROUND(1), 
-	NUMBER_0(2), 
-	NUMBER_1(3), 
-	NUMBER_2(4), 
-	NUMBER_3(5), 
-	NUMBER_4(6), 
-	NUMBER_5(7), 
-	NUMBER_6(8), 
-	NUMBER_7(9), 
-	NUMBER_8(10), 
-	NUMBER_9(11), 
-	DOTS(12), 
-	AM(13), 
-	PM(14), 
-	PREVIEW(15), 
-	TEXTFILE(16), 
-	FIRST_SKIN_IMAGE(BACKGROUND.getValue()), 
-	LAST_SKIN_IMAGE(PM.getValue()), 
-	VOID(100);
+	BACKGROUND(0, "background.png"), 
+	FOREGROUND(1, "background_numbers.png"), 
+	NUMBER_0(2, "number_0.png"), 
+	NUMBER_1(3, "number_1.png"), 
+	NUMBER_2(4, "number_2.png"), 
+	NUMBER_3(5, "number_3.png"), 
+	NUMBER_4(6, "number_4.png"), 
+	NUMBER_5(7, "number_5.png"), 
+	NUMBER_6(8, "number_6.png"), 
+	NUMBER_7(9, "number_7.png"), 
+	NUMBER_8(10, "number_8.png"), 
+	NUMBER_9(11, "number_9.png"), 
+	DOTS(12, "dots.png"), 
+	AM(13, "am.png"), 
+	PM(14, "pm.png");
 	//formatter:on
 
-	private int value;
-	
+	private int mValue;
+	private String mFileName;
 
-	SkinPartType(int value) {
-		this.value = value;
+	SkinPartType(int value, String fileName) {
+		this.mValue = value;
+		this.mFileName = fileName;
 	}
 
 	public int getValue() {
-		return this.value;
+		return this.mValue;
 	}
-
-	public static SkinPartType getSkinpartFromPartName(int skinpart_names_binder) {
-		switch (skinpart_names_binder) {
-		case 0:
-			return SkinPartType.BACKGROUND;
-		case 1:
-			return SkinPartType.FOREGROUND;
-		case 2:
-			return SkinPartType.NUMBER_0;
-		case 3:
-			return SkinPartType.DOTS;
-		case 4:
-			return SkinPartType.AM;
-		default:
-			return SkinPartType.BACKGROUND;
+	
+	public String getFileName(){
+		return mFileName;
+	}
+	
+	public static SkinPartType getType(int index){
+		for (SkinPartType type : SkinPartType.values()) {
+			if(type.getValue()== index)
+				return type;
 		}
+		throw new IndexOutOfBoundsException("index:"+index+ " > values Number"+SkinGroupType.values());
 	}
 }
