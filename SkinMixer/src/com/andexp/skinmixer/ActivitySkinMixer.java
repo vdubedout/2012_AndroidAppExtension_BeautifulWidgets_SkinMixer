@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -16,15 +17,16 @@ import com.andexp.skinmixer.fragment.OnFragmentSkinListClick;
 import com.andexp.skinmixer.skin.SkinGroupType;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFragmentSkinListClick, OnPreviewCompleteListener {
-	private static final String MENU_SEND = "Next";
+public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFragmentSkinListClick,
+		OnPreviewCompleteListener {
+	private static final String MENU_TITLE_ALLMISSING = "All Parts Missing";
+	private static final String MENU_TITLE_NEXT = "Next";
 	private Menu mMenu;
 
 	FragmentPreviewDisplay mPreview;
 
 	private ActivitySkinMixer mActivity;
 	private MenuItem mSendMenu;
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,28 +37,28 @@ public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFra
 		initializePreview();
 		initializeViewPager();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		this.mMenu = menu;
-		mSendMenu = mMenu.add(MENU_SEND);
+		mSendMenu = mMenu.add(MENU_TITLE_ALLMISSING);
 		mSendMenu.setIcon(R.drawable.ic_action_send)
-		.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if(mPreview.isComplete()){
-			//TODO next
+		if (mPreview.isComplete()) {
+			// TODO next
 		} else {
-			//TODO display missing parts
+			Toast.makeText(mActivity, mSendMenu.getTitle(), Toast.LENGTH_LONG).show();
 		}
-		
+
 		return true;
 	}
-	
+
 	private void initializeActionBar() {
 		getSupportActionBar();
 	}
@@ -107,20 +109,26 @@ public class ActivitySkinMixer extends SherlockFragmentActivity implements OnFra
 
 	@Override
 	public void onFragmentSkinListClick(String path, SkinGroupType skinGroupType) {
-		mPreview.setImageType(path, skinGroupType);
+		mPreview.setImageGroupType(path, skinGroupType);
 	}
 
 	@Override
-	public void OnPreviewComplete() {
-		if(mMenu != null && mSendMenu != null){
+	public void OnPreviewComplete(String[] groupPaths) {
+		if (mSendMenu != null) {
 			mSendMenu.setIcon(R.drawable.ic_action_send_clicked);
+			mSendMenu.setTitle(MENU_TITLE_NEXT);
 		}
 	}
 
 	@Override
-	public void OnPreviewUncomplete() {
-		if(mMenu != null && mSendMenu != null){
+	public void OnPreviewUncomplete(SkinGroupType[] groupsMissing) {
+		if (mSendMenu != null) {
 			mSendMenu.setIcon(R.drawable.ic_action_send);
+			String title = "Missing Parts : ";
+			for (SkinGroupType skinGroupType : groupsMissing) {
+				title += skinGroupType + " ";
+			}
+			mSendMenu.setTitle(title);
 		}
 	}
 }

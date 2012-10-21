@@ -3,6 +3,7 @@ package com.andexp.skinmixer.fragment;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +31,17 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 	private ImageView ivDots;
 	private ImageView ivAM;
 
+	String[] mGroupPartPaths;
+
 	private OnPreviewCompleteListener mPreviewCompleteListener;
+
+	private int mMissingGroupNumber;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mRootView = inflater.inflate(R.layout.fragment_skinpreview, null);
 		mPreviewManager = new PreviewManager(mRootView.getContext(), new ImagePreview());
+		mGroupPartPaths = new String[SkinGroupType.values().length];
 		initializeViews(mRootView);
 		StripeHack.apply(mRootView);
 		return mRootView;
@@ -66,17 +72,35 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 		super.onDestroy();
 	}
 
-	public void setImageType(String path, SkinGroupType skinGroupType) {
+	public void setImageGroupType(String path, SkinGroupType skinGroupType) {
 		applyImageType(path, skinGroupType);
-		
-		if(isComplete()){
-			mPreviewCompleteListener.OnPreviewComplete();
+		saveGroupePath(path, skinGroupType);
+		if(isComplete())
+			mPreviewCompleteListener.OnPreviewComplete(mGroupPartPaths);
+		else
+			mPreviewCompleteListener.OnPreviewUncomplete(getMissingGroups());
+	}
+
+	private SkinGroupType[] getMissingGroups() {
+		SkinGroupType[] missingGroupType= new SkinGroupType[mMissingGroupNumber];
+		int index=0;
+		for(int i = 0; i < SkinGroupType.values().length; i++){
+			if(TextUtils.isEmpty(mGroupPartPaths[i])){
+				missingGroupType[index]= SkinGroupType.getSkinGroupType(i);
+				++index;
+			}
 		}
+		
+		return missingGroupType;
+	}
+
+	private void saveGroupePath(String path, SkinGroupType skinGroupType) {
+		mGroupPartPaths[skinGroupType.getValue()] = path;
 	}
 
 	private void applyImageType(String path, SkinGroupType skinGroupType) {
 		SkinPartType[] partType = skinGroupType.getContainedSkinPartType();
-		
+
 		switch (skinGroupType) {
 		case BACKGROUND:
 		case FOREGROUND:
@@ -104,7 +128,15 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 	}
 
 	public boolean isComplete() {
-		return false;
+		boolean isComplete = true;
+		mMissingGroupNumber = 0;
+		for (String path : mGroupPartPaths) {
+			if(TextUtils.isEmpty(path)){
+				isComplete = false;
+				++mMissingGroupNumber;
+			}
+		}
+		return isComplete;
 	}
 
 	class ImagePreview implements ImagePreviewProcessListener {
@@ -141,6 +173,5 @@ public class FragmentPreviewDisplay extends SherlockFragment {
 	private void setForegroundBitmap(Bitmap bitmap) {
 		ivForeground.setImageBitmap(bitmap);
 	}
-
 
 }
